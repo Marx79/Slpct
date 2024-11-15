@@ -1,4 +1,4 @@
-# Maintainer: Giovanni De Paola <avvdpaola@proton.me>
+# Maintainer: Giovanni De Paola <avvdpaola at proton dot me>
 pkgname=slpct
 pkgver=1.32.1
 pkgrel=1
