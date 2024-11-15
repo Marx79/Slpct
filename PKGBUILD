@@ -43,7 +43,7 @@ package() {
 uninstall () {
 
 cd $pkgdir/usr/es/
-	rm -rf SLpct
+	rm -rf SLpct/
 		rm $pkgdir/usr/share/applications/slpctrun1.desktop
  	
  }
