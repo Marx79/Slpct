@@ -1,7 +1,7 @@
 # Maintainer: Giovanni De Paola <avvdpaola at proton dot me>
 pkgname=slpct
-pkgver=1.32.1
-pkgrel=1
+pkgver=1.33.0
+pkgrel=2
 pkgdesc="redattore atti gratuito per il Processo Civile Telematico"
 arch=('any')
 url="https://www.slpct.it/"
@@ -12,7 +12,7 @@ depends=('java-runtime' 'jdk8-openjdk' 'bash' 'xdg-utils' )
 
 
 
-source=('slpct.tar.gz')
+source=('https://github.com/Marx79/Slpct/blob/master/slpct.tar.gz')
 
 sha256sums=('SKIP')
 
