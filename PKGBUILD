@@ -1,7 +1,7 @@
 # Maintainer: Giovanni De Paola <avvdepaola at proton dot me>
 pkgname=slpct
 pkgver=1.33.0
-pkgrel=2
+pkgrel=3
 pkgdesc="redattore atti gratuito per il Processo Civile Telematico"
 arch=('any')
 url="https://www.slpct.it/"
@@ -33,8 +33,8 @@ package() {
  
   cp -fR "$srcdir/SLpct/Schemi" "$pkgdir/usr/es/SLpct/"
   cp -fR "$srcdir/SLpct/lib"    "$pkgdir/usr/es/SLpct/"
-  chmod +777 "$pkgdir/usr/es/SLpct/Schemi/"
-  chmod +777 "$pkgdir/usr/es/SLpct/lib/"
+  chmod -R 777 "$pkgdir/usr/es/SLpct/Schemi/"
+  chmod -R 777 "$pkgdir/usr/es/SLpct/lib/"
 
   
 }
