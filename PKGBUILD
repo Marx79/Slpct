@@ -12,15 +12,15 @@ depends=('java-runtime' 'jdk8-openjdk' 'bash' 'xdg-utils' )
 
 
 
-source=('https://github.com/Marx79/Slpct/blob/master/slpct.tar.gz')
+source=('git+https://github.com/Marx79/Slpct.git')
 
-sha256sums=('SKIP')
+sha256sums=('c07588707eb5d4af87dc4ea79b50e89f959d01f76bbf31ded7684bafc3fdfeef')
 
 
 
 package() {
 	
-  tar -xvf "slpct.tar.gz"
+  tar -xvf "$srcdir/slpct.tar.gz"
 
   install -dm 777 "$pkgdir/usr/es/SLpct"	
   install -Dt  "$pkgdir/usr/es/SLpct/"  -m 777 "$srcdir/SLpct/slpct_run" 
