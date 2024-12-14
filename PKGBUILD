@@ -14,7 +14,7 @@ depends=('java-runtime' 'jdk8-openjdk' 'bash' 'xdg-utils' )
 
 source=('git+https://github.com/Marx79/Slpct.git')
 
-sha256sums=('c07588707eb5d4af87dc4ea79b50e89f959d01f76bbf31ded7684bafc3fdfeef')
+sha256sums=('21e62d00449be0c5832b2a508d98d8512817fd45')
 
 
 
