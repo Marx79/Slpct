@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/notaio/introduttivi/v2"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/notaio/introduttivi/v2"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+               schemaLocation="../base_v7/tipi-atti.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/parte"
+               schemaLocation="../eventi-parte.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+               schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+    <xs:annotation>
+        <xs:documentation>ATTI DI PARTE INTRODUTTIVI NOTAIO</xs:documentation>
+        <xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="NotaDepositoAutorizzazioneNotaio21">
+        <xs:annotation>
+            <xs:documentation>Iscrizione al ruolo di Nota deposito autorizzazione di un Notaio</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoIntroduttivo">
+                    <xs:sequence>
+                        <xs:element ref="pt:AnagraficaProcedimento"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

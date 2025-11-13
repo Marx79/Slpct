@@ -1,0 +1,1682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v6" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns="http://schemi.processotelematico.giustizia.it/eventi/crisiimpresa" targetNamespace="http://schemi.processotelematico.giustizia.it/eventi/crisiimpresa" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" schemaLocation="base_v4/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v6" schemaLocation="base_v6/tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Eventi associabili ad atti per la crisi d'impresa</xs:documentation>
+		<xs:documentation>Lo schema non fa parte delle specifiche di interoperabilita' da pubblicare</xs:documentation>
+	</xs:annotation>
+	<xs:element name="nominaAmministratoreGiudiziario">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="datatermine" type="xs:date"/>
+						<xs:element name="codiceFiscale" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="nominaArbitri">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="Arbitro" maxOccurs="3">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="cognome" type="xs:normalizedString">
+										<xs:annotation>
+											<xs:documentation>cognome se parte fisica o denominazione se parte giuridica</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Nome da specificare obbligatoriamente se parte fisica. Specificare vuoto per parte giuridica</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="codiceFiscale" type="xs:string"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="nominaLIquidatoreAmministrGiudiz">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="datatermine" type="xs:date"/>
+						<xs:element name="deltaTermine" type="xs:int" minOccurs="0"/>
+						<xs:element name="codiceFiscale" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="nominaOCCoLiquidatore">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:choice>
+						<xs:element name="occ">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="cfReferente"/>
+									<xs:element name="cfOCC"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="cfLiquidatore"/>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoAmmissioneCondordatoLiqGiud">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="datatermine" type="xs:date"/>
+				<xs:element name="deltaTermine" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccessoRegInformatico" type="pt:IstanzaEvento"/>
+	<xs:element name="Accoglimento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Accoglimento</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Rigetto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Rigetto</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AccoglimentoEChiusuraProcedura" type="pt:IstanzaEvento"/>
+	<xs:element name="AccoglimentoERevocaCuratore" type="pt:IstanzaEvento"/>
+	<xs:element name="AttestazioneAperturaCC">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="Banca" type="xs:string"/>
+						<xs:element name="Filiale" type="xs:string"/>
+						<xs:element name="CAB" type="xs:string" minOccurs="0"/>
+						<xs:element name="NumeroCC" type="xs:string"/>
+						<xs:element name="TipoCC" type="xs:string"/>
+						<xs:element name="Intestatario" type="xs:string"/>
+						<xs:element name="ImportoApertura" type="xs:float"/>
+						<xs:element name="IBAN" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DecretoEsdebitazione"/>
+	<xs:element name="FissazioneTermineRelPerCommissario">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneTermineMora">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneTermineModificaRendicinto">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneTermineUltAdempimentiLiquidazione">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PrescrizioniTermineAdemPiano">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProrogaTermineEsecuzionePiano">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProrogaTermineCreditoriTitolariDiritti">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RimessioneTermini">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ConvocazioneAutVigInnanziCollegio">
+		<xs:annotation>
+			<xs:documentation>Convocazione autorita' di vigilanza innanzi al Collegio</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="dataUdie" type="xs:dateTime"/>
+						<xs:element name="dataTermineNotifiche" type="xs:date" minOccurs="0"/>
+						<xs:element name="dataTermineDifese" type="xs:date" minOccurs="0"/>
+						<xs:element name="dataTermineRepliche" type="xs:date" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ConvocazioneAutVigInnanziGiudiceRelatore">
+		<xs:annotation>
+			<xs:documentation>Convocazione autorita' di vigilanza innanzi al Giudice Relatore</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="dataUdie" type="xs:dateTime"/>
+						<xs:element name="dataTermineNotifiche" type="xs:date" minOccurs="0"/>
+						<xs:element name="dataTermineDifese" type="xs:date" minOccurs="0"/>
+						<xs:element name="dataTermineRepliche" type="xs:date" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaComparizioneParti">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaEx235">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FissazioneUdienzaInnanziCollegioEx231">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AnnullamentoConcordato" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaAnnullAperturaLiquidazione"/>
+	<xs:element name="SentenzaAnnullConcordatoRiapLiqGiud"/>
+	<xs:element name="AnnullamentoConcordatoEAperturaLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="DichiarazioneStatoInsolvenzaLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoApprovazioneCondordatoLiqGiud"/>
+	<xs:element name="ApprovazioneRendiconto" type="pt:IstanzaEvento"/>
+	<xs:element name="MancataApprovazioneRendiconto" type="pt:IstanzaEvento"/>
+	<xs:element name="ArchiviazioneAtti" type="pt:IstanzaEvento"/>
+	<xs:element name="AttribuzioneCommissarioPoteri" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazionePDL" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneSupplementoPDL" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoCessazioneEsercImpresa" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoFissLimitiMantenimento" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoFormStatoPassivoLC" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoNonProcAccertamentoPassivo" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoSospAttiEsecuzionePiano" type="pt:IstanzaEvento"/>
+	<xs:element name="FormazioneStatoPassivo" type="pt:IstanzaEvento"/>
+	<xs:element name="DesignazioneIstCreditoOrdineDepositoSomme" type="pt:IstanzaEvento"/>
+	<xs:element name="DeterminazioneEquoIndennizzo" type="pt:IstanzaEvento"/>
+	<xs:element name="DiniegoOmissionePubblRelazioneRI" type="pt:IstanzaEvento"/>
+	<xs:element name="DiniegoAgireGiudizio" type="pt:IstanzaEvento"/>
+	<xs:element name="DiniegoAutorizzSottoposizionePdlAlCdc" type="pt:IstanzaEvento"/>
+	<xs:element name="EmissioneIngiunzionePagSoci" type="pt:IstanzaEvento"/>
+	<xs:element name="IngiunzioneEx311CCI" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdineTribunaleCessAttivitaImpresa" type="pt:IstanzaEvento"/>
+	<xs:element name="ProvvConservazionePatrimonio" type="pt:IstanzaEvento"/>
+	<xs:element name="ProvvEsecutivoSeguitoChiusura235CCI" type="pt:IstanzaEvento"/>
+	<xs:element name="ProvvEsecutivoExArt275CCI" type="pt:IstanzaEvento"/>
+	<xs:element name="ProvvInterpelloRapportiPendenti" type="pt:IstanzaEvento"/>
+	<xs:element name="RevocaOrganoAmmSocieta" type="pt:IstanzaEvento"/>
+	<xs:element name="RevocaPoteriCompimentoAttiStrAmmDebitore" type="pt:IstanzaEvento"/>
+	<xs:element name="RichiestaLiquidatoreRelazionare" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanzaChiusura" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanzaEsdebitazione" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanzaIngiunzionePagSoci" type="pt:IstanzaEvento"/>
+	<xs:element name="RipartoEsecuticoLiquidazione" type="pt:IstanzaEvento"/>
+	<xs:element name="SospensioneTerImpugnStatoPassLiquidazioneEx53" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneGD"/>
+	<xs:element name="AutorizzazioneAccessoAttiEstrazioneCopie" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneNonAcquisireBeni" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneRichiestaAperturaLiquidGiud" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAOmissionePubblicazioneRelazioneRI" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazionePromozAzioniResponsabilita" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAccessoBancheDati" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAgireGiudizio" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneEstensioneLiquidazioneAiSoci" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzCDCInvestimSommeRiscosse" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneNominaDelegato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE ALLA NOMINA DEL DELEGATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazioneNominaCoauditore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE ALLA NOMINA DI COADIUTORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazioneNominaNotaio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE ALLA NOMINA NOTAIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazioneAttiStraordinariaAmm" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE ATTI DI STRAORDINARIA AMM.NE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazioneGiudizioReclamo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE A RESISTERE NEL GIUDIZIO DI RECLAMO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazioneSottoposizionePDLaCDC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AUTORIZZAZIONE DI SOTTOPOSIZIONE DEL PDL AL CDC</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AutorizzazionePresentazCopiaTitoli" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataAttivoPassivo" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneEsecuzioneRiparto" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneInvestimentoSommeRiscosse"/>
+	<xs:element name="AutorizzazioneAttiStraordinariaAmministrazioneInSostCDC"/>
+	<xs:element name="AutorizzazionePubblicazioneInSito" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAEsercizioProvvisorio" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneProrogaTermineDepositoRelazione"/>
+	<xs:element name="AutorizzazionePubblicazDomandaSuQuotidiani" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataAzioniRecuperatorie" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataAzioniRevocatorie" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataAzioniRisarcitorie" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataDeiDiritti" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataDeiCrediti" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaAnticipataDiQuote" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneVenditaBeniMobiliAssistitiDaPrelazione" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAllaMancataAcquisizioneBeni"/>
+	<xs:element name="AutorizzazioneSostitCDC" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneAttiStraordAmm" type="pt:IstanzaEvento"/>
+	<xs:element name="AutorizzazioneProrogaTermDeposito" type="pt:IstanzaEvento"/>
+	<xs:element name="AvvCreditoriArt58co2CCI" type="pt:IstanzaEvento"/>
+	<xs:element name="AvvisoCuratoreReclamoCorteAppello" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>AVVISO DEL CURATORE DI RECLAMO IN CORTE D'APPELLO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DecretoChiusuraAnticipata"/>
+	<xs:element name="DecretoChiusuraConcordatoECompletaEsecuzione"/>
+	<xs:element name="DecretoCancFormIscritteEx118" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DECRETO CANCELLAZIONE FORMALITA' ISCRITTE EX ART. 118, VII C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoAvvisoCreditoriPubblicitarie">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO AVVISO CREDITORI/FORMALITA' PUBBLICITARIE</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoBilancioScrittureContFisc">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO BILANCIO ULTIMO ESERCIZIO</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoCancelleriaComunicazione">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO IN CANCELLERIA COMUNICAZIONE (Art. 308 co.4 cci)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="atto" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoComunicazioneDecretoEsdebitazione">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO COMUNICAZIONE DECRETO DI ESDEBITAZIONE</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="dataRicezioneComunicazione" type="xs:date"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DespositoContoGestioneBilancioFinale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO CONTO DI GESTIONE, BILANCIO FINALE E PIANO DI RIPARTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepRicorsoIngiunzione" type="pt:IstanzaEvento"/>
+	<xs:element name="DepositoDichiarazioneTardivaCredExArt208CCI">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO DICHIARAZIONE TARDIVA DI CREDITO EX ART. 208 CCI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="Parte" type="at:Parte"/>
+						<xs:element name="Avvocato" type="at:Avvocato" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoInformativaOcc">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO INFORMATIVA OCC</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepRendicontoOcc" type="pt:IstanzaEvento"/>
+	<xs:element name="DepStatoPassivoEsecutivo" type="pt:IstanzaEvento"/>
+	<xs:element name="ChiusuraProceduraConversioneInLiqGiudiz"/>
+	<xs:element name="ChiusuraProceduraCompiutaRipartizioneFinale"/>
+	<xs:element name="ChiusuraProceduraCompiutaRipartizionePendenza"/>
+	<xs:element name="ChiusuraLiquidazioneIntervenutaOmologaConc"/>
+	<xs:element name="ChiusuraPerInsufficienzaAttivo"/>
+	<xs:element name="ChiusuraPerMancateInsinuazioniPassivo"/>
+	<xs:element name="ContestazioniExArt313CCI" type="pt:IstanzaEvento"/>
+	<xs:element name="ContestazioneProgettoRiparto" type="pt:IstanzaEvento"/>
+	<xs:element name="ComunicazioneDecretoEsecutivitaExArt205CCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE DECRETO DI ESECUTIVITA' EX ART. 205 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComCreditoriDecretoNonLuogoAccertamento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZ. AI CREDITORI DECRETO DI NON FARSI LUOGO ALL'ACCERTAMENTO PASSIVO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComCreditoriExArt241IICCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE AI CREDITORI EX ART. 241, II C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComCreditoriRelazionePatrimoniale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE AI CREDITORI DELLA RELAZIONE PATRIMONIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComCreditoriTitolariDirittiExArt200CCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONI A CREDITORI E TITOLARI DIRITTI EX ART. 200 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComDepositoRendicontoExArt31IICCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE DEPOSITO RENDICONTO EX ART.231, III C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComDepositoSommeCreditoriIrreperibili" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE DI DEPOSITO SOMME AI CREDITORI IRREPERIBILI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComInadempimentiDebitore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE AL TRIBUNALE INADEMPIMENTI DEBITORE EX ART. 118, IV C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComMessaMoraContraente">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE DI MESSA IN MORA DEL CONTRAENTE</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="denominazione" type="xs:string"/>
+				<xs:element name="nome" type="xs:string"/>
+				<xs:element name="codiceFiscale" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ComPubblicazioneGiornali" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE MEDIANTE PUBBLICAZIONE IN GIORNALI LOCALI/NAZIONALI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComRitoOrganiSocieta" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONI DI RITO AGLI ORGANI DELLA SOCIETA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComScioglimentoContratto">
+		<xs:annotation>
+			<xs:documentation>COMUNICAZIONE SCIOGLIMENTO CONTRATTO</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="denominazione" type="xs:string"/>
+				<xs:element name="nome" type="xs:string"/>
+				<xs:element name="codiceFiscale" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CostituzioneCreditore" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneDebitore" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneLiquidatore" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneCommissarioGiud" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneCommissarioLiq" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneCommissarioStr" type="pt:IstanzaEvento"/>
+	<xs:element name="CostituzioneEsperto" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoConversioneInAmmStrordMarzano"/>
+	<xs:element name="DepositoDichiarazioneDissensoCreditore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO DICHIARAZIONE DI DISSENSO DEL CREDITORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CertPubblicazioneNuoviAccordiRegImprese" type="pt:IstanzaEvento"/>
+	<xs:element name="ConversioneLiqGiudiziale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>CONVERSIONE IN LIQUIDAZIONE GIUDIZIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConversioneLiqGiudizialeDiniego" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>CONVERSIONE IN LIQUIDAZ. GIUDIZ. A SEGUITO DI DINIEGO APPROVAZ. PROGRAMMA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConversioneLiqGiudizialeOpposizione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>CONVERSIONE IN LIQUID. GIUDIZ. A SEGUITO DI OPPOSIZ. EX ART. 11 D. LGS. 270/99</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ComunicazioneDelegaFunzioni" type="pt:IstanzaEvento"/>
+	<xs:element name="CorrezioneErroreMateriale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Apertura Sub Procedimento di CORREZIONE ERRORE MATERIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CostituzioneImpugnazioneIncidentale" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoConversioneInLiqControllata"/>
+	<xs:element name="DecretoAperturaLiqControllata"/>
+	<xs:element name="DecretoArchiviazioneProcedura"/>
+	<xs:element name="DecretoArchiviazioneProceduraInPendenzaGiudiz"/>
+	<xs:element name="DecretoConcessioneSussidio"/>
+	<xs:element name="DecretoCorrezioneErroreMateriale" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoEsecutivitaProgettoRipartizione"/>
+	<xs:element name="DecretoFissazioneLimitiMantenimento"/>
+	<xs:element name="DecretoFormazioneStatoPassivo"/>
+	<xs:element name="DecretoNonLuogoProcedimento"/>
+	<xs:element name="DecretoSospensioneAttiEsecuzionePiano"/>
+	<xs:element name="DepositoBilancioScrittureContabiliFiscali" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO BILANCIO E SCRITTURE CONTABILI/FISCALI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoBilancioUltimoEsercizioParteDebitore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO BILANCIO ULTIMO ESERCIZIO DA PARTE DEL DEBITORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoCopia" type="pt:IstanzaEvento"/>
+	<xs:element name="DepositoElencoCreditori" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO ELENCO CREDITORI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoModPianoOmologato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO MODIFICA PIANO OMOLOGATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoRelazioneSecretataArt53IVC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO RELAZIONE SECRETATA (ART. 53, IV C., CCI)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepPianoRipartoLC" type="pt:IstanzaEvento"/>
+	<xs:element name="DepProgettoStatoPassivoLC" type="pt:IstanzaEvento"/>
+	<xs:element name="DiniegoAIstanzaOmissionePubblicazRelazioneNelRI"/>
+	<xs:element name="DiniegoAdAgireInGiudizio"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataAttPassInBlocco"/>
+	<xs:element name="DiniegoAutorizzSottoposizPDLACDC"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataAzioniRecuperatorie"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataAzioniRisarcitorie"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataAzioniRevocatorie"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataDeiDiritti"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataDeiCrediti"/>
+	<xs:element name="DiniegoAutorizzVenditaAnticipataDiQUote"/>
+	<xs:element name="DiniegoAutorizzVenditaBeniMobiliAssistiti"/>
+	<xs:element name="DiniegoAutorizzNonAcquisireRestituireBeni"/>
+	<xs:element name="DiniegoAutorizzAccessoAttiEstrazCopie"/>
+	<xs:element name="DiniegoAutorizzPubblicazioneDomandaSuQuotidiani"/>
+	<xs:element name="DiniegoOmologazionePianoModificato"/>
+	<xs:element name="DiniegoNominaDelegato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DINIEGO ALLA NOMINA DEL DELEGATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DiniegoNominaNotaio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DINIEGO ALLA NOMINA DEL NOTAIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DiffidaAdempiereExArt133IC">
+		<xs:annotation>
+			<xs:documentation>DIFFIDA AD ADEMPIERE EX ART. 133, I C., CCI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipoParte" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="Creditore"/>
+							<xs:enumeration value="Debitore"/>
+							<xs:enumeration value="Terzo"/>
+							<xs:enumeration value="Comitato Creditori"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="cfIncaricato" type="xs:string"/>
+				<xs:element name="datatermine" type="xs:date"/>
+				<xs:element name="deltaTermine" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmissioneIngiunzionePagamentoAiSoci"/>
+	<xs:element name="EmissioneMandatoPagamentoSpeseProcedura"/>
+	<xs:element name="EstinzioneCC">
+		<xs:annotation>
+			<xs:documentation>ESTINZIONE DEL C/C</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="iban" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EstinzionePerRinuncia" type="pt:IstanzaEvento"/>
+	<xs:element name="DichiarazioneAnnDebitoreEsdebitato" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoFissazioneTermineAbbreviatoRelazPeriodComm"/>
+	<xs:element name="DecretoFissazioneTermineMessaInMora"/>
+	<xs:element name="DecretoFissazioneTermineModificaRendiconto"/>
+	<xs:element name="DecretoFIssazioneTermineUlterioriAdempimentiPerLiquidazione"/>
+	<xs:element name="DecretoFissazioneUdienzaComparizioneParti"/>
+	<xs:element name="DecretoFissazioneUdienzaExArt235"/>
+	<xs:element name="DecretoFissazioneUdienzaInnanziCollegioArt231"/>
+	<xs:element name="DepositoOpposizione" type="pt:IstanzaEvento"/>
+	<xs:element name="FissazioneLimitiMantenimento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PROVVEDIMENTO DI FISSAZIONE DEI LIMITI MANTENIMENTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InfoIniziale">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncarico" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InformativaPeriodicaCDCExArt211" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>INFORMATIVA PERIODICA AL CDC EX ART. 211, IV C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InformativaPeriodicaGD" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>INFORMATIVA PERIODICA DEL COMMISSARIO AL GD</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InformativaCircostanzePreclProsecuzEsercizio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>INFORMATIVA SU CIRCOSTANZE PRECLUSIVE&#160;PROSECUZIONE ESERCIZIO IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IngiunzioneExArt311"/>
+	<xs:element name="IntegrazioneRelazioneIniziale" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAccessoAtti" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI ACCESSO AGLI ATTI ED ESTRAZIONE COPIE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazAttiStraordDebitore" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAudizioneDebitoreExArt203IVC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUDIZIONE DEL DEBITORE EX ART. 203 IV C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAperturaLiquidGiudiz" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI APERTURA LIQUIDAZIONE GIUDIZIALE EX ARTT. 119-120 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaConcordatoLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaConcordatoLiquidazGiudiziale" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAutorizzImpiegoSommeRiscosse" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaConcLiquidazGiudizialeCondizDiff" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaConcordatoASProdiBis" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaCDCAutorizzInvestimSommeRiscosse" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaCongiuntaCorrErrMateriale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA CONGIUNTA DI CORREZIONE DI ERRORE MATERIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaConversioneInLiqControllata" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA CONVERSIONE PROCEDURA IN LIQUIDAZIONE CONTROLLATA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaCorrezioneErroreMateriale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI CORREZIONE ERRORE MATERIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaEsdebitazione" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaFissazioneLimitiMantenimento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI FISSAZIONE DEI LIMITI MANTENIMENTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaOmissionePubblicazRelazioneRI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI OMISSIONE PUBBLICAZ. RELAZIONE NEL R.I.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaOmologazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI OMOLOGAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaPresentazCopiaTitoli" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI PRESENTAZIONE COPIA TITOLI AL PORTATORE E RESTITUZIONE ORIGINALI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaRevocaCuratore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI REVOCA CURATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaRiaperturaLiqGiud" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO ISTANZA DI RIAPERTURA DELLA LIQUIDAZIONE GIUDIZIALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaRiaperturaProcedura" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI RIAPERTURA DELLA PROCEDURA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSospenzioneLiquidazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI SOSPENSIONE DELLA LIQUIDAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSospenzioneCuratore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI SOSTITUZIONE CURATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSospenzioneComponentiCdc" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI SOSTITUZIONE DI COMPONENTI DEL CDC</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSostituzioneLiquidatore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI SOSTITUZIONE LIQUIDATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaConcessioneSussidio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA PER LA CONCESSIONE DEL SUSSIDIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSospensioneTerminiImpugnazioneExArt53VIC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA SOSPENSIONE TERMINI IMPUGNAZ. STATO PASS. E LIQUIDAZ. EX ART .53, VI C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaPromuovereRespControComponentiCdc" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA A PROMUOVERE AZ. DI RESPONSABILITA' CONTRO I COMPONENTI CDC</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaCessazEsercizioImpresa" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA CESSAZIONE ESERCIZIO D'IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaCuratoreAperturaEsercizioImpresa" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DEL CURATORE PER APERTURA ESERCIZIO D'IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzeContraenteInterpelloRapportiPendenti">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DEL CONTRAENTE PER INTERPELLO RAPPORTI PENDENTI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="denominazione" type="xs:string"/>
+						<xs:element name="nome" type="xs:string"/>
+						<xs:element name="codiceFiscale" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzeAccessoBancheDati" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI ACCESSO ALLE BANCHE DATI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAperturaCCCreditoriIrreperibili" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI APERTURA C/C PER CREDITORI IRREPERIBILI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaArchiviazioneProcedura" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI ARCHIVIAZIONE DELLA PROCEDURA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzResistereGiudizioReclamo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZ. A RESISTERE NEL GIUDIZIO DI RECLAMO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzRichiestaAperturaLiqGiudImpresaGruppo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZ. RICHIESTA APERTURA LIQ. GIUDIZ. ALTRA IMPRESA DEL GRUPPO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneCompimentoAttiStrAmm" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAutorizzazioneAgireGiudizio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE AD AGIRE IN GIUDIZIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneNominaCoadiutore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE ALLA NOMINA COADIUTORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneNominaDelegato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE ALLA NOMINA DELEGATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneNominaNotaio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE ALLA NOMINA DI NOTAIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneNominaStimatore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE ALLA NOMINA STIMATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazionePubblicazDomandaQuotidianiExArt242CCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE PUBBLICAZ. DOMANDA SU QUOTIDIANI EX ART. 242 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneRapportiPendenti" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZAZIONE RAPPORTI PENDENTI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaAutorizzazioneEstensioneLiquidazioneSoci" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI AUTORIZZIONE ALL’ESTENSIONE DELLA LIQUIDAZIONE AI SOCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaCancellazioneFormalitaIscritte" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI CANCELLAZIONE FORMALITA' ISCRITTE EX ART. 118, VII C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaDeterminazioneEquoIndennizzo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI DETERMINAZIONE EQUO INDENNIZZO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaEmisMandatoPagamentoSpese">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="causale" type="xs:string"/>
+						<xs:element name="iban" type="xs:string"/>
+						<xs:element name="importo" type="xs:float"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaEsecutivitaProgettoRiparto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI ESECUTIVITA PROGETTO DI RIPARTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaFissazioneUdienzaTardive" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaNominaArbitri" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI NOMINA&#160;ARBITRI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaNonAcquisizRestituzBeni" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI NON ACQUISIZ./RESTITUZ. BENI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaProrogaTermineDepositoRelazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI PROROGA TERMINE PER DEPOSITO RELAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaRevocaDecretoNonLuogoAccPassivo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI REVOCA DECRETO DI NON FARSI LUOGO ALL'ACCERTAMENTO DEL PASSIVO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaRiqualificazioneProceduraSecondaria" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI RIQUALIFICAZIONE DELLA PROCEDURA COME SECONDARIA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaSottoposizionePdlCdc" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI SOTTOPOSIZIONE DEL PDL AL CDC</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataAttivitaPassivitaBlocco" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA ATTIVITA' E PASSIVITA' IN BLOCCO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataAzioniRecuperatorie" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA AZIONI RECUPERATORIE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataAzioniRevocatorie" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA AZIONI REVOCATORIE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataAzioniRisarcitorie" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA AZIONI RISARCITORIE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataDiritti" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA DEI DIRITTI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataCrediti" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA DI CREDITI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaAnticipataQuote" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA ANTICIPATA DI QUOTE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaVenditaBeniMobiliAssistitiPrelazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA DI VENDITA DEI BENI MOBILI ASSISTITI DA PRELAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaNonLuogoProcedereAccertamentoPassivoExArt209" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA NON LUOGO A PROCEDERE ALL'ACCERTAMENTO DEL PASSIVO EX ART. 209 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaEmissioneProvvedimentoConservazionePatrimonio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ISTANZA PER L'EMISSIONE PROVVEDIMENTO DI CONSERVAZIONE DEL PATRIMONIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstRiaperturaLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="ChiusuraConcordato" type="pt:IstanzaEvento"/>
+	<xs:element name="ChiusuraProcedura" type="pt:IstanzaEvento"/>
+	<xs:element name="ModificaProposta" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>MODIFICA PROPOSTA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NotificaReclamoPropostoControDecretiTribunale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>NOTIFICA RECLAMO PROPOSTO CONTRO I DECRETI DEL TRIBUNALE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NominaCTP">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+						<xs:element name="nome" type="xs:string"/>
+						<xs:element name="cognome" type="xs:string"/>
+						<xs:element name="codiceFiscale" type="xs:string"/>
+						<xs:element name="TipoParte" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="Creditore"/>
+									<xs:enumeration value="Debitore"/>
+									<xs:enumeration value="Terzo"/>
+									<xs:enumeration value="Liquidatore"/>
+									<xs:enumeration value="Commissario"/>
+									<xs:enumeration value="Curatore"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NominaLiquidatoreOCC"/>
+	<xs:element name="NominaCuratore"/>
+	<xs:element name="NominaEsperto"/>
+	<xs:element name="NominaLiquidatore"/>
+	<xs:element name="NuovaProposta" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>NUOVA PROPOSTA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="NuovoProgettoStatoPassivoOss" type="pt:IstanzaEvento"/>
+	<xs:element name="NuovoRipartoSeguitoContestazioni" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaRipartoFinale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI RIPARTO FINALE EX ART. 232, UC., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCuratoreExArt211VII" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE CURATORE EX ART. 211, VII C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCuratoreExArt241II" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE CURATORE EX ART. 241, II C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PrCommissario" type="pt:IstanzaEvento"/>
+	<xs:element name="ParereCommissarioLiquidatore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL COMMISSARIO LIQUIDATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCuratoreIstanzaNonAcquisizRestituzBeni" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CURATORE SU ISTANZA DI NON ACQUISIZ./RESTITUZ. BENI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCuratoreConcessioneSussidio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CURATORE SULLA CONCESSIONE DEL SUSSIDIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCuratoreFissazioneLimiteMantenimento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CURATORE SULLA FISSAZIONE DEL LIMITE PER IL MANTENIMENTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PrLiquidatore" type="pt:IstanzaEvento"/>
+	<xs:element name="ParereIstanzaAccessoAttiEstrazioneCopie" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE SULL'ISTANZA DI ACCESSO AGLI ATTI ED ESTRAZIONE COPIE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProgettoRipartoModificatoContestazioni" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PROGETTO RIPARTO MODIFICATO A SEGUITO DI CONTESTAZIONI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProvvEsecutivo275" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PROVVEDIMENTO ESECUTIVO EX ART. 275, V C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OmologazioneConcordatoNellaLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="OpposizioneConcordatoLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="OpposizioneEsdebitazioneCreditore" type="pt:IstanzaEvento"/>
+	<xs:element name="OpposizioneCreditoreArt58co2CCC" type="pt:IstanzaEvento"/>
+	<xs:element name="OrdinanzaVenditaAnticipata">
+		<xs:annotation>
+			<xs:documentation>ORDINANZA DI VENDITA ANTICIPATA</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineTribunaleCessazioneAttivitaImpresa">
+		<xs:annotation>
+			<xs:documentation>ORDINE DEL TRIBUNALE CESSAZIONE ATTIVITA'&#160;DI IMPRESA</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineDepositoRelazioneParticolar130">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI DEPOSITO DELLA RELAZIONE PARTICOLAREGGIATA EX ART. 130 CCI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineIntegrazioneRelazioneParticolar130">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI INTEGRAZIONE RELAZIONE PARTICOLAREGGIATA EX ART. 130 CCI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineSecretazioneRelazionePeriodica130">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI SECRETAZIONE RELAZIONE PERIODICA EX ART. 130 CCI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OsservazioniRelazionePeriodica130SostCDC">
+		<xs:annotation>
+			<xs:documentation>OSSERVAZIONI ALLA RELAZIONE PERIODICA ART. 130 C.C.I. IN SOSTITUZIONE DEL CDC</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OsservazioniRelazPeriodicaRapporto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>OSSERVAZIONI ALLA RELAZIONE PERIODICA/RAPPORTO RIEPILOGATIVO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCExArt211VIIC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE CDC EX ART. 211, VII C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCExArt241IIC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE CDC EX ART. 241, II C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCAttConservazionePatrimonio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL C.D.C SU ATTIVITA' DI CONSERVAZIONE DEL PATRIMONIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCVenditaAnticipata" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CDC ALLA VENDITA ANTICIPATA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCIstanzaNonAcqRestituzBeni" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CDC SU ISTANZA DI NON ACQUISIZ./RESTITUZ. BENI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCConcessioneSussidio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CDC SULLA CONCESSIONE DEL SUSSIDIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereCDCFissazioneLimiteMantenimento" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE DEL CDC SULLA FISSAZIONE DEL LIMITE PER IL MANTENIMENTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereVenditaBeniAssistitiPrivilegio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE PER LA VENDITA DEI BENI ASSISTITI DA PRIVILEGIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereFavorevoleContinuazioneImpresa" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE FAVOREVOLE ALLA CONTINUAZIONE DELL'IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParereIstanzaCuratoreExArt209IC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PARERE SULL'ISTANZA DEL CURATORE EX ART. 209, I C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PropostaRevocaAmministratoreGiudiziario">
+		<xs:annotation>
+			<xs:documentation>PROPOSTA DI REVOCA AMMINISTRATORE GIUDIZIARIO</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropostaRevocaEsperto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PROPOSTA DI REVOCA ESPERTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PropostaRevocaLiquidatore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PROPOSTA DI REVOCA LIQUIDATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PubbPianoModificatoAttestazioni" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PUBBLICAZIONE PIANO MODIFICATO E ATTESTAZIONI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProgrammaLiquidazioneApprovato" type="pt:IstanzaEvento"/>
+	<xs:element name="ProspettoSommeDisponibiliArt220CCI">
+		<xs:annotation>
+			<xs:documentation>PROSPETTO SOMME DISPONIBILI (ART. 220, I C., CCI)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PubblicazioneSentenzaSitoTribunale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PUBBLICAZIONE SENTENZA SU SITO TRIBUNALE / MINISTERO DI GIUSTIZIA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PubblicazioneStatoPassivoSitoTribunale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>PUBBLICAZIONE STATO PASSIVO SU SITO TRIBUNALE / MINISTERO DI GIUSTIZIA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProvvedimentoConservazionePatrimonio"/>
+	<xs:element name="ProvvedimentoEsecuzitoASeguitoChiusura"/>
+	<xs:element name="ProvvedimentoSuInterpelloRapportiPendenti"/>
+	<xs:element name="ReclamoAvversoStatoPassivo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO AVVERSO STATO PASSIVO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RestituzioneSommeRiscosse" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RESTITUZIONE SOMME RISCOSSE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RevocaOrganoAmministrativoSocieta"/>
+	<xs:element name="RevocaPoteriCompimentoAttiStraordAmm"/>
+	<xs:element name="SentenzaConversioneInLiqGiudiz"/>
+	<xs:element name="RevNonFarsiLuogoPassivo" type="pt:IstanzaEvento"/>
+	<xs:element name="RevocaRisoluzioneOmologazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Apertura sub-procedimento di REVOCA/RISOLUZIONE OMOLOGAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelazioneTribunaleInadempimentiDebitoreExArt118" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RELAZIONE AL TRIBUNALE INADEMPIMENTI DEBITORE EX ART. 118, IV C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelEsitoVotazioni" type="pt:IstanzaEvento"/>
+	<xs:element name="RelazionePeriodicaAndamentoLiquidazioneOssevCG" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RELAZIONE PERIODICA SULL'ANDAMENTO DELLA LIQUIDAZIONE CON OSSERVAZIONI CG</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelazioneProspettiveLiqExArt209CCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RELAZIONE SULLE PROSPETTIVE DI LIQUIDAZIONE EX ART. 209, I C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RichiestaALiquidatoreRelazione"/>
+	<xs:element name="RichiestaParereLiquidatore"/>
+	<xs:element name="DecretoOmologazioneConcordLiquid" type="pt:IstanzaEvento"/>
+	<xs:element name="RichiestaInformativaOCC" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoCreditoreInsoddisfatto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RICORSO CREDITORE INSODDISFATTO E APERTURA SUB PROC. EX ART. 232, UC., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RicorsoImpugnazione206" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoImpugnazione206LCA" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoRevocazione206" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoRevocazione206LCA" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanzaRevoca"/>
+	<xs:element name="RigettoIstanzaRiapertura"/>
+	<xs:element name="RigettoOmologazioneConcordatoLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="RimessioneAlCollegio">
+		<xs:annotation>
+			<xs:documentation>RIMESSIONE AL COLLEGIO (ART. 241, III C., CCI)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RimessioneNeiTermini"/>
+	<xs:element name="RimessioneAttiGiudiceRipartoExArt275" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RIMESSIONE ATTI AL GIUDICE PER RIPARTO EX ART. 275, VI C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RimessioneFormazioneStatoPassivoGDExArt273" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RIMESSIONE FORMAZIONE STATO PASSIVO AL GD EX ART. 273 CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RinunzIcarico" type="pt:IstanzaEvento"/>
+	<xs:element name="RipartoEsecutivoPiano" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RIPARTO ESECUTIVO DEL PIANO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RipartoSupplementare">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RinvioExArt309Cpc">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="dataUdie" type="xs:dateTime"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RapportoInformativo" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RAPPORTI INFORM. PERIODICI SULLA GESTIONE ECONOMICA/FINANZIARIA IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RapRiepilogativo" type="pt:IstanzaEvento"/>
+	<xs:element name="ReclamoAvversoProgettoRiparto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO AVVERSO PROGETTO DI RIPARTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoControAttiComitatoCreditori" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO CONTRO GLI ATTI DEL COMITATO DEI CREDITORI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoControAttiCommissario" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO CONTRO GLI ATTI DEL COMMISSARIO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoControAttiCuratore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO CONTRO GLI ATTI DEL CURATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoControAttiLiquidatore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO CONTRO GLI ATTI DEL LIQUIDATORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoControDecretiGiudice" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO CONTRO I DECRETI DEL GIUDICE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReclamoGDAvversoProgettoRiparto" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RECLAMO AL GD AVVERSO PROGETTO DI RIPARTO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelazioneMotivataCdcConcordato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RELAZIONE MOTIVATA/PARERE DEL CDC SUL CONCORDATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RelParticolareggiataExArt130" type="pt:IstanzaEvento"/>
+	<xs:element name="RelazioneSituazionePatrimonialeImpresa" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RELAZIONE SULLA SITUAZIONE PATRIMONIALE/ECONOMICA/FINANZIARIA IMPRESA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RendicontoPeriodico" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RENDICONTO PERIODICO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RendicontoPeriodicoEsercProvvisorio" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RENDICONTO PERIODICO EX ART. 211, VI C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RendicontoSupplementare" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RENDICONTO SUPPLEMENTARE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RendicontoFinaleConcordatoLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="RendicontoModInt" type="pt:IstanzaEvento"/>
+	<xs:element name="ResocontoPeriodicoLiq" type="pt:IstanzaEvento"/>
+	<xs:element name="RestituzioneDebitoreBeniNonLiq" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RESTITUZIONE AL DEBITORE BENI NON LIQUIDATI&#160;</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RestituzioneDebitoreSommeEsubero" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RESTITUZIONE AL DEBITORE SOMME IN ESUBERO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RichiestaIngiunzionePagamentoSoci" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RESTITUZIONE AL DEBITORE SOMME IN ESUBERO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RicorsoAnnullamentoConcordatoLiqGiud" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoAnnullamentoPiano" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoRisoluzionePiano" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoDichLiqGiudizialeAltraImpresaGruppo" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoDichStatoInsAltraImpresaGruppo" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoEstensioneAmmStraordSoci" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoEstensioneLiquidazioneSoci" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoOpposizione206" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoOpposizione206LCA" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoProponenteDenunciaDeb" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoRisoluzioneConcordato" type="pt:IstanzaEvento"/>
+	<xs:element name="RicorsoDichiarazioneStatoInsolvenza" type="pt:IstanzaEvento"/>
+	<xs:element name="RinunciaOpposizione58CCI" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RINUNCIA OPPOSIZIONE (Art. 58 co.2 CCI)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RinunziaDirittoPrelazioneEx243" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RINUNZIA AL DIRITTO DI PRELAZIONE EX ART. 243, II C., CCI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SentenzaRisoluzioneConcPrev" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaRisoluzAperturaLiquidazione" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaRisoluzRevocaApertLiquControllata" type="pt:IstanzaEvento"/>
+	<xs:element name="RisoluzioneConcoratoRiaperturaLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaRisoluzConcRiaperturaLiqGiud" type="pt:IstanzaEvento"/>
+	<xs:element name="SecretazioneAtti" type="pt:IstanzaEvento"/>
+	<xs:element name="SegnalazioneViolazioniObblighiParteDebitore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>SEGNALAZIONE VIOLAZIONE OBBLIGHI DA PARTE DEL DEBITORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SentOmoPianoModificato" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaRevocaRisoluzOmologazione">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="Motivazione">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="Atti di frode"/>
+									<xs:enumeration value="Inadempimento"/>
+									<xs:enumeration value="Altro"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="altraMotivazione" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SentenzaRiaperturaLiquidazione" type="pt:IstanzaEvento"/>
+	<xs:element name="DecretoConversioneInAmmStrordProdiBis">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfGiudice"/>
+						<xs:element name="dataUdienza" type="xs:dateTime"/>
+						<xs:element name="dataTermineAmmissionePass" type="xs:dateTime"/>
+						<xs:element name="Debitori">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Debitore">
+										<xs:annotation>
+											<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="at:Soggetto"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Commissari">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Commissario" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="at:Soggetto"/>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaCommissarioRelazionare" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>RICHIESTA AL COMMISSARIO DI RELAZIONARE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SollecitoDepositoRelazionePeriodica" type="pt:IstanzaEvento"/>
+	<xs:element name="SollecitoStimatore" type="pt:IstanzaEvento"/>
+	<xs:element name="SommePressoIstitutiIndicatiGD" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>DEPOSITO SOMME PRESSO ISTITUTI INDICATI DA G.D.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Sospensione" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaOmoConcLCA" type="pt:IstanzaEvento"/>
+	<xs:element name="SospensioneParzialeLiquidazioneAttivo"/>
+	<xs:element name="SospensioneTerminiImpugnazStatopassLiq53"/>
+	<xs:element name="SospensioneTotaleLiquidazioneAttivo"/>
+	<xs:element name="StatoPassivoApprovato" type="pt:IstanzaEvento"/>
+	<xs:element name="SubentroContrattoLiquidatoreLuogoDebitore" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>SUBENTRO NEL CONTRATTO DEL LIQUIDATORE IN LUOGO DEL DEBITORE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplementoProgrammaLiquidazione" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>SUPPLEMENTO PROGR. DI LIQUIDAZIONE</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplementoProgrammaLiquidazioneApprovato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>SUPPLEMENTO PROGR. DI LIQUIDAZIONE APPROVATO</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TrascrizioneSentenzaPubbliciRegistriCompetenti" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>TRASCRIZIONE SENTENZA IN PUBBLICI REGISTRI COMPETENTI</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DecretoSostituzioneAmmGiudiziario">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="DecretoSostituzioneEsperto">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="SostituzioneLiquidatoreLC">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="DecretoSostituzioneStimatore">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="DecretoSostituzioneCuratore">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="AccoglimentoRevocaCuratore">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="VersamentoCProcedura" type="pt:IstanzaEvento"/>
+	<xs:element name="RigettoIstanzaConversione" type="pt:IstanzaEvento"/>
+	<xs:element name="DecDiniegoOmoPianoModificato" type="pt:IstanzaEvento"/>
+	<xs:element name="RevocaIncaricato">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="cfIncaricato" type="xs:string"/>
+						<xs:element name="tipo" type="xs:string"/>
+						<xs:element name="dataIncarico" type="xs:date"/>
+						<xs:element name="motivazioni" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:normalizedString">
+									<xs:enumeration value="Inadempienza Grave"/>
+									<xs:enumeration value="Inosservanza Doveri"/>
+									<xs:enumeration value="Incompatibilita"/>
+									<xs:enumeration value="Altre Gravi Ragioni"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineSecretazioneRelazione53">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI SECRETAZIONE RELAZIONE (ART. 53, IV C., CCI)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrdineComunicazApprovazProponente">
+		<xs:annotation>
+			<xs:documentation>ORDINE DI COMUNICAZIONE APPROVAZIONE A PROPONENTE E CREDITORI DISSENZIENTI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModificaReclamoPropostoControDecretiTribunale">
+		<xs:annotation>
+			<xs:documentation>NOTIFICA RECLAMO PROPOSTO CONTRO I DECRETI DEL TRIBUNALE</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttoNonCodificato" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Atto Non Codificato</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AnnullamentoPianoRistrut" type="pt:IstanzaEvento"/>
+	<xs:element name="SentenzaRisoluzionePianoRistrut" type="pt:IstanzaEvento"/>
+	<xs:element name="AnnullAperturaLiquidazione" type="pt:IstanzaEvento"/>
+	<xs:element name="RisoluzAperturaLiquidazione" type="pt:IstanzaEvento"/>
+</xs:schema>
+
+

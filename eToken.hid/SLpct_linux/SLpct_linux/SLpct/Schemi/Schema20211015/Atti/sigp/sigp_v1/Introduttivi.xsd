@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by TEAM2 (RENEGADE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemi.processotelematico.giustizia.it/sigp/introduttivi/v1" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi/v2" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v2" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/parte/v2" xmlns:ns1="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v2" xmlns:all="http://schemi.processotelematico.giustizia.it/tipi/allegati/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/sigp/introduttivi/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/v2" schemaLocation="../base_v2/tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v2" schemaLocation="../base_v2/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/parte/v2" schemaLocation="../base_v2/eventi-parte.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v2" schemaLocation="../base_v2/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/allegati/v1" schemaLocation="../base_v1/tipi-allegati.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="TipoDecreto">
+		<xs:choice>
+			<xs:element name="somma" type="bt:Valuta"/>
+			<xs:element name="somma-beni" type="bt:Valuta"/>
+			<xs:element name="oneri-condominiali" type="bt:Valuta"/>
+			<xs:element name="consegna-beni" type="bt:Valuta"/>
+		</xs:choice>
+		<xs:attribute name="esecutivo" type="xs:boolean" use="required"/>
+	</xs:complexType>
+	<xs:element name="RicorsoDecretoIngiuntivo">
+		<xs:annotation>
+			<xs:documentation>Iscrizione di un ricorso per decreto ingiuntivo.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element ref="pt:AnagraficaProcedimento"/>
+						<xs:element name="TipoDecreto" type="TipoDecreto"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

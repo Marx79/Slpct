@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/tipi" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:annotation>
+    <xs:documentation>Tipi enumerati soggetti a modifiche e aggiunte</xs:documentation>
+  </xs:annotation>
+  <xs:simpleType name="UfficioTelematico">
+    <xs:annotation>
+      <xs:documentation>Elenco uffici abilitati al processo telematico</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+			<xs:enumeration value="0720060097"><xs:annotation><xs:documentation>Tribunale di Bari</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0160240097"><xs:annotation><xs:documentation>Tribunale di Bergamo</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0160240166"><xs:annotation><xs:documentation>Tribunale di Bergamo - Ex Pretura</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0370060094"><xs:annotation><xs:documentation>Tribunale di Bologna</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0170290098"><xs:annotation><xs:documentation>Tribunale di Brescia</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870150093"><xs:annotation><xs:documentation>Tribunale di Catania</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870040192"><xs:annotation><xs:documentation>Tribunale di Catania - Acireale</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870060196"><xs:annotation><xs:documentation>Tribunale di Catania - Adrano</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870070198"><xs:annotation><xs:documentation>Tribunale di Catania - Belpasso</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870090192"><xs:annotation><xs:documentation>Tribunale di Catania - Bronte</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870170199"><xs:annotation><xs:documentation>Tribunale di Catania - Giarre</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870240194"><xs:annotation><xs:documentation>Tribunale di Catania - Mascalucia</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0870330193"><xs:annotation><xs:documentation>Tribunale di Catania - Paterno</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0100250093"><xs:annotation><xs:documentation>Tribunale di Genova</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0791600090"><xs:annotation><xs:documentation>Tribunale di Lamezia</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0151460094"><xs:annotation><xs:documentation>Tribunale di Milano</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="9876543210"><xs:annotation><xs:documentation>Tribunale di Model Office Balduina SIECIC</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="987654321V"><xs:annotation><xs:documentation>Tribunale di Model Office Balduina Virtuale SICID</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0123456789"><xs:annotation><xs:documentation>Tribunale di Model Office</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0630490096"><xs:annotation><xs:documentation>Tribunale di Napoli</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0280600097"><xs:annotation><xs:documentation>Tribunale di Padova</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0012720095"><xs:annotation><xs:documentation>Tribunale di Torino</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0010820194"><xs:annotation><xs:documentation>Tribunale di Torino - Chivasso</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0010860192"><xs:annotation><xs:documentation>Tribunale di Torino - Cirie</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0011560191"><xs:annotation><xs:documentation>Tribunale di Torino - Moncalieri</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0012700193"><xs:annotation><xs:documentation>Tribunale di Torino - Susa</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0140610093"><xs:annotation><xs:documentation>Tribunale di Milano - Sondrio</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0200300096"><xs:annotation><xs:documentation>Tribunale di Milano - Mantova</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0151490090"><xs:annotation><xs:documentation>Tribunale di Milano - Monza</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0181100092"><xs:annotation><xs:documentation>Tribunale di Milano - Pavia</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0181820093"><xs:annotation><xs:documentation>Tribunale di Milano - Voghera</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0181770092"><xs:annotation><xs:documentation>Tribunale di Milano - Vigevano</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0121330094"><xs:annotation><xs:documentation>Tribunale di Milano - Varese</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0980310090"><xs:annotation><xs:documentation>Tribunale di Milano - Lodi</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0970420092"><xs:annotation><xs:documentation>Tribunale di Milano - Lecco</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0190360095"><xs:annotation><xs:documentation>Tribunale di Milano - Cremona</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0190350093"><xs:annotation><xs:documentation>Tribunale di Milano - Crema</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0130750091"><xs:annotation><xs:documentation>Tribunale di Milano - Como</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0120260097"><xs:annotation><xs:documentation>Tribunale di Milano - Bustoarsizio</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0580910098"><xs:annotation><xs:documentation>Tribunale di Roma</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0580911191"><xs:annotation><xs:documentation>Tribunale di Roma - Ostia</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0480170090"><xs:annotation><xs:documentation>Tribunale di Firenze</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0480140196"><xs:annotation><xs:documentation>Tribunale di Firenze - Empoli</xs:documentation></xs:annotation></xs:enumeration>
+			<xs:enumeration value="0480330196"><xs:annotation><xs:documentation>Tribunale di Firenze - Pontassieve</xs:documentation></xs:annotation></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

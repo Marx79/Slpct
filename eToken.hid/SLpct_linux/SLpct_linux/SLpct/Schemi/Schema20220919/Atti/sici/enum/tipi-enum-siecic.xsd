@@ -1,0 +1,2585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:simpleType name="FormaSocietaria">
+		<xs:annotation>
+			<xs:documentation>Ragione Sociale delle anagrafiche</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DI">
+				<xs:annotation>
+					<xs:documentation>DITTA INDIVIDUALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDF">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' DI FATTO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AA">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' IN ACCOMANDITA PER AZIONI</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE IN ACCOMANDITA SEMPLICE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AI">
+				<xs:annotation>
+					<xs:documentation>ASSOCIAZIONE IMPRESA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AL">
+				<xs:annotation>
+					<xs:documentation>AZIENDA SPECIALE DI ENTE LOCALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AM">
+				<xs:annotation>
+					<xs:documentation>AZIENDA MUNICIPALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AN">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE IN NOME COLLETTIVO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AP">
+				<xs:annotation>
+					<xs:documentation>AZIENDA PROVINCIALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:documentation>AZIENDA REGIONALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' IN ACCOMANDITA SEMPLICE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AT">
+				<xs:annotation>
+					<xs:documentation>AZIENDA AUTONOMA STATALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CC">
+				<xs:annotation>
+					<xs:documentation>CONSORZIO CON ATTIVITA' ESTERNA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CI">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' COOPERATIVA A RESPONSABILITA ILLIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CL">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' COOPERATIVA A RESPONSABILITA LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CM">
+				<xs:annotation>
+					<xs:documentation>CONSORZIO MUNICIPALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CN">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:documentation>CONSORZIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CR">
+				<xs:annotation>
+					<xs:documentation>CONSORZIO INTERCOMUNALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZ">
+				<xs:annotation>
+					<xs:documentation>CONSORZIO AI SENSI DELLA L. 142/90</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EC">
+				<xs:annotation>
+					<xs:documentation>ENTE PUBBLICO COMMERCIALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ED">
+				<xs:annotation>
+					<xs:documentation>ENTE DIRITTO PUBBLICO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EI">
+				<xs:annotation>
+					<xs:documentation>ENTE IMPRESA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EP">
+				<xs:annotation>
+					<xs:documentation>ENTE PUBBLICO ECONOMICO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ES">
+				<xs:annotation>
+					<xs:documentation>ENTE DI CUI ALLA L.R. 21-12-93, N.88</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FI">
+				<xs:annotation>
+					<xs:documentation>FONDAZIONE IMPRESA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GE">
+				<xs:annotation>
+					<xs:documentation>GRUPPO EUROPEO DI INTERESSE ECONOMICO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IC">
+				<xs:annotation>
+					<xs:documentation>ISTITUTO DI CREDITO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:documentation>ISTITUTO DI CREDITO DI DIRITTO PUBBLICO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LL">
+				<xs:annotation>
+					<xs:documentation>AZIENDA SPECIALE AI SENSI DELLA L. 142/9</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MA">
+				<xs:annotation>
+					<xs:documentation>MUTUA ASSICURAZIONE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OC">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' COOPERATIVA CONSORTILE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OO">
+				<xs:annotation>
+					<xs:documentation>COOPERATIVA SOCIALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OS">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE COOPERATIVA A RESPONSABILIT�LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>ASSOCIAZIONE IN PARTECIPAZIONE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PC">
+				<xs:annotation>
+					<xs:documentation>PICCOLA SOCIETA' COOPERATIVA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PS">
+				<xs:annotation>
+					<xs:documentation>PICCOLA SOCIETA' COOPERATIVA A RESPONSABILIT�LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' COOPERATIVA A RESPONSABILIT�LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SE">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' SEMPLICE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SL">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE A RESPONSABILIT�LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SM">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' DI MUTUO SOCCORSO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SN">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' IN NOME COLLETTIVO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SO">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' CONSORTILE PER AZIONI</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SP">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' PER AZIONI</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SR">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' A RESPONSABILITA' LIMITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SS">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' COSTITUITA IN BASE A LEGGI DI ALTRO STATO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SU">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' A RESPONSABILITA' LIMITATA CON UNICO SOCIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SV">
+				<xs:annotation>
+					<xs:documentation>SOCIETA' TRA AVVOCATI</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASS">
+				<xs:annotation>
+					<xs:documentation>Associazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CND">
+				<xs:annotation>
+					<xs:documentation>Condominio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COM">
+				<xs:annotation>
+					<xs:documentation>Comitato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CON">
+				<xs:annotation>
+					<xs:documentation>Consorzio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:documentation>Cooperativa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EDG">
+				<xs:annotation>
+					<xs:documentation>Ente di Gestione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EIS">
+				<xs:annotation>
+					<xs:documentation>Ente religioso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENP">
+				<xs:annotation>
+					<xs:documentation>Ente Pubblico o P.A.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISC">
+				<xs:annotation>
+					<xs:documentation>Istituto di Credito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N/A">
+				<xs:annotation>
+					<xs:documentation>Non specificata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OSE">
+				<xs:annotation>
+					<xs:documentation>Stato Est. o org. interministeriale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAS">
+				<xs:annotation>
+					<xs:documentation>Partito o Sindacato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PUM">
+				<xs:annotation>
+					<xs:documentation>Pubblico Ministero</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOC">
+				<xs:annotation>
+					<xs:documentation>Societa' di capitali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOP">
+				<xs:annotation>
+					<xs:documentation>Societa' di persone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UnitaMisuraQuantita">
+		<xs:annotation>
+			<xs:documentation>Unita di misura per specificare delle quantita'</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UN">
+				<xs:annotation>
+					<xs:documentation>Unita'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MT">
+				<xs:annotation>
+					<xs:documentation>Metri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KG">
+				<xs:annotation>
+					<xs:documentation>Chilogrammi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LT">
+				<xs:annotation>
+					<xs:documentation>Litri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UnitaMisuraSuperficie">
+		<xs:annotation>
+			<xs:documentation>Unita di misura di superfice (Dati catastali)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MQ">
+				<xs:annotation>
+					<xs:documentation>mq</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HA">
+				<xs:annotation>
+					<xs:documentation>Ettari</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:documentation>Are</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:documentation>Centiare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaTitolo">
+		<xs:annotation>
+			<xs:documentation>Codifica delle tipologie di  titoli esecutivi</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Sentenza di condanna I grado</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Sentenza di condanna II grado</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Decreto ingiuntivo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>Cambiale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>Ordinanza</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>Ordinanza in corso di causa (art.186 quater cpc)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:documentation>Ingiunzione in corso di causa (art. 183 ter cpc)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8">
+				<xs:annotation>
+					<xs:documentation>Omologa Separazione Consensuale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>Verbale di Conciliazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:documentation>Cartella Esattoriale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11">
+				<xs:annotation>
+					<xs:documentation>Assegno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12">
+				<xs:annotation>
+					<xs:documentation>Contratto di Finanziamento</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13">
+				<xs:annotation>
+					<xs:documentation>Contratto di Vendita</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14">
+				<xs:annotation>
+					<xs:documentation>Contratto di Sovvenzione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15">
+				<xs:annotation>
+					<xs:documentation>Polizza di Pegno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16">
+				<xs:annotation>
+					<xs:documentation>Fattura</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="17">
+				<xs:annotation>
+					<xs:documentation>Mutuo Fondiario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="18">
+				<xs:annotation>
+					<xs:documentation>Mutuo Ipotecario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="19">
+				<xs:annotation>
+					<xs:documentation>Atto notarile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="20">
+				<xs:annotation>
+					<xs:documentation>Lodo Arbitrale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21">
+				<xs:annotation>
+					<xs:documentation>Scrittura contabile autenticata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:documentation>Atto da specificare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaTitoloNonEsecutivo">
+		<xs:annotation>
+			<xs:documentation>Codifica delle tipologie di  titoli non esecutivi</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="22">
+				<xs:annotation>
+					<xs:documentation>Sequestro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23">
+				<xs:annotation>
+					<xs:documentation>Diritto di pegno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24">
+				<xs:annotation>
+					<xs:documentation>Diritto di prelazione risultante da pubblici registri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25">
+				<xs:annotation>
+					<xs:documentation>Somma di denaro risultante da scritture contabili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="26">
+				<xs:annotation>
+					<xs:documentation>Altro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaDiritto">
+		<xs:annotation>
+			<xs:documentation>Codifica delle tipologie di diritto vantabili sui beni </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Proprieta'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1s">
+				<xs:annotation>
+					<xs:documentation>Proprieta' superficiataria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Nuda proprieta'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2a">
+				<xs:annotation>
+					<xs:documentation>Nuda proprieta'superficiataria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Abitazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3s">
+				<xs:annotation>
+					<xs:documentation>Abitazione su proprieta' superficiataria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4">
+				<xs:annotation>
+					<xs:documentation>del concedente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5">
+				<xs:annotation>
+					<xs:documentation>dell'enfiteuta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6">
+				<xs:annotation>
+					<xs:documentation>Superficie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7">
+				<xs:annotation>
+					<xs:documentation>Uso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7s">
+				<xs:annotation>
+					<xs:documentation>Uso su proprieta' superficiataria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8">
+				<xs:annotation>
+					<xs:documentation>Usufrutto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8s">
+				<xs:annotation>
+					<xs:documentation>Usufrutto su proprieta' superficiataria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>Servitu'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaClasseImmobiliare">
+		<xs:annotation>
+			<xs:documentation>Classe Immobile (Dati Catasto)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A1">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo signorile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A2">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo civile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A3">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo economico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A4">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo popolare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A5">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo ultrapopolare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A6">
+				<xs:annotation>
+					<xs:documentation>Abitazione di tipo rurale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A7">
+				<xs:annotation>
+					<xs:documentation>Abitazione in villini</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A8">
+				<xs:annotation>
+					<xs:documentation>Abitazione in ville</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A9">
+				<xs:annotation>
+					<xs:documentation>Castelli, palazzi di eminenti pregi artistici</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A10">
+				<xs:annotation>
+					<xs:documentation>Uffici e studi privati</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A11">
+				<xs:annotation>
+					<xs:documentation>Abitazioni e alloggi tipici dei luoghi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B1">
+				<xs:annotation>
+					<xs:documentation>Collegi, ospizi, conventi, caserme</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B2">
+				<xs:annotation>
+					<xs:documentation>Case di cura e ospedali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B3">
+				<xs:annotation>
+					<xs:documentation>Prigioni o riformatori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B4">
+				<xs:annotation>
+					<xs:documentation>Uffici pubblici</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B5">
+				<xs:annotation>
+					<xs:documentation>Scuole e laboratori scientifici</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B6">
+				<xs:annotation>
+					<xs:documentation>Biblioteche, musei, gallerie, accademie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B7">
+				<xs:annotation>
+					<xs:documentation>Cappelle e oratori non destinati al pubblico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="B8">
+				<xs:annotation>
+					<xs:documentation>Magazzini sotterranei, deposito di derrate</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C1">
+				<xs:annotation>
+					<xs:documentation>Negozi, botteghe</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C2">
+				<xs:annotation>
+					<xs:documentation>Magazzini e locali di deposito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C3">
+				<xs:annotation>
+					<xs:documentation>Laboratori per arti e mestieri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C4">
+				<xs:annotation>
+					<xs:documentation>Fabbricisti e locali per esercizi sportivi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C5">
+				<xs:annotation>
+					<xs:documentation>Stabilimenti balneari e di acque curative</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C6">
+				<xs:annotation>
+					<xs:documentation>Stalle, scuderie, rimesse, autorimesse</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C7">
+				<xs:annotation>
+					<xs:documentation>Tettoie chiuse o aperte</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D1">
+				<xs:annotation>
+					<xs:documentation>Opifici</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D2">
+				<xs:annotation>
+					<xs:documentation>Alberghi e pensioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D3">
+				<xs:annotation>
+					<xs:documentation>Teatri, cinematografi, sale per concerti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D4">
+				<xs:annotation>
+					<xs:documentation>Case di cura e ospedali con fini di lucro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D5">
+				<xs:annotation>
+					<xs:documentation>Istituto di credito, cambio e assicurazioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D6">
+				<xs:annotation>
+					<xs:documentation>Fabbricati, locali sportivi con fini di lucro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D7">
+				<xs:annotation>
+					<xs:documentation>Fabbricati costruiti per esigenze industriali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D8">
+				<xs:annotation>
+					<xs:documentation>Fabbricati costruiti per esigenze commerciali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D9">
+				<xs:annotation>
+					<xs:documentation>Edifici galleggianti o sospesi fissati al suolo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D10">
+				<xs:annotation>
+					<xs:documentation>Fabbricati per attivita' agricole</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E1">
+				<xs:annotation>
+					<xs:documentation>Stazioni per servizi di trasporto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E2">
+				<xs:annotation>
+					<xs:documentation>Ponti comunali e provinciali a pedaggio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E3">
+				<xs:annotation>
+					<xs:documentation>Costruzione fabbri per esigenze pubbliche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E4">
+				<xs:annotation>
+					<xs:documentation>Recinti chiusi per speciali esigenze pubbliche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E5">
+				<xs:annotation>
+					<xs:documentation>Fabbricati fortificati e loro dipendenze</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E6">
+				<xs:annotation>
+					<xs:documentation>Fari, semafori, torri di orologi comunali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E7">
+				<xs:annotation>
+					<xs:documentation>Fabbricati pubblici destinati al culto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E8">
+				<xs:annotation>
+					<xs:documentation>Fabbricati e costruzioni nei cimiteri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E9">
+				<xs:annotation>
+					<xs:documentation>Edifici a destinazione particolare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="A">
+				<xs:annotation>
+					<xs:documentation>Appartamento</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AP">
+				<xs:annotation>
+					<xs:documentation>Albergo e pensione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C">
+				<xs:annotation>
+					<xs:documentation>Fabbricato in corso di costruzione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:documentation>Castello, immobile di pregio artistico e storico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CC">
+				<xs:annotation>
+					<xs:documentation>Casa di cura o ospedale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CL">
+				<xs:annotation>
+					<xs:documentation>Convento, convitto o istituto similare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CN">
+				<xs:annotation>
+					<xs:documentation>Cantina</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:documentation>Corte o resede</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CP">
+				<xs:annotation>
+					<xs:documentation>Cappella o oratorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="D">
+				<xs:annotation>
+					<xs:documentation>Deposito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="E">
+				<xs:annotation>
+					<xs:documentation>Ente comune</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EU">
+				<xs:annotation>
+					<xs:documentation>Ente urbano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="F">
+				<xs:annotation>
+					<xs:documentation>Bene futuro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="G">
+				<xs:annotation>
+					<xs:documentation>Garage o autorimessa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="I">
+				<xs:annotation>
+					<xs:documentation>Opificio industriale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="K">
+				<xs:annotation>
+					<xs:documentation>Palco teatrale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="L">
+				<xs:annotation>
+					<xs:documentation>Lastrico solare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LA">
+				<xs:annotation>
+					<xs:documentation>Laboratorio artigiano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LE">
+				<xs:annotation>
+					<xs:documentation>Lotto edificabile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="M">
+				<xs:annotation>
+					<xs:documentation>Magazzino</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation>Negozio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="P">
+				<xs:annotation>
+					<xs:documentation>Porzione di immobile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>Posto auto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PG">
+				<xs:annotation>
+					<xs:documentation>Prigione o riformatorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PO">
+				<xs:annotation>
+					<xs:documentation>Pozzo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PS">
+				<xs:annotation>
+					<xs:documentation>Palestra o altro immobile di uso sportivo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Q">
+				<xs:annotation>
+					<xs:documentation>Porzione di fabbricato in corso di costruzione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="R">
+				<xs:annotation>
+					<xs:documentation>Fabbricato rurale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>Scuola, laboratorio scientifico o similari</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SB">
+				<xs:annotation>
+					<xs:documentation>Stabilimento balneare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T">
+				<xs:annotation>
+					<xs:documentation>Terreno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="U">
+				<xs:annotation>
+					<xs:documentation>Ufficio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="V">
+				<xs:annotation>
+					<xs:documentation>Villa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="X">
+				<xs:annotation>
+					<xs:documentation>Fabbricato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaPrivilegio">
+		<xs:annotation>
+			<xs:documentation>Tipologia privilegi sul credito</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="00010">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese di giustizia per atti conservativi o di espropriazione nell'interesse comune dei creditori</xs:documentation>
+					<xs:documentation>Normativa: art. 2770 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00020">
+				<xs:annotation>
+					<xs:documentation>Descrizione: credito dell'acquirente di un immobile per le spese fatte per la dichiarazione di liberazione dell'immobile stesso dalle ipoteche</xs:documentation>
+					<xs:documentation>Normativa: art. 2770 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00030">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi dichiarati da leggi speciali preferiti ad ogni altro credito</xs:documentation>
+					<xs:documentation>Normativa: art. 2777 u.c. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 2 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00040">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposte o quote proporzionali di imposte imputabili ai redditi immobiliari</xs:documentation>
+					<xs:documentation>Normativa: artt. 2771 e 2780, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00050">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per contributi alle opere di bonifica o miglioramento</xs:documentation>
+					<xs:documentation>Normativa: artt. 2775 e 2780, n.2 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00060">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per canoni dovuti dai concessionari di acque pubbliche o di acque derivate da canali demaniani o per lavori eseguiti d'ufficio</xs:documentation>
+					<xs:documentation>Normativa: artt. 2774 e 2780, n.3 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 5 Grado: 3</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00070">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per INVIM e ogni tributo indiretto relativamente agli immobili ai quali il tributo si riferisce</xs:documentation>
+					<xs:documentation>Normativa: artt. 2772 e 2780, n.4 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00080">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per IVA in caso di responsabilita' solidale del cessionario sugli immobili che hanno formato oggetto della cessione</xs:documentation>
+					<xs:documentation>Normativa: artt. 2772 e 2780, n.4 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00090">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per IVA verso il cessionario o il committente sugli immobili che hanno formato oggetto della cessione</xs:documentation>
+					<xs:documentation>Normativa: artt. 2772 e 2780, n.4 c.c</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00100">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per INVIM</xs:documentation>
+					<xs:documentation>Normativa: art. 28 d.p.r. n.643/72 e 2780, n.5 c.c</xs:documentation>
+					<xs:documentation>Ordine: 7 Grado: 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00110">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del promissario acquirente per mancata esecuzione dei contratti preliminari trascritti</xs:documentation>
+					<xs:documentation>Normativa: artt. 2775 bis e 2780,n.5-bis c.c.</xs:documentation>
+					<xs:documentation>Ordine: 8 Grado: 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00120">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti assistiti da privilegi speciale per i quali non risulta dalla legge il grado di preferenza</xs:documentation>
+					<xs:documentation>Normativa: art. 2783 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00130">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti ipotecari secondo l'ordine di iscrizione nei registri immobiliari</xs:documentation>
+					<xs:documentation>Normativa: artt. 2808 e 2748, co. 2 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 10 Grado: 8</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="00140">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti con privilegio generale sui mobili e collocazione sussidiaria sugli immobili secondo la graduazione fatta per i mobili</xs:documentation>
+					<xs:documentation>Normativa: art. 2776 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 11 Grado: 9</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10010">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi marittimi e aeronautici sulla nave e sul molo</xs:documentation>
+					<xs:documentation>Normativa: artt. 552,561, 1023, 1024 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10020">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese giudiziali dovute allo Stato, spese nell'interesse comune dei creditori per atti conservativi sulla nave o per il processo di esecuzione, diritti di ancoraggio, faro o porto e altri diritti e tasse della stessa specie , spese di pilotaggio, spese di custodia e conservazione della nave</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.1 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10030">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti derivanti dal contratto di arruolamento o di lavoro del comandante o degli altri membri dell'equipaggio</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.2 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10040">
+				<xs:annotation>
+					<xs:documentation>Descrizione: somme anticipate dall'amministrazione della marina mercantile o della navigazione interna o dall'autorita' consolare per il mantenimento o il rimpatrio dell'equipaggio, contributi obbligatori ad istituti di assistenza e previdenza sociale per gente di mare il personale di navigazione interna</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.3 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10050">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' e compensi per assistenza e salvataggio, somme dovute per contribuzione della nave alle avarie comuni</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.4 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10060">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' per urto o sinistri della navigazione, per morte o lesioni ai passeggeri e agli equipaggi, per danni alle opere dei porti, dei bacini, e delle vie navigabili, per perdite o avarie del carico e del bagaglio</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.5 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10070">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti derivati da contratti stipulati o operazioni eseguite dal comandante in virtù dei suoi poteri legali per esigenze di conservazione della nave o per la continuazione del viaggio</xs:documentation>
+					<xs:documentation>Normativa: art. 552, n.6 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10080">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi marittimi e aeronautici sulle cose caricate</xs:documentation>
+					<xs:documentation>Normativa: artt. 552,561, 1023,1024 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10090">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese giudiziali dovute allo Stato, spese nell'interesse comune dei creditori per atti conservativi sulle cose o per il processo di esecuzione</xs:documentation>
+					<xs:documentation>Normativa: art. 561, n.1 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10100">
+				<xs:annotation>
+					<xs:documentation>Descrizione: diritti doganali dovuti sulle cose nel luogo di scarico</xs:documentation>
+					<xs:documentation>Normativa: art. 561, n.2 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10110">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' e compensi per assistenza e salvataggio, somme dovute per contribuzione della nave alle avarie comuni</xs:documentation>
+					<xs:documentation>Normativa: art. 561, n.3 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10120">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti derivanti dal contratto di trasporto, comprese le spese di scarico e il fitto dei magazzini ove le cose scaricate sono depositate</xs:documentation>
+					<xs:documentation>Normativa: art. 561, n.4 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10130">
+				<xs:annotation>
+					<xs:documentation>Descrizione: somme per capitale ed interessi dovute per le obbligazioni contratte dal comandante sul carico nei casi previsti dall'art. 307 cod. nav.</xs:documentation>
+					<xs:documentation>Normativa: art. 561, n.5 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 1 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10140">
+				<xs:annotation>
+					<xs:documentation>Descrizione: ipoteca sulle navi e sugli aeromobili (graduazione secondo tabelle)</xs:documentation>
+					<xs:documentation>Normativa: artt. 565 e 1027 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 2 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10150">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese di giustizia per atti conservativi o di espropriazione di beni mobili nell'interesse comune dei creditori aventi privilegio sugli stessi</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10160">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese per la riparazione o miglioramento di un bene pignorato in esecuzione di contratto d'appalto</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10170">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese sostenute da un creditore per impedire il deperimento di un bene</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10180">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese sostenute per azioni surrogatorie (art. 2900 c.c.)</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10190">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese sostenute per azioni revocatorie (art. 2901 c.c.)</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10200">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese sostenute per sequestro conservativo (art. 671 c.p.c.)</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10210">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese per l'espropriazione</xs:documentation>
+					<xs:documentation>Normativa: art. 2755 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 3 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10220">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti assistiti da privilegio speciale da preferire per legge speciale al pegno</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10230">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposte ipotecarie (art. 12 l. n. 540/43)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10240">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposte ipotecarie (art. 8 d.lgs. n. 347/90)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10250">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per finanziamenti alle industrie (art. 3 d.l. n. 1075/47 e art. 9 d.l. n. 367/44)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10260">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per concessioni di finanziamenti per acquisto di macchinari, attrezzature e mezzi strumentali vari (art. 5 l. n. 258/50)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10270">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposta erariale di consumo sui prodotti audiovisivi e fotoottici (art. 4 l. n. 53/83)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10280">
+				<xs:annotation>
+					<xs:documentation>Descrizione: credito peschereccio, per acquisto e costruzione battelli (art. 50 r.d. n. 1604/31)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10290">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi marittimi ed aeronautici di cui al cod. nav. l. n. 1816/28</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10300">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti I.M.I (l. n. 1473/61)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 4 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10310">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti garantiti da pegno</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 e ss. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 5 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10320">
+				<xs:annotation>
+					<xs:documentation>Descrizione: credito pignoratizio risultante da atto scritto avente data certa</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 e ss. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 5 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10330">
+				<xs:annotation>
+					<xs:documentation>Descrizione: interessi dell'anno in corso alla data della dichiarazione di fallimento (art. 2788 c.c.)</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 e ss. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 5 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10340">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese sostenute dal creditore per la domanda di insinuazione al passivo</xs:documentation>
+					<xs:documentation>Normativa: art. 2781 e ss. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 5 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10350">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per retribuzioni dovute sotto qualsiasi forma ai prestatori di lavoro subordinato</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10360">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per retribuzioni e indennita' dovute ai lavoratori subordinati</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10370">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dei lavoratori per risarcimento del danno conseguente al mancato versamento di contributi</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10380">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dei lavoratori per il risarcimento del danno subito per effetto di un licenziamento inefficace, nullo o annullabile</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10390">
+				<xs:annotation>
+					<xs:documentation>Descrizione: retribuzioni ai dipendenti, compreso i lavoranti a domicilio e gli atleti professionisti</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10400">
+				<xs:annotation>
+					<xs:documentation>Descrizione: somministrazione di pasti o erogazione di corrispondente indennita' se continuative</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10410">
+				<xs:annotation>
+					<xs:documentation>Descrizione: compenso per straordinari, lavoro notturno o festivi</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10420">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' sostitutiva delle ferie</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10430">
+				<xs:annotation>
+					<xs:documentation>Descrizione: rimborsi spese fisse o forfetarie</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10440">
+				<xs:annotation>
+					<xs:documentation>Descrizione: mancato preavviso</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10450">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' di trasferimento</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10460">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' residenza</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10470">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' di cassa</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10480">
+				<xs:annotation>
+					<xs:documentation>Descrizione: indennita' di rappresentanza</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10490">
+				<xs:annotation>
+					<xs:documentation>Descrizione: trattamento di fine rapporto</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10500">
+				<xs:annotation>
+					<xs:documentation>Descrizione: assegni familiari</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10510">
+				<xs:annotation>
+					<xs:documentation>Descrizione: prestazioni in natura</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10520">
+				<xs:annotation>
+					<xs:documentation>Descrizione: cassa integrazione guadagni quando il fallito non l'abbia pagata e l'abbia compensata con i contributi</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10530">
+				<xs:annotation>
+					<xs:documentation>Descrizione: credito per risarcimento danni conseguente ad infortuni sul lavoro</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 6 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10540">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per le retribuzioni dei professionisti e degli altri prestatori d'opera intellettuale per gli ultimi due anni di prestazione</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.2 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 7 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10550">
+				<xs:annotation>
+					<xs:documentation>Descrizione: provvigioni derivanti dal rapporto di agenzia dovute per l'ultimo anno di prestazione</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.3 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 7 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10560">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del coltivatore diretto e i crediti del colono e del mezzadro indicati dall'art. 2765 c.c.</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.4 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 8 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10570">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dell'impresa artigiana e delle cooperative di produzione e lavoro per corrispettivi derivanti dalla vendita dei manufatti e dei servizi prestati</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.5 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 8 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10580">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti delle cooperative agricole e dei loro consorzi per la vendita dei loro prodotti</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.5-bis c.c.</xs:documentation>
+					<xs:documentation>Ordine: 8 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10590">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per oneri retributivi e previdenziali addebitati alle imprese utilizzatrici da parte delle imprese fornitrici di lavoro temporaneo ex l. n. 96/97</xs:documentation>
+					<xs:documentation>Normativa: art. 2751 bis, n.1-ter c.c.</xs:documentation>
+					<xs:documentation>Ordine: 8 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10600">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi dichiarati da leggi speciali preferiti ad ogni altro credito</xs:documentation>
+					<xs:documentation>Normativa: art. 2777, co. 3 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10610">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi marittimi e aeronautici</xs:documentation>
+					<xs:documentation>Normativa: artt. 548 e 1022 cod. nav.</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10620">
+				<xs:annotation>
+					<xs:documentation>Descrizione: operazioni di credito industriale per agevolare l'impresa economica della nazione</xs:documentation>
+					<xs:documentation>Normativa: art. 7 l. n. 36/94 e d.l. n. 1073/47</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10630">
+				<xs:annotation>
+					<xs:documentation>Descrizione: operazioni di credito per l'industrializzazione dell'Italia meridionale e insulare</xs:documentation>
+					<xs:documentation>Normativa: art. 2 l. n. 1482/48</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10640">
+				<xs:annotation>
+					<xs:documentation>Descrizione: operazioni di credito per le costruzioni navali e dell'armamento</xs:documentation>
+					<xs:documentation>Normativa: artt. 22 l. n. 75/49 e 12 l. n. 522/54</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10650">
+				<xs:annotation>
+					<xs:documentation>Descrizione: anticipazione a favore delle imprese industriali danneggiate a seguito di calamita' pubblica</xs:documentation>
+					<xs:documentation>Normativa: art. 2 l. n. 638/49</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10660">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti per acquisti di macchinari, attrezzature e mezzi strumentali</xs:documentation>
+					<xs:documentation>Normativa: art. 5 l. n. 258/50</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10670">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti all'industria siderurgica</xs:documentation>
+					<xs:documentation>Normativa: art. 4 l. n. 722/50</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10680">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti per l'industrializzazione di Trento, della Venezia Giulia e della Dalmazia</xs:documentation>
+					<xs:documentation>Normativa: art. 4 l. n. 910/50</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10690">
+				<xs:annotation>
+					<xs:documentation>Descrizione: credito a favore delle imprese artigiane</xs:documentation>
+					<xs:documentation>Normativa: art. 10 l. n. 959/52</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10700">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti per lo sviluppo industriale dell'Italia meridionale</xs:documentation>
+					<xs:documentation>Normativa: art. 15 l. n. 298/53</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10710">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposta di fabbricazione di oli e grassi animali liquidi destinati all'alimentazione</xs:documentation>
+					<xs:documentation>Normativa: art. 17 l. n. 843/53</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10720">
+				<xs:annotation>
+					<xs:documentation>Descrizione: concessione di indennizzi e contributi per danni di guerra</xs:documentation>
+					<xs:documentation>Normativa: art. 64 l. n. 968/53</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10730">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti a favore delle piccole e medie imprese</xs:documentation>
+					<xs:documentation>Normativa: art. 5 l. n. 135/54</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10740">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti sul fondo di dotazione per Trieste e Gorizia</xs:documentation>
+					<xs:documentation>Normativa: l. n. 221/57</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10750">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti a medio termine a favore del commercio</xs:documentation>
+					<xs:documentation>Normativa: art. 2 l. n. 1016/60</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10760">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti a favore delle imprese industriali per programmi di riconversione</xs:documentation>
+					<xs:documentation>Normativa: l. n. 1470/60</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10770">
+				<xs:annotation>
+					<xs:documentation>Descrizione: imposte ipotecarie e catastali</xs:documentation>
+					<xs:documentation>Normativa: art. 9 l. n. 635/72</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10780">
+				<xs:annotation>
+					<xs:documentation>Descrizione: finanziamenti agevolati a favore del commercio</xs:documentation>
+					<xs:documentation>Normativa: art. 4 l. n. 517/75</xs:documentation>
+					<xs:documentation>Ordine: 9 Grado: 0</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10790">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per mancato versamento dei contributi di assicurazione obbligatoria per l'invalidita', vecchiaia ed i superstiti</xs:documentation>
+					<xs:documentation>Normativa: artt. 2753 e 2778, n. 1 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 10 Grado: 1</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10800">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per imposte sui redditi immobiliari quando il privilegio si esercita separatamente sui frutti, fitti e pigioni</xs:documentation>
+					<xs:documentation>Normativa: artt. 2753 e 2778, n. 2 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 11 Grado: 2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10810">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per le mercedi dovuti ai lavoratori impiegati nelle opere di coltivazione e di raccolta dell'annata agricola</xs:documentation>
+					<xs:documentation>Normativa: artt. 2782 e 2778, n. 4 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 12 Grado: 4</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10820">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per le mercedi dovute ai lavoratori delle opere di coltivazione e raccolta</xs:documentation>
+					<xs:documentation>Normativa: artt. 2782 e 2778, n. 5 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 13 Grado: 5</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10830">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per lavori di coltivazione e raccolta, per sementi, materie fertilizzanti e antiparassitarie, per somministrazione di acqua per irrigazione</xs:documentation>
+					<xs:documentation>Normativa: artt. 2782 e 2778, n. 6 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 14 Grado: 6</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10840">
+				<xs:annotation>
+					<xs:documentation>Descrizione: tributi indiretti e imposte sul reddito dovute per i due anni anteriori a quello in cui si procede</xs:documentation>
+					<xs:documentation>Normativa: artt. 2758, 2759 e 2778, n. 7 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 15 Grado: 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10850">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per rivalsa IVA verso il cessionario ed il committente</xs:documentation>
+					<xs:documentation>Normativa: artt. 2758, 2759 e 2778, n. 7 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 15 Grado: 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10860">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per le imposte sul reddito (IRPEG, IRPEF, IRAP) dovute per i due anni anteriori a quello in cui si procede limitatamente all'imposta o alla quota d'imposta imputabile al reddito d'impresa</xs:documentation>
+					<xs:documentation>Normativa: artt. 2758, 2759 e 2778, n. 7 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 15 Grado: 7</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10870">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per contributi previdenziali ed assistenziali nonché gli accessori, limitatamente al 50% del loro ammontare, relativi ai contributi stessi ed a quelli indicati all'art. 2778 c.c.</xs:documentation>
+					<xs:documentation>Normativa: artt. 2754 e 2778, n. 8 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 16 Grado: 8</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10880">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dipendenti da reato</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10890">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per spese sostenute da un pubblico istituto sanitario, a titolo di cura e di alimenti per la persona offesa da reato, durante l'infermita'</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10900">
+				<xs:annotation>
+					<xs:documentation>Descrizione: somme dovute a titolo di risarcimento danni e di spese processuali al danneggiato dal reato</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10910">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese anticipate dal difensore del condannato e somma a lui dovuta a titolo di onorario</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10920">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese del procedimento penale</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10930">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese per il mantenimento del condannato negli stabilimenti di pena</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10940">
+				<xs:annotation>
+					<xs:documentation>Descrizione: pene pecuniarie ed ogni altra somma dovuta all'Erario dello Stato dipendente dal reato</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10950">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del venditore di autoveicoli per il prezzo non corrisposto dal compratore o dell'eventuale terzo che abbia versato il prezzo al venditore nell'interesse del compratore garantiti con la concessione del privilegio convenzionale (qualificato ex lege come ipoteca) di cui all'art. 2 r.d.l. n. 436/27</xs:documentation>
+					<xs:documentation>Normativa: artt. 2768 e 2778, n. 10 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 17 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10960">
+				<xs:annotation>
+					<xs:documentation>Descrizione: ipoteche su autoveicoli</xs:documentation>
+					<xs:documentation>Normativa: art. 2810 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 18 Grado: 10</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10970">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegio sull'indennita' dovuta dall'assicuratore per il credito del danneggiato per il risarcimento nel caso di assicurazione per RC</xs:documentation>
+					<xs:documentation>Normativa: artt. 2767 e 2778, n. 11 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 19 Grado: 11</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10980">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti a cui le leggi speciali attribuiscono il privilegio del creditore pignoratizio se in concorso con altri crediti privilegiati ex art. 2778 c.c.</xs:documentation>
+					<xs:documentation>Normativa: artt. 236 disp. att. e trans. c.c.</xs:documentation>
+					<xs:documentation>Ordine: 20 Grado: 11</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10990">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dell'albergatore per mercedi e somministrazioni verso le persone albergate</xs:documentation>
+					<xs:documentation>Normativa: artt. 2760 e 2778, n. 12 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 21 Grado: 12</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11000">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del vettore, del mandatario, del depositario e del sequestratario</xs:documentation>
+					<xs:documentation>Normativa: artt. 2760 e 2778, n. 13 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 22 Grado: 13</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11010">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del venditore di macchine o della banca per l'anticipazione del prezzo</xs:documentation>
+					<xs:documentation>Normativa: artt. 2760 e 2778, n. 14 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 23 Grado: 14</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11020">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per canoni enfiteutici</xs:documentation>
+					<xs:documentation>Normativa: artt. 2760 e 2778, n. 15 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 24 Grado: 15</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11030">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del locatore di immobili e del concedente dipendenti dal contratto di mezzadria e colonia</xs:documentation>
+					<xs:documentation>Normativa: artt. 2764, 2765 e 2778, n. 16 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 25 Grado: 16</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11040">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti delle cooperative edilizie e della Cassa Depositi e Prestiti dell'Amministrazione delle Ferrovie dello Stato nei confronti degli assegnatari degli alloggi delle mutuatarie cooperative edilizie per la riscossione delle rate di ammortamento dei relativi mutui</xs:documentation>
+					<xs:documentation>Normativa: art. 66 r.d. n. 1165/38</xs:documentation>
+					<xs:documentation>Ordine: 25 Grado: 16</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11050">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti per cauzioni sull'emissione di assegni circolari</xs:documentation>
+					<xs:documentation>Normativa: art. 82 r.d. n. 1736/33</xs:documentation>
+					<xs:documentation>Ordine: 25 Grado: 16</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11060">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti del locatore di immobili per pigioni e fitti, per mancate riparazioni a carico del conduttore, per danni arrecati all'immobile locato, per la mancata restituzione delle scorte e per ogni altro credito dipendente da inadempimento del contraente, comprese le spese giudiziarie per lo sfratto od il pagamento del canone</xs:documentation>
+					<xs:documentation>Normativa: artt. 2764, 2782 e 2778, n. 16 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 25 Grado: 16</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11070">
+				<xs:annotation>
+					<xs:documentation>Descrizione: privilegi per i quali la legge speciale non individua il grado</xs:documentation>
+					<xs:documentation>Normativa: art. 2783 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 26 Grado: 16</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11080">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese funebri necessarie secondo gli usi</xs:documentation>
+					<xs:documentation>Normativa: artt. 2751 e 2778, n. 17 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 27 Grado: 17</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11090">
+				<xs:annotation>
+					<xs:documentation>Descrizione: spese d'infermita' sostenute negli ultimi sei mesi di vita del debitore</xs:documentation>
+					<xs:documentation>Normativa: artt. 2751 e 2778, n. 17 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 27 Grado: 17</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11100">
+				<xs:annotation>
+					<xs:documentation>Descrizione: somministrazione di vesti, vitto e alloggio effettuate dal debitore ed alla sua famiglia negli ultimi sei mesi</xs:documentation>
+					<xs:documentation>Normativa: artt. 2751 e 2778, n. 17 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 27 Grado: 17</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11110">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti di alimenti per gli ultimi tre mesi a favore delle persone alle quali gli alimenti sono dovuti per legge</xs:documentation>
+					<xs:documentation>Normativa: artt. 2751 e 2778, n. 17 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 27 Grado: 17</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11120">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti delle amministrazioni ospedaliere o dei comuni per spese di spedalita' o manicomiali in confronto di ricoverati abbienti</xs:documentation>
+					<xs:documentation>Normativa: artt. 2751 e 2778, n. 17 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 27 Grado: 17</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11130">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per tributi diretti, esclusi quelli relativi ai redditi immobiliari, iscritti nei ruoli dell'anno in cui si procede o si interviene e nell'anno precedente</xs:documentation>
+					<xs:documentation>Normativa: artt. 2752, co. 1 e 2778, n. 18 c.c</xs:documentation>
+					<xs:documentation>Ordine: 28 Grado: 18</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11140">
+				<xs:annotation>
+					<xs:documentation>Descrizione: canone RAI</xs:documentation>
+					<xs:documentation>Normativa: l. n. 246/38</xs:documentation>
+					<xs:documentation>Ordine: 28 Grado: 18</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11150">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti dello Stato per le imposte, per le pene pecuniarie e per le soprattasse dovute secondo le norme relative all'IVA</xs:documentation>
+					<xs:documentation>Normativa: artt. 2752, co. 3 e 2778, n. 19 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 29 Grado: 19</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11160">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti degli enti locali e per imposte, tasse e tributi previsti dalla legge per la finanza locale e dalle norme relative all'imposta comunale sulla pubblicita' ed ai diritti sulle pubbliche affissioni</xs:documentation>
+					<xs:documentation>Normativa: artt. 2752, co. 4 e 2778, n. 20 c.c.</xs:documentation>
+					<xs:documentation>Ordine: 30 Grado: 20</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99970">
+				<xs:annotation>
+					<xs:documentation>Descrizione: postergato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99980">
+				<xs:annotation>
+					<xs:documentation>Descrizione: crediti chirografi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99990">
+				<xs:annotation>
+					<xs:documentation>Descrizione: non specificato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VociPDC">
+		<xs:annotation>
+			<xs:documentation>Piano dei Conti per rendiconto del curatore</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1.01">
+				<xs:annotation>
+					<xs:documentation>Cassa: versamenti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1.02">
+				<xs:annotation>
+					<xs:documentation>Cassa: prelevamentii</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2.01">
+				<xs:annotation>
+					<xs:documentation>Banca: versamenti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2.02">
+				<xs:annotation>
+					<xs:documentation>Banca: prelevamenti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3.01">
+				<xs:annotation>
+					<xs:documentation>IVA: versamenti IVA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3.02">
+				<xs:annotation>
+					<xs:documentation>IVA: arrotondamenti IVA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3.03">
+				<xs:annotation>
+					<xs:documentation>IVA: incasso IVA immobiliare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3.04">
+				<xs:annotation>
+					<xs:documentation>IVA: incasso IVA mobiliare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4.01">
+				<xs:annotation>
+					<xs:documentation>Titoli: acquisto titoli</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4.02">
+				<xs:annotation>
+					<xs:documentation>Titoli: vendita titoli</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11.01">
+				<xs:annotation>
+					<xs:documentation>Incasso Crediti: realizzo crediti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12.01">
+				<xs:annotation>
+					<xs:documentation>Entrate Magazzino: vendita merce</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.01">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita macchinari ed impianti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.02">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita automobili e automezzii</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.03">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita mobili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.04">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita macchine elettroniche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.05">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita altri beni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.06">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita marchi e brevetti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13.07">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Mobili: vendita ramo d'azienda</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14.01">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Immobili: vendita terreni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14.02">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Immobili: vendita immobili industriali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14.03">
+				<xs:annotation>
+					<xs:documentation>Entrate Beni Immobili: vendita immobili civili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15.01">
+				<xs:annotation>
+					<xs:documentation>Entrate da Cessione Attivita' Finanziarie: vendita partecipazioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15.02">
+				<xs:annotation>
+					<xs:documentation>Entrate da Cessione Attivita' Finanziarie: realizzo altri titoli</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.01">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: utile o perdita da esercizio provvisorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.02">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: affitti attivi immobili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.03">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: affitti attivi mobili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.04">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: affitti attivi azienda</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.05">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: risarcimenti o incassi da azioni di responsabilita'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.06">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: rimborsi daterzi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16.07">
+				<xs:annotation>
+					<xs:documentation>Entrate Esercizio Provvisorio: incasso interessi maturati</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21.01">
+				<xs:annotation>
+					<xs:documentation>Ripartizione Crediti: riparto parziale 1 </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21.02">
+				<xs:annotation>
+					<xs:documentation>Ripartizione Crediti: riparto parziale 2 </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22.01">
+				<xs:annotation>
+					<xs:documentation>Gestione Procedura: acconto compenso curatore </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22.02">
+				<xs:annotation>
+					<xs:documentation>Gestione Procedura: compenso finale curatore </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22.03">
+				<xs:annotation>
+					<xs:documentation>Gestione Procedura: rimborso o fondo spese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.01">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: compenso coadiutori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.02">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: compenso periti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.03">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: compenso consulenti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.04">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: compenso legali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.05">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: dipendenti o collaboratori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.06">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: bolli e marche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.07">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: postali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.08">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: ritenute di accounto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.09">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: imposte e tasse</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.10">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: affitti passivi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.11">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: servizi amministrativi di terzi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.12">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: assicurazioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.13">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: cancelleria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.14">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: telefoniche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.15">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: viaggi e trasferte</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.16">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: spese di pubblicita'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.17">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: manutenzioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.18">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: vigilianza</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.19">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: spese bancarie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.20">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: canone software</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.21">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: varie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.22">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: arrotondamenti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.23">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: accantonamento ex. art. 113 L.F.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.24">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: rimborso spese prenotate a debito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.25">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: compione fallimentare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23.26">
+				<xs:annotation>
+					<xs:documentation>Spese Generali: spese chiusura procedura</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.01">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: compenso coadiutori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.02">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: compenso periti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.03">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: compenso legali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.04">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: bolli e marche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.05">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: postali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.06">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: spese fiscali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.07">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: spese registro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.08">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: assicurazioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.09">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: spese pubblicita'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.10">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: manutenzioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.11">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: spese trascrizione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24.12">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Immobili: varie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.01">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: compenso coadiutori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.02">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: compenso periti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.03">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: compenso legali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.04">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: bolli e marche</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.05">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: postali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.06">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: spese fiscali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.07">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: spese registro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.08">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: assicurazioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.09">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: spese pubblicita'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.10">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: manutenzioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.11">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: spese trascrizione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25.12">
+				<xs:annotation>
+					<xs:documentation>Conti Speciali Mobili: varie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaCreditore">
+		<xs:annotation>
+			<xs:documentation>Codifica delle tipologie di creditori</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="11">
+				<xs:annotation>
+					<xs:documentation>Fornitore di beni - Artigiano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12">
+				<xs:annotation>
+					<xs:documentation>Fornitore di beni - Cooperativa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13">
+				<xs:annotation>
+					<xs:documentation>Fornitore di beni - Coltivatore diretto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14">
+				<xs:annotation>
+					<xs:documentation>Fornitore di beni - Fornitore comune</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15">
+				<xs:annotation>
+					<xs:documentation>Fornitore di beni - Altri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Artigiano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Cooperativa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Societa' fornitrice utenze varie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Fornitore comune</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Agente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="26">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Procacciatore d'affari</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="27">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Mediatore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="28">
+				<xs:annotation>
+					<xs:documentation>Fornitore di servizi - Altri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="31">
+				<xs:annotation>
+					<xs:documentation>Lavoratore dipendente - Operaio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="32">
+				<xs:annotation>
+					<xs:documentation>Lavoratore dipendente - Impiegato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="33">
+				<xs:annotation>
+					<xs:documentation>Lavoratore dipendente - Dirigente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="41">
+				<xs:annotation>
+					<xs:documentation>Lavoro Autonomo - Libero professionista</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="51">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Istituto di Credito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="52">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Leasing</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="53">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Societa' finanziaria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="54">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Factoring</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="55">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Stato (contributi in c/capitale/esercizio)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="56">
+				<xs:annotation>
+					<xs:documentation>Capitale di Credito - Altri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="61">
+				<xs:annotation>
+					<xs:documentation>Ente Previdenziale - Inps</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="62">
+				<xs:annotation>
+					<xs:documentation>Ente Previdenziale - Inail</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="63">
+				<xs:annotation>
+					<xs:documentation>Ente Previdenziale - Enasarco</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="64">
+				<xs:annotation>
+					<xs:documentation>Ente Previdenziale - Altri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="71">
+				<xs:annotation>
+					<xs:documentation>Stato ed ente locale - Ufficio IVA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="72">
+				<xs:annotation>
+					<xs:documentation>Stato ed ente locale - Camera di Commercio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="73">
+				<xs:annotation>
+					<xs:documentation>Stato ed ente locale - Concessionario riscossione tributi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="74">
+				<xs:annotation>
+					<xs:documentation>Stato ed ente locale - Ente locale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="75">
+				<xs:annotation>
+					<xs:documentation>Stato ed ente locale - Altri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="98">
+				<xs:annotation>
+					<xs:documentation>Altro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:documentation>Non specificato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatoInsinuazione">
+		<xs:annotation>
+			<xs:documentation>Stato della domanda di insinuazione</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="richiesto">
+				<xs:annotation>
+					<xs:documentation>Domanda richiesta</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="depositato">
+				<xs:annotation>
+					<xs:documentation>Domanda depositata, si attende il provvedimento del magistrato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rigettato">
+				<xs:annotation>
+					<xs:documentation>Domanda rigettata, provvedimento di rigetto emesso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ammesso">
+				<xs:annotation>
+					<xs:documentation>Domanda ammessa, provvedimento di ammissione emesso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="esecutivo">
+				<xs:annotation>
+					<xs:documentation>Domanda esecutiva, provvedimento di esecutivita' emesso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

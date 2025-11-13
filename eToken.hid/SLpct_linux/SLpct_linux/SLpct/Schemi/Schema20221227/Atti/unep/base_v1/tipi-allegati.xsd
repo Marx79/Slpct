@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/unep/tipi/allegati/v1" xmlns:bt="http://schemi.processotelematico.giustizia.it/unep/tipi" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemi.processotelematico.giustizia.it/unep/tipi/allegati/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/unep/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:complexType name="IndiceBusta">
+		<xs:annotation>
+			<xs:documentation>Informazioni sui documenti che compongono la busta</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AttoPrincipale" type="bt:RiferimentoAllegato">
+				<xs:annotation>
+					<xs:documentation>Riferimento all'atto principale nella busta</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##targetNamespace" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Riferimenti ad altri allegati presenti nella busta</xs:documentation>
+				</xs:annotation>
+			</xs:any>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AllegatoSemplice" type="bt:RiferimentoAllegato">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un allegato semplice</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Pignoramento" type="bt:RiferimentoAllegato">
+		<xs:annotation>
+			<xs:documentation>Riferimento all'allegato della copia conforme dell'atto di pignoramento nelle espropriazioni immobiliari</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Precetto" type="bt:RiferimentoAllegato">
+		<xs:annotation>
+			<xs:documentation>Riferimento all'allegato della copia conforme del precetto nelle esecuzioni forzate</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RicevutaPagamento" type="bt:RiferimentoAllegato">
+		<xs:annotation>
+			<xs:documentation>Riferimento all'allegato di ricevuta di pagamento elettronica</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

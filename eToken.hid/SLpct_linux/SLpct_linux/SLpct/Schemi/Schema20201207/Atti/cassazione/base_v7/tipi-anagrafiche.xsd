@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns="http://schemi.processotelematico.giustizia.it/cassazione/tipi/anagrafiche/v7" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:bt="http://schemi.processotelematico.giustizia.it/cassazione/tipi/v7" 
+	targetNamespace="http://schemi.processotelematico.giustizia.it/cassazione/tipi/anagrafiche/v7" 
+	elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/cassazione/tipi/v7" schemaLocation="./tipi-base.xsd"/>
+	<xs:complexType name="Soggetto">
+		<xs:annotation>
+			<xs:documentation>Generico soggetto di anagrafica</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cognome" type="xs:normalizedString"/>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0"/>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Indirizzo">
+		<xs:annotation>
+			<xs:documentation>Dati indirizzo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="via" type="xs:string"/>
+			<xs:element name="cap" type="xs:string"/>
+			<xs:element name="localita" type="xs:string"/>
+			<xs:element name="provincia" type="xs:string"/>
+			<xs:element name="nazione" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LegameParte">
+		<xs:annotation>
+			<xs:documentation>Soggetto con un particolare legame con una parte del procedimento. Comprende le informazioni minimali necessarie per la creazione del fascicolo all'interno dei sistemi di cancelleria.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="denominazione" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Cognome o denominazione della parte. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nome della parte. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Codice fiscale o partita iva della parte</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parteLegata" type="RiferimentoPartecipante" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Riferimenti alle parti legate nel procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tipoLegame" type="TipoLegame"/>
+			<xs:element name="tipoRapporto" type="TipoRapporto"/>
+			<xs:element name="ruolo" type="Ruolo"/>
+		</xs:sequence>
+		<xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Parte">
+		<xs:annotation>
+			<xs:documentation>Parte: soggetto o soggetti nel cui interesse si deposita il ricorso o il controricorso.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="denominazione" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Cognome o denominazione della parte o del Pubblico Ministero. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nome della parte o del Pubblico Ministero. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale">
+				<xs:annotation>
+					<xs:documentation>Codice fiscale o partita iva della parte o del Pubblico Ministero </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pubblicoMinistero" type="bt:ProcureRepubblica" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Procura della Repubblica presso cui opera il Pubblico Ministero</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indirizzo" type="Indirizzo" minOccurs="0"/>
+			<xs:element name="codiceUnivocoPA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Codice univoco amministrazione da riportare per identificare una sede locale della pubblica amministrazione.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DL_196-2003_art_52_comma_1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True se la parte ritiene che debba essere concessa la privacy per il DL 196/2003 Art. 52, comma 1</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:boolean">
+							<xs:attribute name="comma_5" type="xs:boolean" use="required">
+								<xs:annotation>
+									<xs:documentation>True se la privacy e' richiesta anche ai sensi dell DL 196/2003 Art. 52 comma 5</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dataNascita" type="xs:date" minOccurs="0"/>
+			<xs:element name="luogoNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="provinciaNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="nazioneNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="Notifica" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data della notifica</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:date">
+							<xs:attribute name="tipo" type="bt:TipoNotifica"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DataRicevutaRaccomandata" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Se la notifica è stata fatta con R/A riportare la data della ricevuta di ritorno</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="naturaGiuridica" type="bt:NaturaGiuridica" use="required"/>
+		<xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Controparte">
+		<xs:annotation>
+			<xs:documentation>Controparte: indicare la parte-i intimata-e  oppure, nel controricorso,  la parte o le parti ricorrenti.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="denominazione" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Cognome o denominazione della parte o del Pubblico Ministero. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nome della parte o del Pubblico Ministero. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale">
+				<xs:annotation>
+					<xs:documentation>Codice fiscale o partita iva della parte o del Pubblico Ministero</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pubblicoMinistero" type="bt:ProcureRepubblica" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Procura della Repubblica presso cui opera il Pubblico Ministero</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indirizzo" type="Indirizzo" minOccurs="0"/>
+			<xs:element name="DL_196-2003_art_52_comma_1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True se la parte ritiene che debba essere concessa la privacy per il DL 196/2003 Art. 52, comma 1</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:boolean">
+							<xs:attribute name="comma_5" type="xs:boolean" use="required">
+								<xs:annotation>
+									<xs:documentation>True se la privacy e' richiesta anche ai sensi dell DL 196/2003 Art. 52 comma 5</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="dataNascita" type="xs:date" minOccurs="0"/>
+			<xs:element name="luogoNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="provinciaNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="nazioneNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="Notifica" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data della notifica</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:date">
+							<xs:attribute name="tipo" type="bt:TipoNotifica"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DataRicevutaRaccomandata" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Se la notifica è stata fatta con R/A riportare la data della ricevuta di ritorno</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="naturaGiuridica" type="bt:NaturaGiuridica" use="required"/>
+		<xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="NotificatoAnche">
+		<xs:annotation>
+			<xs:documentation>Soggetti a cui è stato notificato l'atto.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="denominazione" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Cognome o denominazione della parte. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nome della parte. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Codice fiscale o partita iva della parte</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indirizzo" type="Indirizzo" minOccurs="0"/>
+			<xs:element name="dataNascita" type="xs:date" minOccurs="0"/>
+			<xs:element name="luogoNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="provinciaNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="nazioneNascita" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Avvocato">
+		<xs:annotation>
+			<xs:documentation>Definizione dell'avvocato coinvolto nei procedimenti, comprende le informazioni minimali per l'aggiornamento delle anagrafiche dei sistemi di cancelleria.
+Non sono incluse le informazioni relative ai domicili dell'avvocato, in quanto in questo contesto si considera il solo indirizzo elettronico, come definito nel D.P.R. 13 febbraio
+2001, n. 123.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Soggetto">
+				<xs:sequence>
+					<xs:element name="indirizzo" type="Indirizzo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Indirizzo del legale</xs:documentation>
+							<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="parteRappresentata" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Riferimenti alle parti rappresentate nel procedimento</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="RiferimentoPartecipante">
+									<xs:sequence>
+										<xs:element name="tipoDifensore" type="bt:RelazioneDifensore"/>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="cassazionista" type="xs:boolean" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoPartecipante">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un partecipante al procedimento. Il riferimento e' da intendersi locale all'atto che lo definisce, per la valutazione dei vincoli di integrita' ma non ha nessun significato globale all'interno del sistema</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoSoggetto">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un partecipante al procedimento tramite codice fiscale o partita iva.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="codiceFiscale" type="bt:CodiceFiscale" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="TipoRapporto">
+		<xs:annotation>
+			<xs:documentation> Codice </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:documentation>difensore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11">
+				<xs:annotation>
+					<xs:documentation>gia’</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="08">
+				<xs:annotation>
+					<xs:documentation>in persona</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>in proprio e nella qualita' di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12">
+				<xs:annotation>
+					<xs:documentation>in proprio e per conto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="06">
+				<xs:annotation>
+					<xs:documentation>in proprio e quale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="05">
+				<xs:annotation>
+					<xs:documentation>in proprio e quali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>nella qualita' di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14">
+				<xs:annotation>
+					<xs:documentation>non in proprio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>quale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation>quali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="9">
+				<xs:annotation>
+					<xs:documentation>rappresentata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="07">
+				<xs:annotation>
+					<xs:documentation>rappresentato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Ruolo">
+		<xs:annotation>
+			<xs:documentation> Codice </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="83">
+				<xs:annotation>
+					<xs:documentation>affidatario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="39">
+				<xs:annotation>
+					<xs:documentation>ammin.re delegato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="35">
+				<xs:annotation>
+					<xs:documentation>ammin.re di sostegno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="64">
+				<xs:annotation>
+					<xs:documentation>ammin.re unico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="21">
+				<xs:annotation>
+					<xs:documentation>amministr.leg.rappr.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="33">
+				<xs:annotation>
+					<xs:documentation>amministratore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="60">
+				<xs:annotation>
+					<xs:documentation>avente causa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="54">
+				<xs:annotation>
+					<xs:documentation>beneficiario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="75">
+				<xs:annotation>
+					<xs:documentation>cessionario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="46">
+				<xs:annotation>
+					<xs:documentation>cessionario credito</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="34">
+				<xs:annotation>
+					<xs:documentation>cessionario diritti</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="71">
+				<xs:annotation>
+					<xs:documentation>cessionario ramo d'azienda</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="26">
+				<xs:annotation>
+					<xs:documentation>civilmente obbligato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="94">
+				<xs:annotation>
+					<xs:documentation>coadiutore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="17">
+				<xs:annotation>
+					<xs:documentation>coerede</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="101">
+				<xs:annotation>
+					<xs:documentation>commissario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="37">
+				<xs:annotation>
+					<xs:documentation>commissario giudiz.le</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="32">
+				<xs:annotation>
+					<xs:documentation>commissario liqu.re</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="42">
+				<xs:annotation>
+					<xs:documentation>commissario straord.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="70">
+				<xs:annotation>
+					<xs:documentation>condomino</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="77">
+				<xs:annotation>
+					<xs:documentation>conferitaria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="96">
+				<xs:annotation>
+					<xs:documentation>coniuge</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="16">
+				<xs:annotation>
+					<xs:documentation>curatore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="57">
+				<xs:annotation>
+					<xs:documentation>curatore fall.re</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="18">
+				<xs:annotation>
+					<xs:documentation>curatore leg.rappr.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="62">
+				<xs:annotation>
+					<xs:documentation>curatore speciale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="76">
+				<xs:annotation>
+					<xs:documentation>custode giudiziario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="12">
+				<xs:annotation>
+					<xs:documentation>da</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="78">
+				<xs:annotation>
+					<xs:documentation>delegato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="68">
+				<xs:annotation>
+					<xs:documentation>dif.re distrattario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="47">
+				<xs:annotation>
+					<xs:documentation>difens.e procuratore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="45">
+				<xs:annotation>
+					<xs:documentation>difensore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="79">
+				<xs:annotation>
+					<xs:documentation>direttore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="99">
+				<xs:annotation>
+					<xs:documentation>direttore generale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="05">
+				<xs:annotation>
+					<xs:documentation>erede di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="06">
+				<xs:annotation>
+					<xs:documentation>eredi di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="59">
+				<xs:annotation>
+					<xs:documentation>esecutore testamentario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="51">
+				<xs:annotation>
+					<xs:documentation>ex soci leg.rapp.te</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="81">
+				<xs:annotation>
+					<xs:documentation>fidejussore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="65">
+				<xs:annotation>
+					<xs:documentation>figlio di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="27">
+				<xs:annotation>
+					<xs:documentation>genitore esercente patria potesta'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="55">
+				<xs:annotation>
+					<xs:documentation>genitore leg.rappr.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="11">
+				<xs:annotation>
+					<xs:documentation>genitori naturali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="84">
+				<xs:annotation>
+					<xs:documentation>germano</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="85">
+				<xs:annotation>
+					<xs:documentation>gestore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="74">
+				<xs:annotation>
+					<xs:documentation>impresa designata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="93">
+				<xs:annotation>
+					<xs:documentation>in proprio e per conto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="40">
+				<xs:annotation>
+					<xs:documentation>incorporante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="82">
+				<xs:annotation>
+					<xs:documentation>incorporata</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="41">
+				<xs:annotation>
+					<xs:documentation>leg.rappr.commissario straord.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="43">
+				<xs:annotation>
+					<xs:documentation>leg.rappr.socio amministr.re</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="24">
+				<xs:annotation>
+					<xs:documentation>legale rappresentante</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>legale rappresentante di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="04">
+				<xs:annotation>
+					<xs:documentation>legali rappresentanti di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="88">
+				<xs:annotation>
+					<xs:documentation>legatario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="52">
+				<xs:annotation>
+					<xs:documentation>liquid.re e socio accom.rio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="50">
+				<xs:annotation>
+					<xs:documentation>liquid.re giudiziale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="13">
+				<xs:annotation>
+					<xs:documentation>liquidatore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="30">
+				<xs:annotation>
+					<xs:documentation>liquidatore leg.rappr.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="58">
+				<xs:annotation>
+					<xs:documentation>madre</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="23">
+				<xs:annotation>
+					<xs:documentation>mandatario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="98">
+				<xs:annotation>
+					<xs:documentation>ministro</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="48">
+				<xs:annotation>
+					<xs:documentation>nonno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="61">
+				<xs:annotation>
+					<xs:documentation>padre</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="44">
+				<xs:annotation>
+					<xs:documentation>parte</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="100">
+				<xs:annotation>
+					<xs:documentation>prefetto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="56">
+				<xs:annotation>
+					<xs:documentation>presidente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="66">
+				<xs:annotation>
+					<xs:documentation>proc.re generale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="38">
+				<xs:annotation>
+					<xs:documentation>procuratore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="14">
+				<xs:annotation>
+					<xs:documentation>procuratore speciale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="15">
+				<xs:annotation>
+					<xs:documentation>procuratrice speciale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="67">
+				<xs:annotation>
+					<xs:documentation>professionista ass.to</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="07">
+				<xs:annotation>
+					<xs:documentation>rappresentante di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="08">
+				<xs:annotation>
+					<xs:documentation>rappresentanti di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="10">
+				<xs:annotation>
+					<xs:documentation>rappresentati  da</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="09">
+				<xs:annotation>
+					<xs:documentation>rappresentato da</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="89">
+				<xs:annotation>
+					<xs:documentation>resp servizio leg e affari generali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="90">
+				<xs:annotation>
+					<xs:documentation>responsabile</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="80">
+				<xs:annotation>
+					<xs:documentation>responsabile servizio tributi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="86">
+				<xs:annotation>
+					<xs:documentation>rettore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="73">
+				<xs:annotation>
+					<xs:documentation>segretario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="72">
+				<xs:annotation>
+					<xs:documentation>segretario gen.le</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="63">
+				<xs:annotation>
+					<xs:documentation>sindaco</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="49">
+				<xs:annotation>
+					<xs:documentation>soci</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="20">
+				<xs:annotation>
+					<xs:documentation>socia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="19">
+				<xs:annotation>
+					<xs:documentation>socio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="22">
+				<xs:annotation>
+					<xs:documentation>socio accomandatario</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="36">
+				<xs:annotation>
+					<xs:documentation>socio ammin.re</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="29">
+				<xs:annotation>
+					<xs:documentation>socio leg.rappr.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="97">
+				<xs:annotation>
+					<xs:documentation>sovrintendente</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="69">
+				<xs:annotation>
+					<xs:documentation>successore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="28">
+				<xs:annotation>
+					<xs:documentation>successore universale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="53">
+				<xs:annotation>
+					<xs:documentation>titolare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="25">
+				<xs:annotation>
+					<xs:documentation>titolare ditta individuale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="95">
+				<xs:annotation>
+					<xs:documentation>trasferitaria</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>tutore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="87">
+				<xs:annotation>
+					<xs:documentation>tutore provvisorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="31">
+				<xs:annotation>
+					<xs:documentation>tutore pubblico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>tutori di</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="91">
+				<xs:annotation>
+					<xs:documentation>vice direttore</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="92">
+				<xs:annotation>
+					<xs:documentation>vice direttore generale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoLegame">
+		<xs:annotation>
+			<xs:documentation> Codice </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AM">
+				<xs:annotation>
+					<xs:documentation>AMMINISTRATORE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:documentation>ASSISTENTE SOCIALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZ">
+				<xs:annotation>
+					<xs:documentation>AZIENDA SANITARIA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CD">
+				<xs:annotation>
+					<xs:documentation>COADIUTORE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CE">
+				<xs:annotation>
+					<xs:documentation>CESSATA DITTA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CL">
+				<xs:annotation>
+					<xs:documentation>CURATORE LEG.RAPPR.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CM">
+				<xs:annotation>
+					<xs:documentation>COMMISSARIO LIQU.RE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CN">
+				<xs:annotation>
+					<xs:documentation>CONDOMINIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:documentation>COEREDE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CR">
+				<xs:annotation>
+					<xs:documentation>COMMISSARIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CU">
+				<xs:annotation>
+					<xs:documentation>CURATORE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:documentation>DECEDUTO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ER">
+				<xs:annotation>
+					<xs:documentation>EREDE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FI">
+				<xs:annotation>
+					<xs:documentation>FIGLIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GE">
+				<xs:annotation>
+					<xs:documentation>GERMANO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IB">
+				<xs:annotation>
+					<xs:documentation>INABILITATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:documentation>INTERDETTO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IN">
+				<xs:annotation>
+					<xs:documentation>INTIMATO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LC">
+				<xs:annotation>
+					<xs:documentation>LEG.RAPPR.COMMISSARIO STRAORD.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LG">
+				<xs:annotation>
+					<xs:documentation>LIQUIDATORE. GIUDIZ.LE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LI">
+				<xs:annotation>
+					<xs:documentation>LIQUIDATORE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LL">
+				<xs:annotation>
+					<xs:documentation>LIQUIDATORE LEG.RAPPR.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LR">
+				<xs:annotation>
+					<xs:documentation>LEGALE RAPPR.TE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MA">
+				<xs:annotation>
+					<xs:documentation>MANDATARIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MN">
+				<xs:annotation>
+					<xs:documentation>MINORE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>PARTE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PC">
+				<xs:annotation>
+					<xs:documentation>IN NOME E PER CONTO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SA">
+				<xs:annotation>
+					<xs:documentation>SOCIA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:documentation>SOCIO ACCOMANDATARIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SE">
+				<xs:annotation>
+					<xs:documentation>SOCIETÀ</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SI">
+				<xs:annotation>
+					<xs:documentation>SOCIETÀ INCORPORATA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SL">
+				<xs:annotation>
+					<xs:documentation>SOCIO LEG.RAPPR.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SM">
+				<xs:annotation>
+					<xs:documentation>SOCIO AMMINISTR.RE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SO">
+				<xs:annotation>
+					<xs:documentation>SOCIO</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SS">
+				<xs:annotation>
+					<xs:documentation>SOCI</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ST">
+				<xs:annotation>
+					<xs:documentation>SUCCESSORE A TITOLO UNIVERSALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TD">
+				<xs:annotation>
+					<xs:documentation>DITTA INDIVIDUALE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZZ">
+				<xs:annotation>
+					<xs:documentation>SOVRINTENDENTE</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

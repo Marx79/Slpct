@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/introduttivi/v6"
+           xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v4"
+           xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+           xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi"
+           xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v6"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/introduttivi/v6"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/introduttivi/v6"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v6" schemaLocation="../base_v6/tipi-atti.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v4" schemaLocation="../base_v4/tipi-base-siecic.xsd"/>
+    <xs:annotation>
+        <xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+        <xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="IscrizioneRuoloPignoramento">
+        <xs:annotation>
+            <xs:documentation>Atto di pignoramento ed iscrizione a ruolo</xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="false">
+            <xs:complexContent mixed="false">
+                <xs:extension base="pt:AttoIntroduttivo">
+                    <xs:sequence>
+                        <xs:element ref="pt:AnagraficaProcedimento">
+                            <xs:annotation>
+                                <xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DataConsegnaPignoramento" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>Data di consegna del pignoramento dall'ufficiale giudiziario al
+                                    creditore
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ImportoPrecetto" type="bt:Valuta">
+                            <xs:annotation>
+                                <xs:documentation>Importo del precetto, non specificare valore della causa
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Beni" nillable="false">
+                            <xs:annotation>
+                                <xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="st:beneImmobileTavolare" maxOccurs="unbounded"/>
+                                    <xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneAnagrafica">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiDebitore" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>Dati di qualifica dei debitori</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="dataNotificaPrecetto" type="xs:date"
+                                                                    minOccurs="0"/>
+                                                        <xs:element name="dataPignoramento" type="xs:date">
+                                                            <xs:annotation>
+                                                                <xs:documentation>Specificare la data di notifica del
+                                                                    pignoramento per le immobiliari e presso terzi e la
+                                                                    data del pignoramento nelle mobiliari presso il
+                                                                    debitore
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:element>
+                                                        <xs:element name="benePignorato" minOccurs="0"
+                                                                    maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="dirittiReali" type="st:Diritto"
+                                                                                maxOccurs="unbounded"/>
+                                                                </xs:sequence>
+                                                                <xs:attribute name="refBene" type="xs:NMTOKEN"
+                                                                              use="required"/>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="DatiProcedente">
+                                        <xs:annotation>
+                                            <xs:documentation>Indicazione del creditori procedente</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="riferimentoAvvocato"
+                                                                    type="at:RiferimentoSoggetto"/>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneDatiRito">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="immobiliare"/>
+                                    <xs:element name="pressoDebitore">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date" minOccurs="0"/>
+                                                <xs:element name="Custode" type="at:Custode"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="pressoTerzo">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date"/>
+                                                <xs:element name="DatiTerzo" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                        <xs:complexContent>
+                                                            <xs:extension base="at:RiferimentoSoggetto">
+                                                                <xs:sequence>
+                                                                    <xs:element name="dataNotificaPrecetto"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                    <xs:element name="dataNotificaPignoramento"
+                                                                                type="xs:date"/>
+                                                                </xs:sequence>
+                                                            </xs:extension>
+                                                        </xs:complexContent>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="Custode" type="at:Custode" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="CronologicoPignoramento" type="xs:string" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="st:titolo" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:key name="PK_BENE">
+            <xs:selector xpath="ns:Beni/*"/>
+            <xs:field xpath="@ID"/>
+        </xs:key>
+        <xs:unique name="AK_CONTROPARTE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:unique>
+        <xs:keyref name="FK_PARTE_BENE" refer="PK_BENE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore/ns:benePignorato"/>
+            <xs:field xpath="@refBene"/>
+        </xs:keyref>
+        <xs:keyref name="FK_DEBITORE_CONTROPARTE" refer="AK_CONTROPARTE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_PARTE_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Parte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_PROCEDENTE_PARTE" refer="PK_PARTE_CF">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_ALTRO_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Altro"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:key name="PK_TERZO_ALTRO">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TERZO_ALTRO" refer="PK_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TITOLO_DEBITORE" refer="AK_CONTROPARTE">
+            <xs:selector xpath="st:titolo/st:debitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Soggetti/pt:Avvocato"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_PARTE_AVVOCATO_MODIFICHE" refer="PK_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente/ns:riferimentoAvvocato"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="IscrizioneRuoloPignoramentoDebitore">
+        <xs:annotation>
+            <xs:documentation>Atto di pignoramento ed iscrizione a ruolo su istanza del debitore</xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="false">
+            <xs:complexContent mixed="false">
+                <xs:extension base="pt:AttoIntroduttivo">
+                    <xs:sequence>
+                        <xs:element ref="pt:AnagraficaProcedimento">
+                            <xs:annotation>
+                                <xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DataConsegnaPignoramento" type="xs:date" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Data di consegna del pignoramento dall'ufficiale giudiziario al
+                                    creditore
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ImportoPrecetto" type="bt:Valuta" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Importo del precetto, non specificare valore della causa
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Beni" nillable="false">
+                            <xs:annotation>
+                                <xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="st:beneImmobileTavolare" maxOccurs="unbounded"/>
+                                    <xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneAnagrafica">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiProcedente">
+                                        <xs:annotation>
+                                            <xs:documentation>Dati di qualifica del procedente</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="dataNotificaPrecetto" type="xs:date"
+                                                                    minOccurs="0"/>
+                                                        <xs:element name="dataPignoramento" type="xs:date">
+                                                            <xs:annotation>
+                                                                <xs:documentation>Specificare la data di notifica del
+                                                                    pignoramento per le immobiliari e presso terzi e la
+                                                                    data del pignoramento nelle mobiliari presso il
+                                                                    debitore
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:element>
+                                                        <xs:element name="benePignorato" minOccurs="0"
+                                                                    maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="dirittiReali" type="st:Diritto"
+                                                                                maxOccurs="unbounded"/>
+                                                                </xs:sequence>
+                                                                <xs:attribute name="refBene" type="xs:NMTOKEN"
+                                                                              use="required"/>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                        <xs:element name="riferimentoAvvocato"
+                                                                    type="at:RiferimentoSoggetto" minOccurs="0"/>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneDatiRito">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="immobiliare"/>
+                                    <xs:element name="pressoDebitore">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date" minOccurs="0"/>
+                                                <xs:element name="Custode" type="at:Custode"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="pressoTerzo">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date"/>
+                                                <xs:element name="DatiTerzo" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                        <xs:complexContent>
+                                                            <xs:extension base="at:RiferimentoSoggetto">
+                                                                <xs:sequence>
+                                                                    <xs:element name="dataNotificaPrecetto"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                    <xs:element name="dataNotificaPignoramento"
+                                                                                type="xs:date"/>
+                                                                </xs:sequence>
+                                                            </xs:extension>
+                                                        </xs:complexContent>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="Custode" type="at:Custode" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="CronologicoPignoramento" type="xs:string" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="st:titolo" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:key name="PK_DEB_BENE">
+            <xs:selector xpath="ns:Beni/*"/>
+            <xs:field xpath="@ID"/>
+        </xs:key>
+        <xs:unique name="AK_DEB_CONTROPARTE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:unique>
+        <xs:keyref name="FK_DEB_PARTE_BENE" refer="PK_DEB_BENE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente/ns:benePignorato"/>
+            <xs:field xpath="@refBene"/>
+        </xs:keyref>
+        <xs:key name="PK_DEB_CONTROPARTE_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_DEB_PROCEDENTE_CONTROPARTE" refer="PK_DEB_CONTROPARTE_CF">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_DEB_ALTRO_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Altro"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:key name="PK_DEB_TERZO_ALTRO">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_DEB_TERZO_ALTRO" refer="PK_DEB_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:keyref name="FK_DEB_TITOLO_DEBITORE" refer="AK_DEB_CONTROPARTE">
+            <xs:selector xpath="st:titolo/st:debitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_DEB_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Soggetti/pt:Avvocato"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_DEB_PARTE_AVVOCATO_MODIFICHE" refer="PK_DEB_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente/ns:riferimentoAvvocato"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="IscrizioneRuoloPignoramentoTerzo">
+        <xs:annotation>
+            <xs:documentation>Atto di pignoramento ed iscrizione a ruolo su istanza di terzi</xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="false">
+            <xs:complexContent mixed="false">
+                <xs:extension base="pt:AttoIntroduttivo">
+                    <xs:sequence>
+                        <xs:element ref="pt:AnagraficaProcedimento">
+                            <xs:annotation>
+                                <xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DataConsegnaPignoramento" type="xs:date" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Data di consegna del pignoramento dall'ufficiale giudiziario al
+                                    creditore
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ImportoPrecetto" type="bt:Valuta" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Importo del precetto, non specificare valore della causa
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Beni" nillable="false">
+                            <xs:annotation>
+                                <xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="st:beneImmobileTavolare" maxOccurs="unbounded"/>
+                                    <xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneAnagrafica">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiDebitore" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>Dati di qualifica dei debitori</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="dataNotificaPrecetto" type="xs:date"
+                                                                    minOccurs="0"/>
+                                                        <xs:element name="dataPignoramento" type="xs:date"
+                                                                    minOccurs="0">
+                                                            <xs:annotation>
+                                                                <xs:documentation>Specificare la data di notifica del
+                                                                    pignoramento per le immobiliari e presso terzi e la
+                                                                    data del pignoramento nelle mobiliari presso il
+                                                                    debitore
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:element>
+                                                        <xs:element name="benePignorato" minOccurs="0"
+                                                                    maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="dirittiReali" type="st:Diritto"
+                                                                                maxOccurs="unbounded"/>
+                                                                </xs:sequence>
+                                                                <xs:attribute name="refBene" type="xs:NMTOKEN"
+                                                                              use="required"/>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="DatiProcedente">
+                                        <xs:annotation>
+                                            <xs:documentation>Indicazione del procedente</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="riferimentoAvvocato"
+                                                                    type="at:RiferimentoSoggetto" minOccurs="0"/>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneDatiRito">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element name="immobiliare"/>
+                                    <xs:element name="pressoDebitore">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date" minOccurs="0"/>
+                                                <xs:element name="Custode" type="at:Custode" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="pressoTerzo">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date" minOccurs="0"/>
+                                                <xs:element name="DatiTerzo" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                        <xs:complexContent>
+                                                            <xs:extension base="at:RiferimentoSoggetto">
+                                                                <xs:sequence>
+                                                                    <xs:element name="dataNotificaPrecetto"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                    <xs:element name="dataNotificaPignoramento"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                </xs:sequence>
+                                                            </xs:extension>
+                                                        </xs:complexContent>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="Custode" type="at:Custode" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="CronologicoPignoramento" type="xs:string" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="st:titolo" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:key name="PK_TER_BENE">
+            <xs:selector xpath="ns:Beni/*"/>
+            <xs:field xpath="@ID"/>
+        </xs:key>
+        <xs:unique name="AK_TER_CONTROPARTE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:unique>
+        <xs:keyref name="FK_TER_PARTE_BENE" refer="PK_TER_BENE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore/ns:benePignorato"/>
+            <xs:field xpath="@refBene"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TER_DEBITORE_CONTROPARTE" refer="AK_TER_CONTROPARTE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_TER_PARTE_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Parte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:key name="PK_TER_ALTRO_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Altro"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TER_PROCEDENTE_PARTE" refer="PK_TER_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_TER_TERZO_ALTRO">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TER_TERZO_ALTRO" refer="PK_TER_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TER_TITOLO_DEBITORE" refer="AK_TER_CONTROPARTE">
+            <xs:selector xpath="st:titolo/st:debitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_TER_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Soggetti/pt:Avvocato"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TER_PARTE_AVVOCATO_MODIFICHE" refer="PK_TER_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente/ns:riferimentoAvvocato"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="IscrizioneRuoloPignoramentoTerzoPignorato">
+        <xs:annotation>
+            <xs:documentation>Atto di pignoramento ed iscrizione a ruolo su istanza del terzo pignorato
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="false">
+            <xs:complexContent mixed="false">
+                <xs:extension base="pt:AttoIntroduttivo">
+                    <xs:sequence>
+                        <xs:element ref="pt:AnagraficaProcedimento">
+                            <xs:annotation>
+                                <xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="DataConsegnaPignoramento" type="xs:date" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Data di consegna del pignoramento dall'ufficiale giudiziario al
+                                    creditore
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ImportoPrecetto" type="bt:Valuta" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Importo del precetto, non specificare valore della causa
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Beni" nillable="false">
+                            <xs:annotation>
+                                <xs:documentation>Lista dei beni mobili o immobili pignorati</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="st:beneImmobileTavolare" maxOccurs="unbounded"/>
+                                    <xs:element ref="st:beneMobile" maxOccurs="unbounded"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneAnagrafica">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiDebitore" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>Dati di qualifica dei debitori</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="dataNotificaPrecetto" type="xs:date"
+                                                                    minOccurs="0"/>
+                                                        <xs:element name="dataPignoramento" type="xs:date"
+                                                                    minOccurs="0">
+                                                            <xs:annotation>
+                                                                <xs:documentation>Specificare la data di notifica del
+                                                                    pignoramento per le immobiliari e presso terzi e la
+                                                                    data del pignoramento nelle mobiliari presso il
+                                                                    debitore
+                                                                </xs:documentation>
+                                                            </xs:annotation>
+                                                        </xs:element>
+                                                        <xs:element name="benePignorato" minOccurs="0"
+                                                                    maxOccurs="unbounded">
+                                                            <xs:complexType>
+                                                                <xs:sequence>
+                                                                    <xs:element name="dirittiReali" type="st:Diritto"
+                                                                                maxOccurs="unbounded"/>
+                                                                </xs:sequence>
+                                                                <xs:attribute name="refBene" type="xs:NMTOKEN"
+                                                                              use="required"/>
+                                                            </xs:complexType>
+                                                        </xs:element>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="DatiProcedente">
+                                        <xs:annotation>
+                                            <xs:documentation>Indicazione del procedente</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:complexContent>
+                                                <xs:extension base="at:RiferimentoSoggetto">
+                                                    <xs:sequence>
+                                                        <xs:element name="riferimentoAvvocato"
+                                                                    type="at:RiferimentoSoggetto" minOccurs="0"/>
+                                                    </xs:sequence>
+                                                </xs:extension>
+                                            </xs:complexContent>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="EstensioneDatiRito">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="pressoTerzo">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="dataCitazione" type="xs:date" minOccurs="0"/>
+                                                <xs:element name="DatiTerzo" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                        <xs:complexContent>
+                                                            <xs:extension base="at:RiferimentoSoggetto">
+                                                                <xs:sequence>
+                                                                    <xs:element name="dataNotificaPrecetto"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                    <xs:element name="dataNotificaPignoramento"
+                                                                                type="xs:date" minOccurs="0"/>
+                                                                </xs:sequence>
+                                                            </xs:extension>
+                                                        </xs:complexContent>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="Custode" type="at:Custode" minOccurs="0"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="CronologicoPignoramento" type="xs:string" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="st:titolo" minOccurs="0">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:key name="PK_TERPIGN_BENE">
+            <xs:selector xpath="ns:Beni/*"/>
+            <xs:field xpath="@ID"/>
+        </xs:key>
+        <xs:unique name="AK_TERPIGN_CONTROPARTE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:unique>
+        <xs:keyref name="FK_TERPIGN_PARTE_BENE" refer="PK_TERPIGN_BENE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore/ns:benePignorato"/>
+            <xs:field xpath="@refBene"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TERPIGN_DEBITORE_CONTROPARTE" refer="AK_TERPIGN_CONTROPARTE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_TERPIGN_PARTE_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Parte"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:key name="PK_TERPIGN_ALTRO_CF">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Altro"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:key name="PK_TERPIGN_TERZO_ALTRO">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TERPIGN_TERZO_ALTRO" refer="PK_TERPIGN_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneDatiRito/ns:pressoTerzo/ns:DatiTerzo"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TERPIGN_TERZOPIGN_ALTRO" refer="PK_TERPIGN_ALTRO_CF">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:keyref name="FK_TERPIGN_TITOLO_DEBITORE" refer="AK_TERPIGN_CONTROPARTE">
+            <xs:selector xpath="st:titolo/st:debitore"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+        <xs:key name="PK_TERPIGN_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="pt:AnagraficaProcedimento/pt:Soggetti/pt:Avvocato"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:keyref name="FK_TERPIGN_PARTE_AVVOCATO_MODIFICHE" refer="PK_TERPIGN_AVVOCATO_MODIFICHE">
+            <xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiProcedente/ns:riferimentoAvvocato"/>
+            <xs:field xpath="@codiceFiscale"/>
+        </xs:keyref>
+    </xs:element>
+</xs:schema>

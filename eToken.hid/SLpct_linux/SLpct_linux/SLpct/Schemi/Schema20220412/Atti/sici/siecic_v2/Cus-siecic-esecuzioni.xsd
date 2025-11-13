@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/custode/v2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/custode/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="../eventi.xsd"/>
+	<xs:element name="DepositoSemplice">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto semplice</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:rendicontoCustode"/>
+									<xs:element ref="evt:istanzaGenericaCustode"/>
+									<xs:element ref="evt:istanzaLiquidazioneCustode"/>
+									<xs:element ref="evt:attoNonCodificato"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
