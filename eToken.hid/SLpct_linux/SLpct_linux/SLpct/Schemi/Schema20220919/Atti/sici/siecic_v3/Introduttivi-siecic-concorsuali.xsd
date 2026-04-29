@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v3" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v3" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v3" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v3" schemaLocation="../base_v3/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="../tipi-base-siecic.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="TipoConcordatoOrdinario">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="AB"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IscrizioneRuoloPrefallimentare">
+		<xs:annotation>
+			<xs:documentation>Istanza di fallimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element ref="pt:AnagraficaProcedimento">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="EstensioneAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiDebitore">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="formaSocietaria" type="st:FormaSocietaria"/>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiCreditore" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="tipologiaCreditore" type="st:TipologiaCreditore">
+													<xs:annotation>
+														<xs:documentation>Tipologia applicativa del creditore (gerarchia)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="AK_PARTE">
+			<xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Parte"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:key name="AK_CONTROPARTE">
+			<xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:ControParte"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:keyref name="FK_DEBITORE_CONTROPARTE" refer="AK_CONTROPARTE">
+			<xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_CREDITORE_PARTE" refer="AK_PARTE">
+			<xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiCreditore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="IscrizioneRuoloNuovoConcordato">
+		<xs:annotation>
+			<xs:documentation>Ricorso al Nuovo Concordato Preventivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element ref="pt:AnagraficaProcedimento">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="EstensioneAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiDebitore">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="formaSocietaria" type="st:FormaSocietaria"/>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TipoConcordato">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="prenotativo" type="xs:boolean"/>
+									<xs:element name="ordinario">
+										<xs:complexType>
+											<xs:simpleContent>
+												<xs:extension base="TipoConcordatoOrdinario">
+													<xs:attribute name="DivisioneCrediti" type="xs:boolean" use="required"/>
+													<xs:attribute name="TransazioneExArt182Ter" type="xs:boolean" use="required"/>
+													<xs:attribute name="Relazione1602c" type="xs:boolean" use="required"/>
+												</xs:extension>
+											</xs:simpleContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="AK_PARTE_NUCP">
+			<xs:selector xpath="pt:AnagraficaProcedimento/pt:Partecipanti/pt:Parte"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:keyref name="FK_DEBITORE_PARTE_NUCP" refer="AK_PARTE_NUCP">
+			<xs:selector xpath="ns:EstensioneAnagrafica/ns:DatiDebitore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

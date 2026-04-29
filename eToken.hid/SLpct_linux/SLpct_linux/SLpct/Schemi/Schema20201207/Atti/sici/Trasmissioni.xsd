@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v3" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v2" xmlns="http://schemi.processotelematico.giustizia.it/sicid/trasmissioni" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/trasmissioni" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v3" schemaLocation="./base_v3/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v2" schemaLocation="./base_v2/tipi-anagrafiche.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="TipoDivorzio">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="congiunto"/>
+			<xs:enumeration value="contenzioso"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoNomina">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="tutore"/>
+			<xs:enumeration value="curatore"/>
+			<xs:enumeration value="amministratoreSostegno"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DatiMatrimonio">
+		<xs:sequence>
+			<xs:element name="ParteCivile" type="xs:string" minOccurs="0"/>
+			<xs:element name="ParteReligiosa" type="xs:string" minOccurs="0"/>
+			<xs:element name="NumeroMatrimonio" type="xs:nonNegativeInteger" minOccurs="0"/>
+			<xs:element name="RegistroMatrimonio" type="xs:string" minOccurs="0"/>
+			<xs:element name="SerieMatrimonio" type="xs:string" minOccurs="0"/>
+			<xs:element name="CittaMatrimonio" type="xs:string" minOccurs="0"/>
+			<xs:element name="ProvinciaMatrimonio" type="xs:string" minOccurs="0"/>
+			<xs:element name="DataCelebrazioneMatrimonio" type="xs:date" minOccurs="0"/>
+			<xs:element name="DataOmologazioneMatrimonio" type="xs:date" minOccurs="0"/>
+			<xs:element name="LuogoTrascrizioneMatrmonio" type="xs:string" minOccurs="0"/>
+			<xs:element name="AnnoRegistrazione" type="xs:nonNegativeInteger" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TrasmissioniUfficioStatoCivile">
+		<xs:annotation>
+			<xs:documentation>Atto di deposito di un reclamo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoTrasmissione">
+					<xs:sequence>
+						<xs:element ref="pt:AnagraficaProcedimento"/>
+						<xs:element name="DatiMatrimonio" type="DatiMatrimonio" minOccurs="0"/>
+						<xs:element name="tipoTrasmissione" minOccurs="0">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="DatiSeparazione">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="Congiunto">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Omologazione" type="xs:date" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Giudiziale">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Sentenza" type="pt:RiferimentoProvvedimento" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiDivorzio">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Sentenza" type="pt:RiferimentoProvvedimento" minOccurs="0"/>
+											</xs:sequence>
+											<xs:attribute name="tipoDivorzio" type="TipoDivorzio"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PresentazioneRicorsoDivorzio">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="dataIscrizione" type="xs:date"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="RetificheStatoCivile">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Sentenza" type="pt:RiferimentoProvvedimento" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ComunicazioneNomina">
+		<xs:annotation>
+			<xs:documentation>Atto di deposito di un reclamo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoTrasmissione">
+					<xs:sequence>
+						<xs:element name="dataNomina" type="xs:date"/>
+						<xs:element name="AnagraficaNominato" type="at:Soggetto"/>
+						<xs:element name="dataGiuramento" type="xs:date" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="tipoNomina" type="TipoNomina"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaATrasmissione">
+		<xs:annotation>
+			<xs:documentation>Iscrizione al ruolo di un ricorso generico</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoTrasmissione"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1"
+           xmlns:all="http://schemi.processotelematico.giustizia.it/tipi/allegati/v2"
+           xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+           xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+           xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1"
+           elementFormDefault="qualified" version="1.1">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+               schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/allegati/v2"
+               schemaLocation="../base_v2/tipi-allegati.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+               schemaLocation="../base_v7/tipi-atti.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi"
+               schemaLocation="../tipi-base.xsd"/>
+    <xs:simpleType name="RuoloSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Ruoli di iscrizione della segnalazione o dell'atto</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AffariCivili"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Rito">
+        <xs:annotation>
+            <xs:documentation>Riti validi per l'indentificazione del registro telematico</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ProcuraCivile">
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:attributeGroup name="RegistroTelematico">
+        <xs:annotation>
+            <xs:documentation>Attributi necessari ad individuare un registro telematico</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="ufficio" type="xs:string" use="required"/>
+        <xs:attribute name="ruolo" type="RuoloSegnalazione" use="required"/>
+        <xs:attribute name="rito" type="Rito" use="required"/>
+    </xs:attributeGroup>
+    <xs:complexType name="IntroduttivoProcura" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Atto per l'introduzione di una segnalazione al ruolo.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="destinazione">
+                <xs:annotation>
+                    <xs:documentation>Ufficio Giudiziario di destinazione, tra quelli dove è attivo il PCT
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="RegistroTelematico"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Oggetto" type="CodiceMateria">
+                <xs:annotation>
+                    <xs:documentation>Codice materia della segnalazione. La materia deve essere attinente all'atto
+                        specifico.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="RefId" type="xs:NMTOKEN"/>
+    </xs:complexType>
+    <xs:complexType name="AttoProcedimentoProcura" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Atto depositato su un fascicolo di segnalazione.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="procedimento" type="RiferimentoProcedimentoProcura">
+                <xs:annotation>
+                    <xs:documentation>Riferimento alla segnalazione</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="riferimento" type="pt:RiferimentoDocumentale" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="RefId" type="xs:NMTOKEN"/>
+        <xs:attribute name="urgente" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType name="RiferimentoProcedimentoProcura">
+        <xs:annotation>
+            <xs:documentation>Riferimento a una segnalazione all'interno del sistema di gestione dei registri.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="numero" type="xs:nonNegativeInteger"/>
+            <xs:element name="anno" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="RegistroTelematico"/>
+    </xs:complexType>
+    <xs:simpleType name="CodiceMateria">
+        <xs:annotation>
+            <xs:documentation>Codice materia della Procura</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="D11001">
+                <xs:annotation>
+                    <xs:documentation>Accordo ex art. 6 d.l. n.132 del 2014</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="AnagraficaProcedimentoProcura">
+        <xs:annotation>
+            <xs:documentation>Dati anagrafici relativi alla segnalazione da iscrivere</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Partecipanti">
+                <xs:annotation>
+                    <xs:documentation>Parti in causa</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Istanti" type="at:Parte" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Istante che introduce la causa.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="pt:Soggetti"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AnagraficaConiugi">
+        <xs:annotation>
+            <xs:documentation>Dati anagrafici dei coniugi per ricorso VG, non iscritti come parti del ricorso
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Partecipanti">
+                <xs:annotation>
+                    <xs:documentation>Parti in causa</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Coniugi" type="at:Parte" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Coniuge.</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="pt:Soggetti"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AnagraficaProle">
+        <xs:sequence>
+            <xs:element name="Prole" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Nome">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="255"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Cognome">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="255"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+                        <xs:element name="DataNascita" type="xs:date"/>
+                        <xs:element name="LuogoNascita">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="255"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+
+

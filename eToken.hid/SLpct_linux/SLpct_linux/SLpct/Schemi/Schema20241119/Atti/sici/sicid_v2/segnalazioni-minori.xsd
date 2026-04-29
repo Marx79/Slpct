@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/v2"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:in="http://schemi.processotelematico.giustizia.it/sicid/introduttivi/v7"
+           xmlns:ts="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/v2"
+           elementFormDefault="qualified" version="1.2">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/sicid/introduttivi/v7"
+               schemaLocation="../sicid_v7/Introduttivi.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2"
+               schemaLocation="../base_v2/tipi-segnalazioni-minori.xsd"/>
+    <xs:annotation>
+        <xs:documentation>DEPOSITI SEGNALAZIONI PROCURA MINORENNI</xs:documentation>
+        <xs:documentation>Gli atti qui definiti permettono il deposito o l'integrazione di una segnalazione all'Ufficio
+            Affari Civili presso il Tribunale per i Minorenni
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="IntroduttivoSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Deposito di una segnalazione all'UAC del TM</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:IntroduttivoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="AnagraficaSegnalazione" type="ts:AnagraficaSegnalazione"/>
+                        <xs:element name="AnagraficaMinorenni" type="in:AnagraficaMinorenni"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+
+        <xs:key name="PK_GENITORE">
+            <xs:selector xpath="AnagraficaMinorenni/in:Genitore"/>
+            <xs:field xpath="@RefId"/>
+        </xs:key>
+        <xs:keyref name="FK_MINORE_MADRE" refer="PK_GENITORE">
+            <xs:selector xpath="AnagraficaMinorenni/in:Minore"/>
+            <xs:field xpath="in:madre"/>
+        </xs:keyref>
+        <xs:keyref name="FK_MINORE_PADRE" refer="PK_GENITORE">
+            <xs:selector xpath="AnagraficaMinorenni/in:Minore"/>
+            <xs:field xpath="in:padre"/>
+        </xs:keyref>
+
+    </xs:element>
+    <xs:element name="DepositoDocumentiSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Deposito generico di documenti a integrazione di una segnalazione</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:AttoProcedimentoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="note" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AssegnazioneAPM">
+        <xs:annotation>
+            <xs:documentation>Deposito di Assegnazione a PM</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:AttoProcedimentoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="codiceFiscalePM" type="xs:string"/>
+                        <xs:element name="idSezione" type="xs:string"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SostituzionePMTitolare">
+        <xs:annotation>
+            <xs:documentation>Deposito di Sostituzione PM</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:AttoProcedimentoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="codiceFiscalePMSostituto" type="xs:string"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CoassegnazioneAPM">
+        <xs:annotation>
+            <xs:documentation>Deposito di Coassegnazione PM</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:AttoProcedimentoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="idSezione" type="xs:string"/>
+                        <xs:element name="PMCoassegnatario" maxOccurs="3">
+				            <xs:complexType>
+					            <xs:sequence>
+						           <xs:element name="codiceFiscalePM" type="xs:string"/>
+					           </xs:sequence>
+                            </xs:complexType>
+			            </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SostituzionePMCoassegnatari">
+        <xs:annotation>
+            <xs:documentation>Deposito di sostituzione PM coassegnatari</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ts:AttoProcedimentoSegnalazione">
+                    <xs:sequence>
+                        <xs:element name="PMCoassegnatario" maxOccurs="3">
+				            <xs:complexType>
+					            <xs:sequence>
+						           <xs:element name="codiceFiscalePM" type="xs:string"/>
+					           </xs:sequence>
+                            </xs:complexType>
+			            </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+

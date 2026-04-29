@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/delegato/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/delegato/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="./eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="./tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:element name="DepositoSemplice">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto semplice</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:relazionePeriodicaDelegato"/>
+									<xs:element ref="evt:avvisoVendita"/>
+									<xs:element ref="evt:verbaleAggiudicazione"/>
+									<xs:element ref="evt:depositoPrezzo"/>
+									<xs:element ref="evt:istanzaRevocaDecadenzaAggiudicatario"/>
+									<xs:element ref="evt:attoNonCodificato"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MinutaDecreto">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto minuta decreto di trasferimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="lotto" type="xs:string" nillable="false">
+							<xs:annotation>
+								<xs:documentation>Specifica del numero di lotto al quale si riferisce (se è un evento di lotto)</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropostaProgetto">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto proposta progetto di distribuzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AggiudicazioneLotto">
+		<xs:annotation>
+			<xs:documentation>Aggiudicazione lotto (verbale di vendita)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="Lotto" type="xs:positiveInteger">
+							<xs:annotation>
+								<xs:documentation>Identificazione numerica del lotto oggetto di aggiudicazione</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="SenzaIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Offerte" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="st:importo"/>
+													<xs:element name="Cauzione" type="bt:Valuta"/>
+													<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+													<xs:element name="Offerente" type="at:Soggetto"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Aggiudicatario" type="at:RiferimentoSoggetto">
+											<xs:annotation>
+												<xs:documentation>I dati dell'aggiudicatario sono dedotti dai dati degli offerenti, qui viene riportato il solo codice fiscale che deve avere una ed una sola occorrenza nell'insieme degli offerenti</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ConIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="BaseAsta" type="bt:Valuta"/>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element ref="st:importo"/>
+										<xs:element name="Cauzione" type="bt:Valuta"/>
+										<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+										<xs:element name="Aggiudicatario" type="at:Soggetto"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="TermineConguaglio" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Termine per il versamento del conguaglio</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TermineDecreto" type="xs:date" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Termine per l’emissione del decreto di trasferimento</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProgettoDistribuzione">
+		<xs:annotation>
+			<xs:documentation>Decreto di esecutivita' progetto di distribuzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:accoglimentoPianoRipartoParziale"/>
+									<xs:element ref="evt:accoglimentoPianoRiparto"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="st:dettagliRiparto" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

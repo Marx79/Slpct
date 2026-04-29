@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/parte/v1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tp="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/parte/v1"
+           elementFormDefault="qualified" version="1.0">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1"
+               schemaLocation="../base_v1/tipi-procura.xsd"/>
+    <xs:annotation>
+        <xs:documentation>DEPOSITI PARTE PROCURA</xs:documentation>
+        <xs:documentation>Gli atti qui definiti permettono il deposito di parte all'Ufficio Affari Civili, registro
+            Procura
+        </xs:documentation>
+    </xs:annotation>
+    <xs:element name="DepositoDocumentiProcura">
+        <xs:annotation>
+            <xs:documentation>Deposito generico di documenti a integrazione di una segnalazione</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="tp:AttoProcedimentoProcura">
+                    <xs:sequence>
+                        <xs:element name="note" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+

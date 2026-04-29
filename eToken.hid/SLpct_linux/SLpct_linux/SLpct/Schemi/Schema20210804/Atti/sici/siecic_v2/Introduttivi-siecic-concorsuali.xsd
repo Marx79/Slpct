@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tn="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v2" xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v2" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/introduttivi/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="../tipi-base-siecic.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+		<xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+	</xs:annotation>
+	<xs:element name="IscrizioneRuoloPrefallimentare">
+		<xs:annotation>
+			<xs:documentation>Istanza di fallimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="pt:AttoIntroduttivo">
+					<xs:sequence>
+						<xs:element ref="pt:AnagraficaProcedimento">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="EstensioneAnagrafica" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiDebitore">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="formaSocietaria" type="st:FormaSocietaria"/>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DatiCreditore" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="tipologiaCreditore" type="st:TipologiaCreditore">
+													<xs:annotation>
+														<xs:documentation>Tipologia applicativa del creditore (gerarchia)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+											<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:keyref name="FK_DEBITORE_CONTROPARTE" refer="pt:PK_CONTROPARTE">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiDebitore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_CREDITORE_PARTE" refer="pt:PK_PARTE">
+			<xs:selector xpath="tn:EstensioneAnagrafica/tn:DatiCreditore"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

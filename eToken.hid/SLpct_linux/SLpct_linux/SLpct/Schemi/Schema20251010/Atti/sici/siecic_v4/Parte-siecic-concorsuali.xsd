@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/parte/v4"
+           xmlns:tns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/parte/v4"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v1"
+           xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche"
+           xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi"
+           xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/parte/v4"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v1" schemaLocation="../base_v1/tipi-atti.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="../tipi-anagrafiche.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="../tipi-base-siecic.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="../eventi.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+    <xs:annotation>
+        <xs:documentation>ATTI CONCORSUALI DI PARTE IN CORSO DI CAUSA</xs:documentation>
+        <xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+    </xs:annotation>
+    <xs:element name="AttoCostituzioneAvvocato">
+        <xs:annotation>
+            <xs:documentation>Atto di costituzione e sostituzione avvocato (parte gia' censita)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element ref="pt:ModificheAnagrafica">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="deposito">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="evt:costituzioneAvvocato"/>
+                                    <xs:element ref="evt:sostituzioneProcuratore"/>
+                                    <xs:element ref="evt:depositoMandato"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AttoGenerico">
+        <xs:annotation>
+            <xs:documentation>Deposito atto generico</xs:documentation>
+            <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element name="deposito">
+                            <xs:complexType>
+                                <xs:choice>
+                                    <xs:element ref="evt:depositoMemorie"/>
+                                    <xs:element ref="evt:attoNonCodificato"/>
+                                    <xs:element ref="evt:RinunciaDebitore"/>
+                                    <xs:element ref="evt:depositoRimessioneTermini"/>
+                                    <xs:element ref="evt:depositoNotaSpese"/>
+                                    <xs:element ref="evt:depositoIstanzaLiquidazionePatrocinio"/>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DomandaInsinuazione">
+        <xs:annotation>
+            <xs:documentation>Deposito domanda di ammissione al passivo</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element ref="pt:ModificheAnagrafica">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="EstensioneAnagrafica" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiCreditore" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="tipologiaCreditore" type="st:TipologiaCreditore">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Tipologia applicativa del creditore
+                                                            (gerarchia)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element ref="st:precisazioneCredito" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:keyref name="FK_INSINUA_CREDITORE_PARTE" refer="pt:PK_PARTE_MODIFICHE">
+            <xs:selector xpath="tns:EstensioneAnagrafica/tns:DatiCreditore"/>
+            <xs:field xpath="@ref"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="RinunciaInsinuazione">
+        <xs:annotation>
+            <xs:documentation>Deposito Rinuncia al credito oggetto di insinuazione</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element name="Insinuazione" type="st:RiferimentoInsinuazione">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="st:precisazioneCredito" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Rivendicazione">
+        <xs:annotation>
+            <xs:documentation>Domanda di rivendicazione, restituzione e separazione cose mobili ex art. 103 l.f.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element ref="pt:ModificheAnagrafica"/>
+                        <xs:element name="EstensioneAnagrafica" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Informazioni aggiuntive sull'anagrafica delle parti</xs:documentation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="DatiCreditore" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="tipologiaCreditore" type="st:TipologiaCreditore">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Tipologia applicativa del creditore
+                                                            (gerarchia)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Beni" type="st:BeneMobile" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Lista di beni per la descrizione del lotto o delle rivendicazioni
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:keyref name="FK_RIVENDICA_CREDITORE_PARTE" refer="pt:PK_PARTE_MODIFICHE">
+            <xs:selector xpath="tns:EstensioneAnagrafica/tns:DatiCreditore"/>
+            <xs:field xpath="@ref"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="RinunciaRivendicazione">
+        <xs:annotation>
+            <xs:documentation>Deposito Rinuncia al credito oggetto di insinuazione</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element name="Insinuazione" type="st:RiferimentoInsinuazione">
+                            <xs:annotation>
+                                <xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Beni" type="st:BeneMobile" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AttoRichiestaVisibilita">
+        <xs:annotation>
+            <xs:documentation>Atto di richiesta visibilita' del fascicolo</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="pt:AttoProcedimento">
+                    <xs:sequence>
+                        <xs:element name="Parte">
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="at:RiferimentoSoggetto">
+                                        <xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Avvocato" type="at:Avvocato"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:key name="PK_PARTE">
+            <xs:selector xpath="tns:Parte"/>
+            <xs:field xpath="@ID"/>
+        </xs:key>
+        <xs:keyref name="FK_PARTE_AVVOCATO_MODIFICHE" refer="PK_PARTE">
+            <xs:selector xpath="tns:Avvocato/at:parteRappresentata"/>
+            <xs:field xpath="@ref"/>
+        </xs:keyref>
+    </xs:element>
+</xs:schema>
