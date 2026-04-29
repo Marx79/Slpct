@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/notaio/v2"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+		   xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/notaio"
+		   targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/notaio/v2"
+		   elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v7" schemaLocation="../base_v7/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/notaio" schemaLocation="../eventi-notaio.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI NOTAIO 21 IN CORSO DI CAUSA</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+	</xs:annotation>
+	<xs:element name="AutorizzazioneNotaioArt21">
+		<xs:annotation>
+			<xs:documentation>Deposito Notaio21</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoAutorizzazioneNotaioArt21"/>
+									<xs:element ref="evt:depositoVisibilitaNotaioArt21"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

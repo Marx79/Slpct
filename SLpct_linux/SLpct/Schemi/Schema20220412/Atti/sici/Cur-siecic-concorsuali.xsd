@@ -1,0 +1,951 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by lori (lori) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/curatore/v1" xmlns:tns="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/curatore/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/concorsuali/curatore/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="./tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="./eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DEL CURATORE</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+	</xs:annotation>
+	<xs:attributeGroup name="CoordinateBancarie">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Coordinate bancarie</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ABI" type="xs:string" use="required"/>
+		<xs:attribute name="CAB" type="xs:string" use="required"/>
+		<xs:attribute name="CIN" type="xs:string" use="required"/>
+		<xs:attribute name="CC" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PersonaFisica">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Dati della persona fisica</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Cognome" type="xs:string" use="required"/>
+		<xs:attribute name="Nome" type="xs:string" use="required"/>
+		<xs:attribute name="CodiceFiscale" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="16"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="NatoA" type="xs:string" use="required"/>
+		<xs:attribute name="DataNascita" type="xs:date" use="required"/>
+		<xs:attributeGroup ref="IndirizzoCompleto"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="PersonaGiuridica">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Dati della persona giuridica</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Denominazione" type="xs:string" use="required"/>
+		<xs:attribute name="FormaGiuridica" type="xs:string" use="required"/>
+		<xs:attribute name="CodiceFiscale" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="11"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="IndirizzoCompleto"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="IndirizzoCompleto">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Dati di indirizzo</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Indirizzo" type="xs:string" use="required"/>
+		<xs:attribute name="CAP" type="xs:string" use="required"/>
+		<xs:attribute name="Localita" type="xs:string" use="required"/>
+		<xs:attribute name="Provincia" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="TipologieAttivo">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica:  Tipologie di attivo</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Stimato" type="xs:float" use="optional"/>
+		<xs:attribute name="DaRealizzare" type="xs:float" use="required"/>
+		<xs:attribute name="Realizzato" type="xs:float" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="RG">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Identificazione Procedura</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Tribunale" type="xs:string" use="required"/>
+		<xs:attribute name="Sezione" type="xs:string" use="required"/>
+		<xs:attribute name="RuoloGenerale" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="Sub" type="xs:positiveInteger" use="optional"/>
+		<xs:attribute name="Anno" type="xs:gYear" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="InformazioniCause">
+		<xs:annotation>
+			<xs:documentation>Relazione Periodica: Informazioni cause in corso</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Oggetto" type="xs:string" use="required"/>
+		<xs:attribute name="DataUdienza" type="xs:date" use="required"/>
+		<xs:attribute name="Fase" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Introduttiva"/>
+					<xs:enumeration value="Prove"/>
+					<xs:enumeration value="Decisione"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Valore" type="xs:float" use="required"/>
+	</xs:attributeGroup>
+	<xs:complexType name="elementoRendiconto">
+		<xs:annotation>
+			<xs:documentation>Elemento di rendiconto con riferimenti alle voci di contabilità del fallimento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="st:importo"/>
+			<xs:element name="PDC" type="st:VociPDC" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DepositoAPC">
+		<xs:annotation>
+			<xs:documentation>Deposito atto interoperabilita' APC</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:documentation>Tipologia dell'atto veicolato</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="inventario" type="bt:RiferimentoAllegato">
+										<xs:annotation>
+											<xs:documentation>Inventario come definito in APC v1.8.x</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="elencoInsinuazioni" type="bt:RiferimentoAllegato">
+										<xs:annotation>
+											<xs:documentation>Elenco delle insinuazioni come definito in APC v1.8.x</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="statoPassivo" type="bt:RiferimentoAllegato">
+										<xs:annotation>
+											<xs:documentation>Stato Passivo come definito in APC v1.8.x</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="relazioneIniziale" type="bt:RiferimentoAllegato">
+										<xs:annotation>
+											<xs:documentation>Relazione iniziale come definita in APC v1.8.x</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="relazionePeriodica" type="bt:RiferimentoAllegato">
+										<xs:annotation>
+											<xs:documentation>Relazione periodica come definita in APC v1.8.x</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoSemplice">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto semplice</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoIstanzaFissazioneVenditaProgrammaLiquidazione"/>
+									<xs:element ref="evt:attoNonCodificato"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRelazioneIniziale">
+		<xs:annotation>
+			<xs:documentation>Deposito relazione iniziale ex art. 33 L.F.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:choice minOccurs="0">
+						<xs:element name="RelazioneStandard">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ReclamoExArt18" type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>Presentato reclamo ex. art. 18</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="DatiBase">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="DataCostituzione" type="xs:date"/>
+												<xs:element name="Settore">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Industria"/>
+															<xs:enumeration value="Commercio"/>
+															<xs:enumeration value="Servizi"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="Mercato">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Locale"/>
+															<xs:enumeration value="Nazionale"/>
+															<xs:enumeration value="Estero"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="RicaviLordi">
+													<xs:complexType>
+														<xs:sequence maxOccurs="3">
+															<xs:annotation>
+																<xs:documentation>Anno in corso e i due precedenti</xs:documentation>
+															</xs:annotation>
+															<xs:element name="Anno" type="xs:positiveInteger"/>
+															<xs:element name="Ricavo" type="bt:Valuta"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Dipendenti">
+													<xs:complexType>
+														<xs:sequence maxOccurs="3">
+															<xs:annotation>
+																<xs:documentation>Anno in corso e i due precedenti</xs:documentation>
+															</xs:annotation>
+															<xs:element name="Anno" type="xs:positiveInteger"/>
+															<xs:element name="Numero" type="xs:positiveInteger"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Garanzie">
+													<xs:complexType>
+														<xs:sequence maxOccurs="unbounded">
+															<xs:element name="Tipologia" type="xs:string"/>
+															<xs:element name="Ammontare" type="bt:Valuta"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Attivo">
+													<xs:complexType>
+														<xs:sequence maxOccurs="3">
+															<xs:annotation>
+																<xs:documentation>Anno in corso e i due precedenti</xs:documentation>
+															</xs:annotation>
+															<xs:element name="Immobilizzato" type="bt:Valuta"/>
+															<xs:element name="Immoblili" type="bt:Valuta"/>
+															<xs:element name="Partecipazioni" type="bt:Valuta"/>
+															<xs:element name="Circolante" type="bt:Valuta"/>
+															<xs:element name="Crediti" type="bt:Valuta"/>
+															<xs:element name="Magazzino" type="bt:Valuta"/>
+															<xs:element name="Liquidita" type="bt:Valuta"/>
+															<xs:element name="Altro" type="bt:Valuta"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Passivo">
+													<xs:complexType>
+														<xs:sequence maxOccurs="3">
+															<xs:annotation>
+																<xs:documentation>Anno in corso e i due precedenti</xs:documentation>
+															</xs:annotation>
+															<xs:element name="DebitiBreve" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>Entro 12 mesi</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="DebitiLungo" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>oltre 12 mesi</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="CapitaleProprio" type="bt:Valuta"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Governance">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Modo">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Monistico"/>
+															<xs:enumeration value="Dualistico"/>
+															<xs:enumeration value="Tradizionale"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="Gruppo">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Partecipata"/>
+															<xs:enumeration value="Holding"/>
+															<xs:enumeration value="No"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="Soci">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Famigliare"/>
+															<xs:enumeration value="Minore5Soci"/>
+															<xs:enumeration value="Maggiore5Soci"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="Amministratore">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Unico"/>
+															<xs:enumeration value="Consiglio"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="OrganoControllo">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="Comitato"/>
+															<xs:enumeration value="ComitatoRevisore"/>
+															<xs:enumeration value="Revisore"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="AmministratoriNonSoci" type="xs:boolean"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CauseDissesto" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Soggettive">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="ErrateScelte" maxOccurs="unbounded">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="Settore"/>
+																		<xs:enumeration value="Prodotto"/>
+																		<xs:enumeration value="Organizzazione"/>
+																		<xs:enumeration value="Finanziarie"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="Inefficienze" maxOccurs="unbounded">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="Controllo"/>
+																		<xs:enumeration value="Gestione"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="PassaggioGenerazionale" type="xs:boolean"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Esterne">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="AndamentoEconomico" type="xs:boolean"/>
+															<xs:element name="AndamentoMercato" type="xs:boolean"/>
+															<xs:element name="CostoFattoriProduttivi" type="xs:boolean"/>
+															<xs:element name="RecuperoCrediti" type="xs:boolean"/>
+															<xs:element name="Altro" type="xs:string"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="AnalisiBilancio">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="RappresentazioneFedele" type="xs:boolean"/>
+															<xs:element name="Riclassificazione" type="bt:RiferimentoAllegato" minOccurs="0"/>
+															<xs:element name="Indici" type="bt:RiferimentoAllegato" minOccurs="0"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Diligenza">
+										<xs:annotation>
+											<xs:documentation>Diligenza del fallito / Condotta organi di amministrazione e controllo</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="DiligenzaImprenditore" type="xs:boolean"/>
+												<xs:element name="ElementiRilievoPenale" type="xs:boolean"/>
+												<xs:element name="Responsabilita">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Fallito" type="xs:boolean"/>
+															<xs:element name="Amministratore" type="xs:boolean"/>
+															<xs:element name="OrganiControllo" type="xs:boolean"/>
+															<xs:element name="Altri" type="xs:boolean"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="OccultamentoPatrimonio" type="xs:boolean"/>
+												<xs:element name="CollaborazioneProcedura" type="xs:boolean"/>
+												<xs:element name="Altro" type="xs:string"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="AttiImpugnati" type="xs:string" maxOccurs="unbounded"/>
+									<xs:element name="AzioniEsperire" type="xs:string" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RelazioneQuotate">
+							<xs:annotation>
+								<xs:documentation>Relazione iniziale specifica per s.p.a. – s.a.p.a – soc.coop. p.a.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRelazionePeriodica">
+		<xs:annotation>
+			<xs:documentation>Deposito relazione periodica ex art. 33 L.F.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="RiferimentiTemporali" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DataRelazione" type="xs:date"/>
+									<xs:element name="PeriodoRiferimento">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="DataIniziale" type="xs:date"/>
+												<xs:element name="DataFinale" type="xs:date"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="DataInventario" type="xs:date"/>
+									<xs:element name="DataVidimazioneGiornale" type="xs:date"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RiferimentiBancari" nillable="true">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element name="IBAN" type="xs:string"/>
+									<xs:element name="Coordinate">
+										<xs:complexType>
+											<xs:attributeGroup ref="CoordinateBancarie"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="ComitatoCreditori" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Presidente">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="CreditorePersonaFisica">
+													<xs:complexType>
+														<xs:attributeGroup ref="PersonaFisica"/>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="CreditorePersonaGiuridica">
+													<xs:complexType>
+														<xs:attributeGroup ref="PersonaGiuridica"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Membri" maxOccurs="5">
+										<xs:complexType>
+											<xs:choice>
+												<xs:element name="CreditorePersonaFisica">
+													<xs:complexType>
+														<xs:attributeGroup ref="PersonaFisica"/>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="CreditorePersonaGiuridica">
+													<xs:complexType>
+														<xs:attributeGroup ref="PersonaGiuridica"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Professionisti" nillable="true">
+							<xs:complexType>
+								<xs:sequence minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="Tipologia" type="xs:string"/>
+									<xs:element name="Anagrafica">
+										<xs:complexType>
+											<xs:attributeGroup ref="PersonaFisica"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Attivo" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Immobili" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Mobili" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CreditiTerzi" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CreditiErario" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="InteressiAttivi" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="AzioniRevocatorie" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Transazioni" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Varie" minOccurs="0">
+										<xs:complexType>
+											<xs:attributeGroup ref="TipologieAttivo"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Liquidi" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Saldo" type="xs:float"/>
+									<xs:element name="DataEstrattoConto" type="xs:date"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Passivo" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PrivilegiSoddisfatti">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Privilegio" type="xs:string"/>
+												<xs:element name="Percentuale" type="xs:float"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="UsciteProcedura">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="SpesePrededuzione" type="xs:float"/>
+												<xs:element name="SpeseGiustizia" type="xs:float"/>
+												<xs:element name="SpeseAmministrazione" type="xs:float"/>
+												<xs:element name="CompensiProfessionisti" type="xs:string"/>
+												<xs:element name="CompensiCuratore" type="xs:float"/>
+												<xs:element name="RitenuteInteressi" type="xs:string"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PassivoAmmesso">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Privilegio" type="xs:float"/>
+												<xs:element name="Chirografo" type="xs:float"/>
+												<xs:element name="Tardive">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Privilegio" type="xs:float"/>
+															<xs:element name="Chirografo" type="xs:float"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Opposizioni">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Privilegio" type="xs:float"/>
+															<xs:element name="Chirografo" type="xs:float"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PassivoAccertamento">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Tardive">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Privilegio" type="xs:float"/>
+															<xs:element name="Chirografo" type="xs:float"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Opposizioni">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Privilegio" type="xs:float"/>
+															<xs:element name="Chirografo" type="xs:float"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="CauseCorso" nillable="true">
+							<xs:complexType>
+								<xs:sequence maxOccurs="unbounded">
+									<xs:element name="RuoloGenerale">
+										<xs:complexType>
+											<xs:attributeGroup ref="RG"/>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Informazioni">
+										<xs:complexType>
+											<xs:attributeGroup ref="InformazioniCause"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="PianiRiparto" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Numero" type="xs:positiveInteger"/>
+									<xs:element name="DataUltimo" type="xs:date"/>
+									<xs:element name="TotaleIpotecari" type="xs:float"/>
+									<xs:element name="TotalePrivilegiSpeciali" type="xs:float"/>
+									<xs:element name="TotalePrivilegiGenerali" type="xs:float"/>
+									<xs:element name="TotaleChirografari" type="xs:float"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RisultatoGestione" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Riparti">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Entrata" type="xs:float"/>
+												<xs:element name="Uscita" type="xs:float"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Immobiliare">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Entrata" type="xs:float"/>
+												<xs:element name="Uscita" type="xs:float"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Mobiliare">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Entrata" type="xs:float"/>
+												<xs:element name="Uscita" type="xs:float"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Promiscua">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Entrata" type="xs:float"/>
+												<xs:element name="Uscita" type="xs:float"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AttiChiusura" nillable="true">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Inventario" type="xs:boolean"/>
+									<xs:element name="VerificaCrediti" type="xs:boolean"/>
+									<xs:element name="RecuperoCrediti" type="xs:boolean"/>
+									<xs:element name="RipartizioneAttivo" type="xs:boolean"/>
+									<xs:element name="Vendite" type="xs:boolean"/>
+									<xs:element name="Opposizioni" type="xs:boolean"/>
+									<xs:element name="ControversieFiscali" type="xs:boolean"/>
+									<xs:element name="AltreControversie" type="xs:boolean"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ElencoInsinuazioni">
+		<xs:annotation>
+			<xs:documentation>Deposito elenco insinuazioni e Deposito progetto stato passivo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoElencoInsinuazioni"/>
+									<xs:element ref="evt:depositoProgettoPassivo"/>
+									<xs:element ref="evt:depositoStatoPassivo"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Domanda" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="st:RiferimentoCronologico">
+										<xs:sequence>
+											<xs:element ref="pt:ModificheAnagrafica" minOccurs="0"/>
+											<xs:choice>
+												<xs:element ref="st:precisazioneCredito" minOccurs="0" maxOccurs="unbounded"/>
+												<xs:element name="ElencoBeni" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Elenco dei beni rivendicati dai creditori insinuati</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:complexContent>
+															<xs:extension base="st:BeneMobile">
+																<xs:sequence>
+																	<xs:element name="valore" type="bt:Valuta"/>
+																</xs:sequence>
+															</xs:extension>
+														</xs:complexContent>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+											<xs:element name="Motivazioni" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+										<xs:attribute name="stato" type="st:StatoInsinuazione">
+											<xs:annotation>
+												<xs:documentation>Stato della domanda di insinuazione</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Inventario">
+		<xs:annotation>
+			<xs:documentation>Deposito verbale di inventario con distinzione dei beni inventariati e beni esclusi per decreto del giudice delegato</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="DataInventario" type="xs:date">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Beni" type="st:ListaBeni" nillable="true">
+							<xs:annotation>
+								<xs:documentation>Vengono elencati i beni inventariati e le merci difettose (rese) ed i beni la cui proprietà non è riconducibile al debitore (a seconda del diritto)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Escluso" type="st:ListaBeni" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>vengono elencati i beni esclusi per decreto del giudice delegato.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DirittiBeni" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="dirittiReali" type="st:Diritto"/>
+								</xs:sequence>
+								<xs:attribute name="refBene" type="xs:NMTOKEN" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="PK_BENEINVENTARIO">
+			<xs:selector xpath="tns:Beni/*"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:keyref name="FK_BENEINVENTARIO" refer="PK_BENEINVENTARIO">
+			<xs:selector xpath="tns:DirittiBeni"/>
+			<xs:field xpath="@refBene"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="ProgettoDistribuzione">
+		<xs:annotation>
+			<xs:documentation>Deposito Piano di Riparto</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoPianoRiparto"/>
+									<xs:element ref="evt:depositoPianoRipartoParziale"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="st:dettagliRiparto" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRendiconto">
+		<xs:annotation>
+			<xs:documentation>Deposito rendiconto</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="Contabile" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Entrate" nillable="true" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="elementoRendiconto">
+													<xs:attribute name="tipologia">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:enumeration value="VenditaBeniImmobili"/>
+																<xs:enumeration value="VenditaBeniMobili"/>
+																<xs:enumeration value="RealizzoMagazzino"/>
+																<xs:enumeration value="RealizzoCrediti"/>
+																<xs:enumeration value="CessioneAttività"/>
+																<xs:enumeration value="EsercizioProvvisorio"/>
+																<xs:enumeration value="Locazioni"/>
+																<xs:enumeration value="Rimborsi"/>
+																<xs:enumeration value="Interessi"/>
+																<xs:enumeration value="RealizzoTitoli"/>
+																<xs:enumeration value="IVAvendite"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:attribute>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Uscite" nillable="true" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="elementoRendiconto">
+													<xs:attribute name="tipologia">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:enumeration value="SpeseLegali"/>
+																<xs:enumeration value="SpesePeriti"/>
+																<xs:enumeration value="SpeseCuratori"/>
+																<xs:enumeration value="SpeseGestione"/>
+																<xs:enumeration value="RipartoParziale"/>
+																<xs:enumeration value="Accantonamento"/>
+																<xs:enumeration value="RitenuteFiscali"/>
+																<xs:enumeration value="IVAdebito"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:attribute>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Gestione" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AzioniPromosse" type="xs:string" nillable="true" maxOccurs="unbounded"/>
+									<xs:element name="CoadiutoriNominati" type="at:Soggetto" nillable="true" maxOccurs="unbounded"/>
+									<xs:element name="CausePendenti" type="xs:string" nillable="true" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>solo in caso cessazione curatore</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AccontiRicevuti" nillable="true" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:simpleContent>
+												<xs:extension base="xs:string">
+													<xs:attribute name="Importo" type="bt:Valuta"/>
+												</xs:extension>
+											</xs:simpleContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AttivoRealizzato" type="bt:Valuta"/>
+						<xs:element name="PassivoAccertato" type="bt:Valuta"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

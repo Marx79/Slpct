@@ -1,0 +1,2745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/unep/tipiBaseUnep"
+           xmlns:bt="http://schemi.processotelematico.giustizia.it/unep/tipi"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/unep/tipiBaseUnep"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/unep/tipi" schemaLocation="./tipi-base.xsd"/>
+    <xs:annotation>
+        <xs:documentation>Tipi primitivi Unep utilizzati nella definizione degli schemi Unep</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType name="Articolo">
+        <xs:annotation>
+            <xs:documentation>Elenco articoli previsti da c.p.c. e c.p.p. per la notifica ed esecuzione di atti
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="138-I CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 138 C.P.C. I COMMA - (MANI PROPRIE)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="138-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 138 C.P.C. II COMMA - (RIFIUTO DESTINATARIO)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 139 C.P.C. II COMMA - (RESIDENZA:FAMILIARE CONVIVENTE/ADDETTO ALLA CASA,
+                        ALL'UFFICIO O ALL'AZIENDA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139-III CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 139 C.P.C. III COMMA - (PORTIERE/VICINO DI CASA)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139-V CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 139 C.P.C. V COMMA - (CAPITANO NAVE O CHI NE FA LE VECI)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139-VI CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 139 C.P.C. VI COMMA - (DISPOSIZIONI PRECEDENTI A COMUNE DI DIMORA O
+                        DOMICILIO)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="140 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 140 C.P.C. - (IRREPERIBILITA' TEMPORANEA/RIFIUTO/INCAPACITA')
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="141 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 141 C.P.C. - (DOMICILIO ELETTO)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="142-I CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 142 C.P.C. I COMMA - (NOTIFICA ALL'ESTERO MEZZO POSTA)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="142-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 142 C.P.C. II COMMA - (NOTIFICA ALL'ESTERO - CONVENZIONI)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="143-I CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 143 C.P.C. I COMMA - (DEPOSITO CASA COMUNALE: IRREPERIBILITA'
+                        DEFINITIVA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="143-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 143 C.P.C. II COMMA - (CONSEGNA P.M.: IRREPERIBILITA' DEFINITIVA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="144-I CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 144 C.P.C. I COMMA - (AMMINISTRAZIONI DELLO STATO: AVVOCATURA DELLO
+                        STATO)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="144-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 144 C.P.C. II COMMA - (AMMINISTRAZIONI DELLO STATO: PRESSO
+                        L'AMMINISTRAZIONE DESTINATARIA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="145-I CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 145 C.P.C. I COMMA - (PERSONE GIURIDICHE:LEGALE
+                        RAPPRESENTANTE/INCARICATO/ADDETTO SEDE/PORTIERE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="145-II CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 145 C.P.C. II COMMA - (PERSONA FISICA RAPPRESENTANTE
+                        SOCIETA'/ASSOCIAZIONI/COMITATI NO PERSONALITA' GIURIDICA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="145-III CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 145 C.P.C. III COMMA - (PERSONA FISICA RAPPRESENTANTE A NORMA ARTT. 140 0
+                        143 C.P.C.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="146 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 146 C.P.C. - (MILITARE: MANI PROPRIE/CONSEGNA P.M.)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="149 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 149 C.P.C. - (NOTIFICA A MEZZO POSTA)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="149-BIS CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 149 BIS C.P.C. - (NOTIFICA A MEZZO POSTA ELETTRONICA CERTIFICATA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="150 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 150 C.P.C. - (PUBBLICI PROCLAMI)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="151 CPC">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 151 C.P.C. - (MODALITA' ORDINATE DAL GIUDICE)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="149 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 149 C.P.P. - (NOTIFICA TELEFONICA/TELEGRAFICA)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="150 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 150 C.P.P. - (FORME PARTICOLARI DI NOTIFICAZIONE DISPOSTE DAL GIUDICE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="153 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 153 C.P.P. - (NOTIFICA AL PUBBLICO MINISTERO)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="154-I CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 154 C.P.P. I COMMA - (NOTIFICA A PERSONA OFFESA: EX ART. 157
+                        C.P.P/DEPOSITO IN CANCELLERIA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="154-IV CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 154 C.P.P. IV COMMA - (NOTIFICA A PERSONA OFFESA - C/O DIFENSORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="155 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 155 C.P.P. - (NOTIFICA PER PUBBLICI ANNUNZI)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="156-I CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 156 C.P.P. I COMMA - (IMPUTATO DETENUTO - CONSEGNA ALLA PERSONA)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="156-II CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 156 C.P.P. II COMMA - (IMPUTATO DETENUTO - RIFIUTO O ASSENTE - CONSEGNA
+                        DIRETTORE ISTITUTO)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="156-III CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 156 C.P.P. III COMMA - (IMPUTATO DETENUTO NON IN ISTITUTO PENITENZIARIO EX
+                        ART. 157 C.P.P.)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157-I-II CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 157 C.P.P. I-II COMMA - (IMPUTATO NON DETENUTO: DI
+                        PERSONA/CONVIVENTE/PORTIERE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157-III CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 157 C.P.P. III COMMA - (IMPUTATO NON DETENUTO - PORTIERE CON AVVISO DI
+                        RICEVIMENTO AL DESTINATARIO)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157-VII CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 157 C.P.P. VII COMMA - (IMPUTATO NON DETENUTO - II ACCESSO)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157-VIII CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 157 C.P.P. VIII COMMA - (IMPUTATO NON DETENUTO - DEPOSITO CASA COMUNALE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157-VIII-BIS CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 157 C.P.P. VIII-BIS COMMA - (NOTIFICHE SUCCESSIVE - DIFENSORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="158 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 158 C.P.P. - (IMPUTATO MILITARE: DI PERSONA/COMANDANTE)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="159 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 159 C.P.P. - (IRREPERIBILITA' DELL'IMPUTATO - DIFENSORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="161-IV CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 161 C.P.P. IV COMMA - (DOMICILIO IMPOSSIBILE/MANCANTE/INSUFFICIENTE -
+                        DIFENSORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="165 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 165 C.P.P. - (IMPUTATO LATITANTE/EVASO - DIFENSORE)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="166-I CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 166 C.P.P. - (IMPUTATO INTERDETTO/INFERMO DI MENTE - TUTORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="169-I CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 169 C.P.P. I COMMA - (IMPUTATO ALL'ESTERO SENZA DOMICILIO - DIFENSORE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="170 CPP">
+                <xs:annotation>
+                    <xs:documentation>EX ART. 170 C.P.P. - (NOTIFICA A MEZZO POSTA)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NEG">
+                <xs:annotation>
+                    <xs:documentation>NEGATIVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Qualita">
+        <xs:annotation>
+            <xs:documentation>Elenco che individua la qualità del destinatario a cui è consegnato l'atto
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>LO STESSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>LA STESSA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>LA MADRE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>IL PADRE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>IL COGNATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>LA COGNATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>IL SUOCERO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>LA SUOCERA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>IL GENERO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="10">
+                <xs:annotation>
+                    <xs:documentation>LA NUORA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="11">
+                <xs:annotation>
+                    <xs:documentation>IL NONNO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="12">
+                <xs:annotation>
+                    <xs:documentation>LA NONNA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="13">
+                <xs:annotation>
+                    <xs:documentation>LO ZIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="14">
+                <xs:annotation>
+                    <xs:documentation>LA ZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="15">
+                <xs:annotation>
+                    <xs:documentation>IL CUGINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="16">
+                <xs:annotation>
+                    <xs:documentation>LA CUGINA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="17">
+                <xs:annotation>
+                    <xs:documentation>IL NIPOTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="18">
+                <xs:annotation>
+                    <xs:documentation>LA NIPOTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="19">
+                <xs:annotation>
+                    <xs:documentation>IL MARITO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="20">
+                <xs:annotation>
+                    <xs:documentation>LA MOGLIE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="21">
+                <xs:annotation>
+                    <xs:documentation>IL FIGLIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="22">
+                <xs:annotation>
+                    <xs:documentation>LA FIGLIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="23">
+                <xs:annotation>
+                    <xs:documentation>IL FRATELLO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="24">
+                <xs:annotation>
+                    <xs:documentation>LA SORELLA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="25">
+                <xs:annotation>
+                    <xs:documentation>L'AMMINISTRATORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="26">
+                <xs:annotation>
+                    <xs:documentation>IL LEGALE RAPPRESENTANTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="27">
+                <xs:annotation>
+                    <xs:documentation>IL FUNZIONARIO ADDETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="28">
+                <xs:annotation>
+                    <xs:documentation>L'INCARICATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="29">
+                <xs:annotation>
+                    <xs:documentation>COMMISSARIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="30">
+                <xs:annotation>
+                    <xs:documentation>IL PROCURATORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="31">
+                <xs:annotation>
+                    <xs:documentation>IMPIEGATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="32">
+                <xs:annotation>
+                    <xs:documentation>IL DIPENDENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="33">
+                <xs:annotation>
+                    <xs:documentation>IL SOCIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="34">
+                <xs:annotation>
+                    <xs:documentation>IL TITOLARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="35">
+                <xs:annotation>
+                    <xs:documentation>IL CONDOMINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="36">
+                <xs:annotation>
+                    <xs:documentation>LA CONDOMINA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="37">
+                <xs:annotation>
+                    <xs:documentation>GLI STESSI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="38">
+                <xs:annotation>
+                    <xs:documentation>COLLEGA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="39">
+                <xs:annotation>
+                    <xs:documentation>IL CONVIVENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="40">
+                <xs:annotation>
+                    <xs:documentation>LA CONVIVENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="41">
+                <xs:annotation>
+                    <xs:documentation>CANCELLIERE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="42">
+                <xs:annotation>
+                    <xs:documentation>PORTIERE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="43">
+                <xs:annotation>
+                    <xs:documentation>PUBBLICO MINISTERO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="44">
+                <xs:annotation>
+                    <xs:documentation>COMANDANTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="45">
+                <xs:annotation>
+                    <xs:documentation>DOMICILIATARIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="46">
+                <xs:annotation>
+                    <xs:documentation>NESSUNO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Motivi">
+        <xs:annotation>
+            <xs:documentation>Elenco motivazioni mancata consegna dell'atto</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>DECEDUTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>INDIRIZZO ERRATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>INDIRIZZO INSUFFICIENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>IRREPERIBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>TRASFERITO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>INCOMPETENZA TERRITORIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>ALTRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Ricerche">
+        <xs:annotation>
+            <xs:documentation>Elenco ricerche effettuate</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>VICINI'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>ANAGRAFE COMUNE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>VIGILI URBANI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>POLIZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>CARABINIERI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>CAMERA DI COMMERCIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>AGENZIA DELLE ENTRATE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>ALTRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Urgenza">
+        <xs:annotation>
+            <xs:documentation>Elenco tipologie urgenze</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>NON URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>IN GIORNATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>AMMINISTRATIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>IN GIORNATA AMMINISTRATIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>IN GIORNATA LAVORO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>LAVORO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>URGENTE AMMINISTRATIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>URGENTE LAVORO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="10">
+                <xs:annotation>
+                    <xs:documentation>CARICATO PER ERRORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="11">
+                <xs:annotation>
+                    <xs:documentation>DIRITTO UNICO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="12">
+                <xs:annotation>
+                    <xs:documentation>ESPROPRIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="13">
+                <xs:annotation>
+                    <xs:documentation>ESPROPRIO URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="14">
+                <xs:annotation>
+                    <xs:documentation>GIUDICE DI PACE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="15">
+                <xs:annotation>
+                    <xs:documentation>GIUDICE DI PACE IN GIORNATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="16">
+                <xs:annotation>
+                    <xs:documentation>GIUDICE DI PACE URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="17">
+                <xs:annotation>
+                    <xs:documentation>ESENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="18">
+                <xs:annotation>
+                    <xs:documentation>ESENTE IN GIORNATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="19">
+                <xs:annotation>
+                    <xs:documentation>ESENTE URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="20">
+                <xs:annotation>
+                    <xs:documentation>MOD. G/C</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="21">
+                <xs:annotation>
+                    <xs:documentation>PATROCINIO A SPESE DELLO STATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="22">
+                <xs:annotation>
+                    <xs:documentation>PATROCINIO A SPESE DELLO STATO IN GIORNATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="23">
+                <xs:annotation>
+                    <xs:documentation>PATROCINIO A SPESE DELLO STATO URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="24">
+                <xs:annotation>
+                    <xs:documentation>PERCENTUALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="25">
+                <xs:annotation>
+                    <xs:documentation>T.U. 639/1910</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="26">
+                <xs:annotation>
+                    <xs:documentation>T.U. 639/1910 URGENTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="27">
+                <xs:annotation>
+                    <xs:documentation>CONCILIAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NaturaAtti">
+        <xs:annotation>
+            <xs:documentation>Elenco natura degli atti</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>PRECETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>DECRETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>DECRETO INGIUNTIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>RICORSO DECRETO E PRECETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>COMUNICAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>AVVISO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>ISTANZA E PROVVEDIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>RICORSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="10">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO DI PROVVEDIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="11">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI UDIENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="12">
+                <xs:annotation>
+                    <xs:documentation>COMPARSA DI COSTITUZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="13">
+                <xs:annotation>
+                    <xs:documentation>COMPARSA DI RIASSUNZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="14">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DIFENSORE DEPOSITO ATTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="15">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE A D.I.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="16">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO C/O TERZI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="17">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO IMMOBILIARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="18">
+                <xs:annotation>
+                    <xs:documentation>RILASCIO DI IMMOBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="19">
+                <xs:annotation>
+                    <xs:documentation>INTIMAZIONE DI SFRATTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="20">
+                <xs:annotation>
+                    <xs:documentation>NOMINA PERITO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="21">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE A CONTRAVVENZ.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="22">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE A ORD.INGIUNZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="23">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE A CART.ESATT.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="24">
+                <xs:annotation>
+                    <xs:documentation>PROVVEDIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="25">
+                <xs:annotation>
+                    <xs:documentation>RICORSO E DECRETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="26">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="27">
+                <xs:annotation>
+                    <xs:documentation>INTIMAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="28">
+                <xs:annotation>
+                    <xs:documentation>REVOCA PROCURA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="29">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI LIQUIDAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="30">
+                <xs:annotation>
+                    <xs:documentation>ATTO DI RIASSUNZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="31">
+                <xs:annotation>
+                    <xs:documentation>COMPARIZIONE DELLE PARTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="32">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO SENTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="33">
+                <xs:annotation>
+                    <xs:documentation>CITAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="34">
+                <xs:annotation>
+                    <xs:documentation>STIMA BENI PIGNORATI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="35">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO PERIZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="36">
+                <xs:annotation>
+                    <xs:documentation>NOMINA CONSULENTE TECNICO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="37">
+                <xs:annotation>
+                    <xs:documentation>VERBALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="38">
+                <xs:annotation>
+                    <xs:documentation>RICORSO DECRETO E SEQUEST.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="39">
+                <xs:annotation>
+                    <xs:documentation>SEQUESTRO CONS.C/O TERZI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="40">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE ALL'ESECUZ.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="41">
+                <xs:annotation>
+                    <xs:documentation>CITAZIONE TESTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="42">
+                <xs:annotation>
+                    <xs:documentation>ATTO DI RINUNCIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="43">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO MOBILIARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="44">
+                <xs:annotation>
+                    <xs:documentation>OPP. A SENT.DICH.FALLIMENT.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="45">
+                <xs:annotation>
+                    <xs:documentation>INSINUANZIONE TARDIVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="46">
+                <xs:annotation>
+                    <xs:documentation>DIFFIDA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="47">
+                <xs:annotation>
+                    <xs:documentation>RICORSO PER CASSAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="48">
+                <xs:annotation>
+                    <xs:documentation>APPELLO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="49">
+                <xs:annotation>
+                    <xs:documentation>FISSAZIONE UDIENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="50">
+                <xs:annotation>
+                    <xs:documentation>INTEGRAZ. CONTRADDITTORIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="51">
+                <xs:annotation>
+                    <xs:documentation>COSTITUZIONE DI PARTE CIVILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="52">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI OFFERTA REALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="53">
+                <xs:annotation>
+                    <xs:documentation>SENTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="54">
+                <xs:annotation>
+                    <xs:documentation>CONTRATTO DI MUTUO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="55">
+                <xs:annotation>
+                    <xs:documentation>PROCURA SPECIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="56">
+                <xs:annotation>
+                    <xs:documentation>REVOCA MANDATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="57">
+                <xs:annotation>
+                    <xs:documentation>INGIUNZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="58">
+                <xs:annotation>
+                    <xs:documentation>AVVISO INCID.ESECUZ.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="59">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI VENDITA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="60">
+                <xs:annotation>
+                    <xs:documentation>NOMINA PRESIDENTE DI SEGGIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="61">
+                <xs:annotation>
+                    <xs:documentation>ATTO STRAGIUDIZIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="62">
+                <xs:annotation>
+                    <xs:documentation>NOMINA ARBITRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="63">
+                <xs:annotation>
+                    <xs:documentation>CESSIONE DI CREDITO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="64">
+                <xs:annotation>
+                    <xs:documentation>CONTRATTO PREL.RE COMPRAVENDITA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="65">
+                <xs:annotation>
+                    <xs:documentation>LODO ARBITRALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="66">
+                <xs:annotation>
+                    <xs:documentation>SCRITTURA PRIVATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="67">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI ESPROPRIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="68">
+                <xs:annotation>
+                    <xs:documentation>MOTIVI AGGIUNTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="69">
+                <xs:annotation>
+                    <xs:documentation>CONTRATTO DI FINANZIAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="70">
+                <xs:annotation>
+                    <xs:documentation>ATTO NOTARILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="71">
+                <xs:annotation>
+                    <xs:documentation>PREAVVISO DI RILASCIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="72">
+                <xs:annotation>
+                    <xs:documentation>SENTENZA E PRECETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="73">
+                <xs:annotation>
+                    <xs:documentation>ATTO DI INTERVENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="74">
+                <xs:annotation>
+                    <xs:documentation>CITAZIONE PER CHIAMATA IN CAUSA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="75">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI CITAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="76">
+                <xs:annotation>
+                    <xs:documentation>OBLAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="77">
+                <xs:annotation>
+                    <xs:documentation>DECLARATORIA AMNISTIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="78">
+                <xs:annotation>
+                    <xs:documentation>AVVISO AL DIFENSORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="79">
+                <xs:annotation>
+                    <xs:documentation>APPELLO P.M.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="80">
+                <xs:annotation>
+                    <xs:documentation>REVOCA LIBERTA'' CONTROLLATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="81">
+                <xs:annotation>
+                    <xs:documentation>ORDINE DI CARCERAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="82">
+                <xs:annotation>
+                    <xs:documentation>AMMISSIONE GRATUITO PATROCINIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="83">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI PERQUISIZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="84">
+                <xs:annotation>
+                    <xs:documentation>NOMINA DIFENSORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="85">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI DIBATTIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="86">
+                <xs:annotation>
+                    <xs:documentation>LIQUIDAZIONE COMPENSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="87">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI RIABILIT.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="88">
+                <xs:annotation>
+                    <xs:documentation>RIGETTO ISTANZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="89">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA INAMM.TA'' IMPUGNAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="90">
+                <xs:annotation>
+                    <xs:documentation>AVVISO INCIDENTE DI ESECUZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="91">
+                <xs:annotation>
+                    <xs:documentation>MISURE DI PREVENZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="92">
+                <xs:annotation>
+                    <xs:documentation>FISSAZIONE UDIENZA PRELIMINARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="93">
+                <xs:annotation>
+                    <xs:documentation>AVV.P.O. RICHIESTA DI ARCHIVIAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="94">
+                <xs:annotation>
+                    <xs:documentation>DECRETO PENALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="95">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI IRREPER.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="96">
+                <xs:annotation>
+                    <xs:documentation>RICHIESTA PROROGA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="97">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO PROVVEDIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="98">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI DISSEQ.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="99">
+                <xs:annotation>
+                    <xs:documentation>AVV.DIFENS.DEPOSITO ATTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="100">
+                <xs:annotation>
+                    <xs:documentation>DICH.INAMM.GRAT.PATR.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="101">
+                <xs:annotation>
+                    <xs:documentation>IMPUGNAZIONE P.M.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="102">
+                <xs:annotation>
+                    <xs:documentation>REVOCA NOMINA DIFENSORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="103">
+                <xs:annotation>
+                    <xs:documentation>AVVISO NOTIZIE DI REATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="104">
+                <xs:annotation>
+                    <xs:documentation>ORDIN.CORREZ.ERR.MATERIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="105">
+                <xs:annotation>
+                    <xs:documentation>DIFFERIMENTO UDIENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="106">
+                <xs:annotation>
+                    <xs:documentation>DECR.CHE DISP.IL GIUD.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="107">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI ARCHIVIAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="108">
+                <xs:annotation>
+                    <xs:documentation>FISSAZ.UD.CAMERA CONS.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="109">
+                <xs:annotation>
+                    <xs:documentation>RICH.INCIDENTE PROBATORIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="110">
+                <xs:annotation>
+                    <xs:documentation>FISSAZ.UDIENZA DIBATT.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="111">
+                <xs:annotation>
+                    <xs:documentation>CONVALIDA DI PERQUISIZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="112">
+                <xs:annotation>
+                    <xs:documentation>DECR.APPLIC.PENA SU RICHIESTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="113">
+                <xs:annotation>
+                    <xs:documentation>CONVALIDA DI ARRESTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="114">
+                <xs:annotation>
+                    <xs:documentation>DECR.GIUD.IMMEDIATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="115">
+                <xs:annotation>
+                    <xs:documentation>AVV.DIF.INTERR.INDAGATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="116">
+                <xs:annotation>
+                    <xs:documentation>DECR.DI RINVIO A GIUD.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="117">
+                <xs:annotation>
+                    <xs:documentation>RICH.ANTICIP.UDIENZA IMPUTATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="118">
+                <xs:annotation>
+                    <xs:documentation>CONVALIDA DI SEQUESTRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="119">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA DI SCARCERAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="120">
+                <xs:annotation>
+                    <xs:documentation>CONVALIDA PERQUISIZ.E SEQUESTRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="121">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA CUSTODIA CAUTELARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="122">
+                <xs:annotation>
+                    <xs:documentation>AVV.CONCL.INDAGINI PRELIMINARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="123">
+                <xs:annotation>
+                    <xs:documentation>AVV.P.O.FISSAZ.UDIENZA PRELIMINARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="124">
+                <xs:annotation>
+                    <xs:documentation>AVV.DI CHIUSURA INDAGINE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="125">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA DI ARCHIVIAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="126">
+                <xs:annotation>
+                    <xs:documentation>ORDIN.AMM.INC.PROBATORIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="127">
+                <xs:annotation>
+                    <xs:documentation>RICH.NOM.CURATORE SPECIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="128">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI ARCH.NE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="129">
+                <xs:annotation>
+                    <xs:documentation>INFORMAZIONE DI GARANZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="130">
+                <xs:annotation>
+                    <xs:documentation>REVOCA DI PROVVEDIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="131">
+                <xs:annotation>
+                    <xs:documentation>AVV.DIF.INTERROG.IMPUTATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="132">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA DI REVOCA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="133">
+                <xs:annotation>
+                    <xs:documentation>DEPOSITO SOMMA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="134">
+                <xs:annotation>
+                    <xs:documentation>AVV.DEP.DECRETO DI LIQUIDAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="135">
+                <xs:annotation>
+                    <xs:documentation>DECR.FISSAZ.UDIENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="136">
+                <xs:annotation>
+                    <xs:documentation>DECRETO DI LIQUID.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="137">
+                <xs:annotation>
+                    <xs:documentation>DECR.COND.AMMENDA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="138">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO IMPUGNAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI PAGAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="140">
+                <xs:annotation>
+                    <xs:documentation>DECR.AMM.GRATUITO PATROCINIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="141">
+                <xs:annotation>
+                    <xs:documentation>INFORM.DI MISURA CAUTELARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="142">
+                <xs:annotation>
+                    <xs:documentation>RICHIESTA DI ARCHIVIAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="143">
+                <xs:annotation>
+                    <xs:documentation>REVOCA MULTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="144">
+                <xs:annotation>
+                    <xs:documentation>ORDINANZA DI DISSEQUESTRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="145">
+                <xs:annotation>
+                    <xs:documentation>RICHIESTA DI RINVIO A GIUDIZIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="146">
+                <xs:annotation>
+                    <xs:documentation>DELEGA DI INDAGINI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="147">
+                <xs:annotation>
+                    <xs:documentation>ESTRATTO DI SENTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="148">
+                <xs:annotation>
+                    <xs:documentation>CORREZIONE ERRORE MATERIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="149">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO ORDINANZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="150">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO LIQUIDAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="151">
+                <xs:annotation>
+                    <xs:documentation>REVOCA DEC.SOSP.ESECUZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="152">
+                <xs:annotation>
+                    <xs:documentation>NOMINA CURATORE SPECIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="153">
+                <xs:annotation>
+                    <xs:documentation>AVV.DEP.CUSTODIA CAUTELARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="154">
+                <xs:annotation>
+                    <xs:documentation>REVOCA DECRETO PENALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="155">
+                <xs:annotation>
+                    <xs:documentation>RIGETTO APPELLO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="156">
+                <xs:annotation>
+                    <xs:documentation>OFFERTA REALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="157">
+                <xs:annotation>
+                    <xs:documentation>ATTO ESTERO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="158">
+                <xs:annotation>
+                    <xs:documentation>NOMINA C.T.U.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="159">
+                <xs:annotation>
+                    <xs:documentation>DISPOSITIVO DI SENTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="160">
+                <xs:annotation>
+                    <xs:documentation>AVVISO D'ASTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="161">
+                <xs:annotation>
+                    <xs:documentation>INVITO A COMPARIRE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="162">
+                <xs:annotation>
+                    <xs:documentation>INVITO A DICH.O ELEGG.DOMICILIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="163">
+                <xs:annotation>
+                    <xs:documentation>SENTENZA DICHIARATIVA DI FALLIMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="164">
+                <xs:annotation>
+                    <xs:documentation>COM.DEC.LIQ.COMP.C.T.U.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="165">
+                <xs:annotation>
+                    <xs:documentation>IMMISSIONE POSSESSO CUSTODE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="166">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DEPOSITO DECRETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="167">
+                <xs:annotation>
+                    <xs:documentation>ESTR.CONDANNA E AVVISO DI PAGAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="168">
+                <xs:annotation>
+                    <xs:documentation>GRAT.PATR.PROCEDIMENTO PENALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="169">
+                <xs:annotation>
+                    <xs:documentation>GRAT.PATR.PROCEDIMENTO CIVILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="170">
+                <xs:annotation>
+                    <xs:documentation>PROCEDIMENTO ADOZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="171">
+                <xs:annotation>
+                    <xs:documentation>INTERDIZIONE-INABILITAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="172">
+                <xs:annotation>
+                    <xs:documentation>PROCED.TO PARTE P.A.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="173">
+                <xs:annotation>
+                    <xs:documentation>PROCEDURA FALLIMENTARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="174">
+                <xs:annotation>
+                    <xs:documentation>EREDITA' GIACENTE UFFICIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="175">
+                <xs:annotation>
+                    <xs:documentation>NOMINA CURATORE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="176">
+                <xs:annotation>
+                    <xs:documentation>INCANTO VENDITA IMMOBILIARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="177">
+                <xs:annotation>
+                    <xs:documentation>SFRATTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="178">
+                <xs:annotation>
+                    <xs:documentation>OBBLIGO DI FARE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="179">
+                <xs:annotation>
+                    <xs:documentation>REGOLAMENTO DI CONFINI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="180">
+                <xs:annotation>
+                    <xs:documentation>SEQUESTRO GIUDIZIARIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="181">
+                <xs:annotation>
+                    <xs:documentation>SEQUESTRO CONSERVATIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="182">
+                <xs:annotation>
+                    <xs:documentation>OFFERTA PER INTIMAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="183">
+                <xs:annotation>
+                    <xs:documentation>REINTEGRA IN POSSESSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="184">
+                <xs:annotation>
+                    <xs:documentation>CONSEGNA BENE MOBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="185">
+                <xs:annotation>
+                    <xs:documentation>CONSEGNA DI IMMOBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="186">
+                <xs:annotation>
+                    <xs:documentation>NOMINA CUSTODE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="187">
+                <xs:annotation>
+                    <xs:documentation>NOMINA SEQUETRATARIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="188">
+                <xs:annotation>
+                    <xs:documentation>GRATUITO PATROCINIO CIVILE RICHIESTA PARTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="189">
+                <xs:annotation>
+                    <xs:documentation>SEQUESTRO AUTOVEICOLO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="190">
+                <xs:annotation>
+                    <xs:documentation>CONSEGNA MINORI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="191">
+                <xs:annotation>
+                    <xs:documentation>APPRENSIONE BENE MOBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="192">
+                <xs:annotation>
+                    <xs:documentation>CONSEGNA BENE MOBILE E PIGNORAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="193">
+                <xs:annotation>
+                    <xs:documentation>SURROGA CUSTODE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="194">
+                <xs:annotation>
+                    <xs:documentation>RILASCIO E CONSEGNA BENE MOBILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="195">
+                <xs:annotation>
+                    <xs:documentation>INTERPELLO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="196">
+                <xs:annotation>
+                    <xs:documentation>SFRATTO E PIGNORAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="197">
+                <xs:annotation>
+                    <xs:documentation>RILASCIO E PIGNORAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="198">
+                <xs:annotation>
+                    <xs:documentation>PROROGA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="199">
+                <xs:annotation>
+                    <xs:documentation>gratuito patrocinio penale -parte e ufficio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="200">
+                <xs:annotation>
+                    <xs:documentation>Gratuito patrocinio Civile - Ufficio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="201">
+                <xs:annotation>
+                    <xs:documentation>Gratuito patrocinio-adozioni-ufficio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="202">
+                <xs:annotation>
+                    <xs:documentation>IMMISSIONE POSSESSO CASA CONIUGALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="203">
+                <xs:annotation>
+                    <xs:documentation>Procedimento con parte P.A.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="204">
+                <xs:annotation>
+                    <xs:documentation>Fallimentare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="205">
+                <xs:annotation>
+                    <xs:documentation>Eredita'  giacente</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="206">
+                <xs:annotation>
+                    <xs:documentation>RIMBORSO SPESE NOTIFICHE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="207">
+                <xs:annotation>
+                    <xs:documentation>ASSEGNAZIONE BENE PIGNORATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="208">
+                <xs:annotation>
+                    <xs:documentation>OPPOSIZIONE A PRECETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="209">
+                <xs:annotation>
+                    <xs:documentation>RILASCIO DI AZIENDA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="210">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO QUOTE SOCIALI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="211">
+                <xs:annotation>
+                    <xs:documentation>TRASFERTE RECUPERATE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="212">
+                <xs:annotation>
+                    <xs:documentation>DICHIARAZIONE-ART.492 CPC V COMMA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="213">
+                <xs:annotation>
+                    <xs:documentation>DECRETO INGIUNTIVO E PRECETTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="214">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI DEP.SOMME</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="215">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI RICOGNIZIONE DI BENI PIGNORATI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="216">
+                <xs:annotation>
+                    <xs:documentation>PERCENTUALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="217">
+                <xs:annotation>
+                    <xs:documentation>RICHIESTA GESTORI ANAGRAFE TRIBUTARIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="218">
+                <xs:annotation>
+                    <xs:documentation>PREAVVISO DI OFFERTA PER INTIMAZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="219">
+                <xs:annotation>
+                    <xs:documentation>DEPOSITO SENTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="220">
+                <xs:annotation>
+                    <xs:documentation>ACCOMPAGNAMENTO COATTIVO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="221">
+                <xs:annotation>
+                    <xs:documentation>INDULTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="222">
+                <xs:annotation>
+                    <xs:documentation>DISDETTA DI CONTRATTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="223">
+                <xs:annotation>
+                    <xs:documentation>INVITO AL PAGAMENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="224">
+                <xs:annotation>
+                    <xs:documentation>AVVISO DI VENDITA ALL'INCANTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="225">
+                <xs:annotation>
+                    <xs:documentation>DESCRIZIONE BENE PROPRIETA' INDUSTRIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="226">
+                <xs:annotation>
+                    <xs:documentation>MEMORIA DI REPLICA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="227">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO DI MARCHIO INDUSTRIALE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="228">
+                <xs:annotation>
+                    <xs:documentation>NOMINA COMMERCIALISTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="229">
+                <xs:annotation>
+                    <xs:documentation>MEMORIA DIFENSIVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="230">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI RICOGNIZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="231">
+                <xs:annotation>
+                    <xs:documentation>VERBALE DI NOMINA ESPERTO CONTABILE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="232">
+                <xs:annotation>
+                    <xs:documentation>PIGNORAMENTO QUOTE SOCIETARIE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="233">
+                <xs:annotation>
+                    <xs:documentation>SEQUESTRO CONSERVATIVO QUOTE SOCIETARIE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="234">
+                <xs:annotation>
+                    <xs:documentation>RECLAMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="HashType">
+        <xs:annotation>
+            <xs:documentation>Generico Hash per il riferimento ad un documento</xs:documentation>
+        </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:base64Binary">
+                <xs:attribute name="algID" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="TipoNotifica">
+        <xs:annotation>
+            <xs:documentation>Tipo di notifiche previste (Mani,Posta,Estero,Telematica)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Mani"/>
+            <xs:enumeration value="Posta"/>
+            <xs:enumeration value="Estero"/>
+            <xs:enumeration value="Telematica"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Protocollo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Ufficio" nillable="false">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="CodiceUfficio" type="bt:UfficioTelematico" use="required"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Anno" type="xs:positiveInteger"/>
+                <xs:element name="Registro" type="xs:integer"/>
+                <xs:element name="Cronologico" type="xs:positiveInteger"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="EsitoRicerca">
+        <xs:annotation>
+            <xs:documentation>Tipologie esiti</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="70">
+                <xs:annotation>
+                    <xs:documentation>RICERCA NEGATIVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="71">
+                <xs:annotation>
+                    <xs:documentation>RICERCA POSITIVA - PIGNORAMENTO MOBILIARE D'UFFICIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="72">
+                <xs:annotation>
+                    <xs:documentation>RICERCA POSITIVA - PIGNORAMENTO MOBILIARE DA ESEGUIRSI FUORI COMPETENZA
+                        TERRITORIALE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="73">
+                <xs:annotation>
+                    <xs:documentation>RICERCA POSITIVA - PIGNORAMENTO PRESSO TERZI D'UFFICIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="74">
+                <xs:annotation>
+                    <xs:documentation>RICERCA POSITIVA - COMUNICAZIONE DEL VERBALE CON PIU' ESITI POSITIVI ALLEGATI
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Riti">
+        <xs:annotation>
+            <xs:documentation>Tipologie riti</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>CONTENZIOSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>ESECUZIONI IMMOBILIARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>ESECUZIONI MOBILIARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>LAVORO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>PROCEDURE CONCORSUALI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>VOLONTARIA GIURISDIZIONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AutoritaRicercaBeni">
+        <xs:annotation>
+            <xs:documentation>Elenco autorit che rilasciano provvedimento autorizzatorio</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>AGRIGENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>ALESSANDRIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>ANCONA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>AOSTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>AREZZO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation>ASCOLI PICENO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="7">
+                <xs:annotation>
+                    <xs:documentation>ASTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="8">
+                <xs:annotation>
+                    <xs:documentation>AVELLINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="9">
+                <xs:annotation>
+                    <xs:documentation>AVEZZANO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="10">
+                <xs:annotation>
+                    <xs:documentation>BARCELLONA P.G.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="11">
+                <xs:annotation>
+                    <xs:documentation>BARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="12">
+                <xs:annotation>
+                    <xs:documentation>BELLUNO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="13">
+                <xs:annotation>
+                    <xs:documentation>BENEVENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="14">
+                <xs:annotation>
+                    <xs:documentation>BERGAMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="15">
+                <xs:annotation>
+                    <xs:documentation>BIELLA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="16">
+                <xs:annotation>
+                    <xs:documentation>BOLOGNA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="17">
+                <xs:annotation>
+                    <xs:documentation>BOLZANO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="18">
+                <xs:annotation>
+                    <xs:documentation>BRESCIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="19">
+                <xs:annotation>
+                    <xs:documentation>BRINDISI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="20">
+                <xs:annotation>
+                    <xs:documentation>BUSTO ARSIZIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="21">
+                <xs:annotation>
+                    <xs:documentation>CAGLIARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="22">
+                <xs:annotation>
+                    <xs:documentation>CALTAGIRONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="23">
+                <xs:annotation>
+                    <xs:documentation>CALTANISSETTA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="24">
+                <xs:annotation>
+                    <xs:documentation>CAMPOBASSO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="25">
+                <xs:annotation>
+                    <xs:documentation>CASSINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="26">
+                <xs:annotation>
+                    <xs:documentation>CASTROVILLARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="27">
+                <xs:annotation>
+                    <xs:documentation>CATANIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="28">
+                <xs:annotation>
+                    <xs:documentation>CATANZARO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="29">
+                <xs:annotation>
+                    <xs:documentation>CHIETI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="30">
+                <xs:annotation>
+                    <xs:documentation>CIVITAVECCHIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="31">
+                <xs:annotation>
+                    <xs:documentation>COMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="32">
+                <xs:annotation>
+                    <xs:documentation>COSENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="33">
+                <xs:annotation>
+                    <xs:documentation>CREMONA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="34">
+                <xs:annotation>
+                    <xs:documentation>CROTONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="35">
+                <xs:annotation>
+                    <xs:documentation>CUNEO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="36">
+                <xs:annotation>
+                    <xs:documentation>ENNA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="37">
+                <xs:annotation>
+                    <xs:documentation>FERMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="38">
+                <xs:annotation>
+                    <xs:documentation>FERRARA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="39">
+                <xs:annotation>
+                    <xs:documentation>FIRENZE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="40">
+                <xs:annotation>
+                    <xs:documentation>FOGGIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="41">
+                <xs:annotation>
+                    <xs:documentation>FORLI'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="42">
+                <xs:annotation>
+                    <xs:documentation>FROSINONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="43">
+                <xs:annotation>
+                    <xs:documentation>GELA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="44">
+                <xs:annotation>
+                    <xs:documentation>GENOVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="45">
+                <xs:annotation>
+                    <xs:documentation>GORIZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="46">
+                <xs:annotation>
+                    <xs:documentation>GROSSETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="47">
+                <xs:annotation>
+                    <xs:documentation>IMPERIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="48">
+                <xs:annotation>
+                    <xs:documentation>ISERNIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="49">
+                <xs:annotation>
+                    <xs:documentation>IVREA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="50">
+                <xs:annotation>
+                    <xs:documentation>LAGONEGRO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="51">
+                <xs:annotation>
+                    <xs:documentation>LAMEZIA TERME</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="52">
+                <xs:annotation>
+                    <xs:documentation>LANCIANO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="53">
+                <xs:annotation>
+                    <xs:documentation>LANUSEI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="54">
+                <xs:annotation>
+                    <xs:documentation>L'AQUILA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="55">
+                <xs:annotation>
+                    <xs:documentation>LARINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="56">
+                <xs:annotation>
+                    <xs:documentation>LASPEZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="57">
+                <xs:annotation>
+                    <xs:documentation>LATINA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="58">
+                <xs:annotation>
+                    <xs:documentation>LECCE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="59">
+                <xs:annotation>
+                    <xs:documentation>LECCO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="60">
+                <xs:annotation>
+                    <xs:documentation>LIVORNO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="61">
+                <xs:annotation>
+                    <xs:documentation>LOCRI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="62">
+                <xs:annotation>
+                    <xs:documentation>LODI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="63">
+                <xs:annotation>
+                    <xs:documentation>LUCCA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="64">
+                <xs:annotation>
+                    <xs:documentation>MACERATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="65">
+                <xs:annotation>
+                    <xs:documentation>MANTOVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="66">
+                <xs:annotation>
+                    <xs:documentation>MARSALA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="67">
+                <xs:annotation>
+                    <xs:documentation>MASSA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="68">
+                <xs:annotation>
+                    <xs:documentation>MATERA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="69">
+                <xs:annotation>
+                    <xs:documentation>MESSINA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="70">
+                <xs:annotation>
+                    <xs:documentation>MILANO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="71">
+                <xs:annotation>
+                    <xs:documentation>MODENA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="72">
+                <xs:annotation>
+                    <xs:documentation>MONZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="73">
+                <xs:annotation>
+                    <xs:documentation>NAPOLI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="74">
+                <xs:annotation>
+                    <xs:documentation>NAPOLI NORD</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="75">
+                <xs:annotation>
+                    <xs:documentation>NOCERA INF.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="76">
+                <xs:annotation>
+                    <xs:documentation>NOLA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="77">
+                <xs:annotation>
+                    <xs:documentation>NOVARA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="78">
+                <xs:annotation>
+                    <xs:documentation>NUORO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="79">
+                <xs:annotation>
+                    <xs:documentation>ORISTANO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="80">
+                <xs:annotation>
+                    <xs:documentation>PADOVA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="81">
+                <xs:annotation>
+                    <xs:documentation>PALERMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="82">
+                <xs:annotation>
+                    <xs:documentation>PALMI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="83">
+                <xs:annotation>
+                    <xs:documentation>PAOLA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="84">
+                <xs:annotation>
+                    <xs:documentation>PARMA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="85">
+                <xs:annotation>
+                    <xs:documentation>PATTI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="86">
+                <xs:annotation>
+                    <xs:documentation>PAVIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="87">
+                <xs:annotation>
+                    <xs:documentation>PERUGIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="88">
+                <xs:annotation>
+                    <xs:documentation>PESARO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="89">
+                <xs:annotation>
+                    <xs:documentation>PESCARA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="90">
+                <xs:annotation>
+                    <xs:documentation>PIACENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="91">
+                <xs:annotation>
+                    <xs:documentation>PISA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="92">
+                <xs:annotation>
+                    <xs:documentation>PISTOIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="93">
+                <xs:annotation>
+                    <xs:documentation>PORDENONE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="94">
+                <xs:annotation>
+                    <xs:documentation>POTENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="95">
+                <xs:annotation>
+                    <xs:documentation>PRATO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="96">
+                <xs:annotation>
+                    <xs:documentation>RAGUSA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="97">
+                <xs:annotation>
+                    <xs:documentation>RAVENNA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="98">
+                <xs:annotation>
+                    <xs:documentation>REGGIO CALABRIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="99">
+                <xs:annotation>
+                    <xs:documentation>REGGIO EMILIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="100">
+                <xs:annotation>
+                    <xs:documentation>RIETI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="101">
+                <xs:annotation>
+                    <xs:documentation>RIMINI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="102">
+                <xs:annotation>
+                    <xs:documentation>ROMA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="103">
+                <xs:annotation>
+                    <xs:documentation>ROVERETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="104">
+                <xs:annotation>
+                    <xs:documentation>ROVIGO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="105">
+                <xs:annotation>
+                    <xs:documentation>S.MARIA CAPUA V</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="106">
+                <xs:annotation>
+                    <xs:documentation>SALERNO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="107">
+                <xs:annotation>
+                    <xs:documentation>SASSARI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="108">
+                <xs:annotation>
+                    <xs:documentation>SAVONA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="109">
+                <xs:annotation>
+                    <xs:documentation>SCIACCA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="110">
+                <xs:annotation>
+                    <xs:documentation>SIENA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="111">
+                <xs:annotation>
+                    <xs:documentation>SIRACUSA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="112">
+                <xs:annotation>
+                    <xs:documentation>SONDRIO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="113">
+                <xs:annotation>
+                    <xs:documentation>SPOLETO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="114">
+                <xs:annotation>
+                    <xs:documentation>SULMONA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="115">
+                <xs:annotation>
+                    <xs:documentation>T. ANNUNZIATA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="116">
+                <xs:annotation>
+                    <xs:documentation>TARANTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="117">
+                <xs:annotation>
+                    <xs:documentation>TEMPIO PAUSANIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="118">
+                <xs:annotation>
+                    <xs:documentation>TERAMO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="119">
+                <xs:annotation>
+                    <xs:documentation>TERMINI IMERESE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="120">
+                <xs:annotation>
+                    <xs:documentation>TERNI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="121">
+                <xs:annotation>
+                    <xs:documentation>TIVOLI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="122">
+                <xs:annotation>
+                    <xs:documentation>TORINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="123">
+                <xs:annotation>
+                    <xs:documentation>TRANI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="124">
+                <xs:annotation>
+                    <xs:documentation>TRAPANI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="125">
+                <xs:annotation>
+                    <xs:documentation>TRENTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="126">
+                <xs:annotation>
+                    <xs:documentation>TREVISO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="127">
+                <xs:annotation>
+                    <xs:documentation>TRIESTE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="128">
+                <xs:annotation>
+                    <xs:documentation>UDINE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="129">
+                <xs:annotation>
+                    <xs:documentation>URBINO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="130">
+                <xs:annotation>
+                    <xs:documentation>V.DELLA LUCANIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="131">
+                <xs:annotation>
+                    <xs:documentation>VARESE</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="132">
+                <xs:annotation>
+                    <xs:documentation>VASTO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="133">
+                <xs:annotation>
+                    <xs:documentation>VELLETRI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="134">
+                <xs:annotation>
+                    <xs:documentation>VENEZIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="135">
+                <xs:annotation>
+                    <xs:documentation>VERBANIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="136">
+                <xs:annotation>
+                    <xs:documentation>VERCELLI</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="137">
+                <xs:annotation>
+                    <xs:documentation>VERONA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="138">
+                <xs:annotation>
+                    <xs:documentation>VIBO VALENTIA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="139">
+                <xs:annotation>
+                    <xs:documentation>VICENZA</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="140">
+                <xs:annotation>
+                    <xs:documentation>VITERBO</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

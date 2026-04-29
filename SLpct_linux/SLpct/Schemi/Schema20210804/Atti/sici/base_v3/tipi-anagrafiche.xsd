@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by TEAM2 (RENEGADE) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" targetNamespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:complexType name="Soggetto">
+		<xs:annotation>
+			<xs:documentation>Generico soggetto di anagrafica</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cognome" type="xs:normalizedString"/>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0"/>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Indirizzo">
+		<xs:annotation>
+			<xs:documentation>Dati indirizzo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="via" type="xs:string"/>
+			<xs:element name="civico" type="xs:string" minOccurs="0"/>
+			<xs:element name="cap" type="xs:string"/>
+			<xs:element name="localita" type="xs:string"/>
+			<xs:element name="provincia" type="xs:string"/>
+			<xs:element name="nazione" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Parte">
+		<xs:annotation>
+			<xs:documentation>Parte del procedimento. Comprende le informazioni minimali necessarie per la creazione del fascicolo all'interno dei sistemi di cancelleria.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="denominazione" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Cognome o denominazione della parte. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nome della parte. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale">
+				<xs:annotation>
+					<xs:documentation>Codice fiscale o partita iva della parte</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="indirizzo" type="Indirizzo"/>
+			<xs:element name="codiceUnivocoPA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Codice univoco amministrazione da riportare per identificare una sede locale della pubblica amministrazione.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="11"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="naturaGiuridica" type="bt:NaturaGiuridica" use="required"/>
+		<xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Avvocato">
+		<xs:annotation>
+			<xs:documentation>Definizione dell'avvocato coinvolto nei procedimenti, comprende le informazioni minimali per l'aggiornamento delle anagrafiche dei sistemi di cancelleria. Non sono incluse le informazioni relative ai domicili dell'avvocato, in quanto in questo contesto si considera il solo indirizzo elettronico, come definito nel D.P.R. 13 febbraio 2001, n. 123.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Soggetto">
+				<xs:sequence>
+					<xs:element name="domicilio" type="Indirizzo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Domicilio del rappresentante legale nel contesto del procedimento</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="indirizzo" type="Indirizzo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Indirizzo del legale</xs:documentation>
+							<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="parteRappresentata" type="RiferimentoPartecipante" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Riferimenti alle parti rappresentate nel procedimento</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoPartecipante">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un partecipante al procedimento. Il riferimento e' da intendersi locale all'atto che lo definisce, per la valutazione dei vincoli di integrita' ma non ha nessun significato globale all'interno del sistema</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoParte">
+		<xs:choice>
+			<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+			<xs:element name="dettagli">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nome" type="xs:normalizedString"/>
+						<xs:element name="denominazione" type="xs:normalizedString"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="CTU">
+		<xs:annotation>
+			<xs:documentation>Definizione del consulente tecnico d'ufficio, comprende le informazioni minimali per l'aggiornamento delle anagrafiche dei sistemi di cancelleria. Per i CTU e' utile inserire opzionalmente delle informazioni su un recapito o indirizzo, visto che per ora non sono inseriti nel contesto del PCT.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Soggetto">
+				<xs:sequence>
+					<xs:element name="indirizzo" type="Indirizzo" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoCTU">
+		<xs:attribute name="codiceFiscale" type="bt:CodiceFiscale" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoSoggetto">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un partecipante al procedimento tramite codice fiscale o partita iva.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="codiceFiscale" type="bt:CodiceFiscale" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="Custode">
+		<xs:annotation>
+			<xs:documentation>Custode nelle espropriazioni mobiliari</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Indirizzo">
+				<xs:sequence>
+					<xs:element name="cognome" type="xs:normalizedString">
+						<xs:annotation>
+							<xs:documentation>cognome se parte fisica o denominazione se parte giuridica</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nome" type="xs:normalizedString">
+						<xs:annotation>
+							<xs:documentation>Nome da specificare obbligatoriamente se parte fisica. Specificare vuoto per parte giuridica</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+					<xs:element name="PEC" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SportelloProssimita">
+		<xs:annotation>
+			<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Parte">
+				<xs:sequence>
+					<xs:element name="delegaComunicazioni" type="xs:boolean"/>
+					<xs:element name="delegatoDa">
+						<xs:complexType>
+							<xs:choice>
+								<xs:element name="parteDelegante" type="RiferimentoPartecipante" minOccurs="0"/>
+								<xs:sequence>
+									<xs:element name="denominazione" type="xs:normalizedString" minOccurs="0"/>
+									<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+								</xs:sequence>
+							</xs:choice>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="delegaVisibilita" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Curatore">
+		<xs:annotation>
+			<xs:documentation>Curatore nelle concorsuali</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Indirizzo">
+				<xs:sequence>
+					<xs:element name="cognome" type="xs:normalizedString">
+						<xs:annotation>
+							<xs:documentation>cognome se parte fisica o denominazione se parte giuridica</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nome" type="xs:normalizedString">
+						<xs:annotation>
+							<xs:documentation>Nome da specificare obbligatoriamente se parte fisica. Specificare vuoto per parte giuridica</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="codiceFiscale" type="bt:CodiceFiscale"/>
+					<xs:element name="PEC" type="xs:string" minOccurs="0"/>
+					<xs:element name="qualifica"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

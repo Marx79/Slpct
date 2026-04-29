@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2"
+           xmlns:all="http://schemi.processotelematico.giustizia.it/tipi/allegati/v2"
+           xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+           xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v7"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2"
+           elementFormDefault="qualified" version="1.2">
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4"
+               schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/allegati/v2"
+               schemaLocation="../base_v2/tipi-allegati.xsd"/>
+    <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v7" schemaLocation="../base_v7/tipi-atti.xsd"/>
+    <xs:simpleType name="RuoloSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Ruoli di iscrizione della segnalazione o dell'atto</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AffariCiviliMinorenni"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Rito">
+        <xs:annotation>
+            <xs:documentation>Riti validi per l'indentificazione del registro telematico</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SegnalazioniProcuraMinorenni">
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:attributeGroup name="RegistroTelematico">
+        <xs:annotation>
+            <xs:documentation>Attributi necessari ad individuare un registro telematico</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="ufficio" type="xs:string" use="required"/>
+        <xs:attribute name="ruolo" type="RuoloSegnalazione" use="required"/>
+        <xs:attribute name="rito" type="Rito" use="required"/>
+    </xs:attributeGroup>
+    <xs:complexType name="IntroduttivoSegnalazione" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Atto per l'introduzione di una segnalazione al ruolo.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="destinazione">
+                <xs:annotation>
+                    <xs:documentation>Ufficio Giudiziario di destinazione, tra quelli dove è attivo il PCT
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="RegistroTelematico"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Oggetto" type="CodiceMateria">
+                <xs:annotation>
+                    <xs:documentation>Codice materia della segnalazione. La materia deve essere attinente
+                        all'atto
+                        specifico.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="RefId" type="xs:NMTOKEN"/>
+        <xs:attribute name="urgente" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType name="AttoProcedimentoSegnalazione" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Atto depositato su un fascicolo di segnalazione.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="procedimento" type="RiferimentoProcedimentoSegnalazione">
+                <xs:annotation>
+                    <xs:documentation>Riferimento alla segnalazione</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="riferimento" type="pt:RiferimentoDocumentale" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="RefId" type="xs:NMTOKEN"/>
+        <xs:attribute name="urgente" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType name="RiferimentoProcedimentoSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Riferimento a una segnalazione all'interno del sistema di gestione dei registri.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="numero" type="xs:nonNegativeInteger"/>
+            <xs:element name="anno" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="RegistroTelematico"/>
+    </xs:complexType>
+    <xs:simpleType name="CodiceMateria">
+        <xs:annotation>
+            <xs:documentation>Codice materia della Procura</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="C01001">
+                <xs:annotation>
+                    <xs:documentation>Richiesta apertura stato di adottabilità</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C01002">
+                <xs:annotation>
+                    <xs:documentation>Abbandono minori</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C01003">
+                <xs:annotation>
+                    <xs:documentation>Minore esposto - madre che non vuole essere nominata</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C01004">
+                <xs:annotation>
+                    <xs:documentation>Dichiarazione di nascita di figlio naturale</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C01005">
+                <xs:annotation>
+                    <xs:documentation>Nascita neonato da madre minorenne</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C01006">
+                <xs:annotation>
+                    <xs:documentation>Nascituro - segnalazione</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C02001">
+                <xs:annotation>
+                    <xs:documentation>Abbandono neonato non riconosciuto</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C03001">
+                <xs:annotation>
+                    <xs:documentation>Abuso alcol minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C03002">
+                <xs:annotation>
+                    <xs:documentation>Abuso stupefacenti minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C03003">
+                <xs:annotation>
+                    <xs:documentation>Abuso alcol genitore/i</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C03004">
+                <xs:annotation>
+                    <xs:documentation>Abuso stupefacenti genitore/i</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04001">
+                <xs:annotation>
+                    <xs:documentation>Abuso sessuale altra a.g. (art. 609 decies)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04002">
+                <xs:annotation>
+                    <xs:documentation>Abuso/molestia sessuale</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04003">
+                <xs:annotation>
+                    <xs:documentation>Abuso sessuale non in famiglia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04004">
+                <xs:annotation>
+                    <xs:documentation>Abuso sessuale in famiglia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04005">
+                <xs:annotation>
+                    <xs:documentation>Pornografia minorile</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C04006">
+                <xs:annotation>
+                    <xs:documentation>Abuso sessuale - minore autore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C05013">
+                <xs:annotation>
+                    <xs:documentation>Ricerca delle origini</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C05014">
+                <xs:annotation>
+                    <xs:documentation>Formazione atto di nascita</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C05015">
+                <xs:annotation>
+                    <xs:documentation>Riconoscimento tardivo di minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06001">
+                <xs:annotation>
+                    <xs:documentation>Abuso di mezzi di correzione</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06002">
+                <xs:annotation>
+                    <xs:documentation>Accattonaggio genitore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06003">
+                <xs:annotation>
+                    <xs:documentation>Accattonaggio minorile</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06004">
+                <xs:annotation>
+                    <xs:documentation>Affido familiare proroga</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06005">
+                <xs:annotation>
+                    <xs:documentation>Affido familiare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06006">
+                <xs:annotation>
+                    <xs:documentation>Art. 4 dpr 448/88 segnalazione a pm tm reati minorenni residenti in altro
+                        distretto
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06007">
+                <xs:annotation>
+                    <xs:documentation>Conflittualita' familiare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06008">
+                <xs:annotation>
+                    <xs:documentation>Crisi adottive</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06009">
+                <xs:annotation>
+                    <xs:documentation>Denunce tra genitori di minori</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06010">
+                <xs:annotation>
+                    <xs:documentation>Disagio abitativo -trascuratezza</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06011">
+                <xs:annotation>
+                    <xs:documentation>Disagio familiare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06012">
+                <xs:annotation>
+                    <xs:documentation>Disagio personale genitore/i</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06013">
+                <xs:annotation>
+                    <xs:documentation>Pene accessorie genitori</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06014">
+                <xs:annotation>
+                    <xs:documentation>Disagio psichico/psicologico genitore/i</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06015">
+                <xs:annotation>
+                    <xs:documentation>Femminicidio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06016">
+                <xs:annotation>
+                    <xs:documentation>Immigrazione clandestina</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06017">
+                <xs:annotation>
+                    <xs:documentation>Inadempienza obbligo vaccinale</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06018">
+                <xs:annotation>
+                    <xs:documentation>Incapacita' educativa</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06019">
+                <xs:annotation>
+                    <xs:documentation>Induzione al matrimonio</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06020">
+                <xs:annotation>
+                    <xs:documentation>Inosservanza di un provvedimento dell'a.g.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06021">
+                <xs:annotation>
+                    <xs:documentation>Lesioni patite da minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06022">
+                <xs:annotation>
+                    <xs:documentation>Minore figlio di persona arrestata o detenuta</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06023">
+                <xs:annotation>
+                    <xs:documentation>Richiesta affidamento servizi sociali</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06024">
+                <xs:annotation>
+                    <xs:documentation>Ricovero ospedaliero</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06025">
+                <xs:annotation>
+                    <xs:documentation>Rifiuto di prestazioni sanitarie</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06026">
+                <xs:annotation>
+                    <xs:documentation>Rintraccio minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06027">
+                <xs:annotation>
+                    <xs:documentation>Segnalazione nascita da madre con problematiche</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06028">
+                <xs:annotation>
+                    <xs:documentation>Sfruttamento minore (lavoro)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06029">
+                <xs:annotation>
+                    <xs:documentation>Uccisione minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06030">
+                <xs:annotation>
+                    <xs:documentation>Violazione obblighi mantenimento (art. 570 cp)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C06031">
+                <xs:annotation>
+                    <xs:documentation>Allontanamento minore (art. 403 cc)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07001">
+                <xs:annotation>
+                    <xs:documentation>Adescamento minori (art. 609 undecies cp)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07002">
+                <xs:annotation>
+                    <xs:documentation>Allontanamento dalla comunita'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07003">
+                <xs:annotation>
+                    <xs:documentation>Allontanamento/fuga abitazione</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07004">
+                <xs:annotation>
+                    <xs:documentation>Atti vandalici</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07005">
+                <xs:annotation>
+                    <xs:documentation>Giochi mortali in rete-adescamento tramite web</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07006">
+                <xs:annotation>
+                    <xs:documentation>Cyberbullismo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07007">
+                <xs:annotation>
+                    <xs:documentation>Bullismo-minore autore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07008">
+                <xs:annotation>
+                    <xs:documentation>Bullismo-minore vittima</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07009">
+                <xs:annotation>
+                    <xs:documentation>Disagio - problemi psichici del minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07010">
+                <xs:annotation>
+                    <xs:documentation>Devianza minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07011">
+                <xs:annotation>
+                    <xs:documentation>Dipendenze patologiche minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07012">
+                <xs:annotation>
+                    <xs:documentation>Disturbo alimentare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07013">
+                <xs:annotation>
+                    <xs:documentation>Tentato suicidio e autolesionismo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C07014">
+                <xs:annotation>
+                    <xs:documentation>Dipendenza web minore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C08001">
+                <xs:annotation>
+                    <xs:documentation>Dispersione scolastica femmine</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C08002">
+                <xs:annotation>
+                    <xs:documentation>Dispersione scolastica maschile</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C08003">
+                <xs:annotation>
+                    <xs:documentation>Istruzione parentale</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C09001">
+                <xs:annotation>
+                    <xs:documentation>Maltrattamenti familiari - vittima</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C09002">
+                <xs:annotation>
+                    <xs:documentation>Maltrattamenti extrafamiliari - vittima</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C09003">
+                <xs:annotation>
+                    <xs:documentation>Maltrattamenti violenza assistita</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C09004">
+                <xs:annotation>
+                    <xs:documentation>Maltrattamenti - minore autore</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C10001">
+                <xs:annotation>
+                    <xs:documentation>Minore autore di reati non infraquattordicenne</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C10002">
+                <xs:annotation>
+                    <xs:documentation>Minore autore di reati infraquattordicenne</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C10003">
+                <xs:annotation>
+                    <xs:documentation>Reclami avverso provvedimenti giudice tutelare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C10004">
+                <xs:annotation>
+                    <xs:documentation>Visti giudice tutelare</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11001">
+                <xs:annotation>
+                    <xs:documentation>Msna prosieguo amministrativo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11002">
+                <xs:annotation>
+                    <xs:documentation>Msna accertamento eta'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11003">
+                <xs:annotation>
+                    <xs:documentation>Msna allontanamento in comunita'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11004">
+                <xs:annotation>
+                    <xs:documentation>Tutele minori stranieri c/o parenti</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11005">
+                <xs:annotation>
+                    <xs:documentation>Msna non collocato in comunita'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C11006">
+                <xs:annotation>
+                    <xs:documentation>Msna vittime tratta</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C12001">
+                <xs:annotation>
+                    <xs:documentation>Msna collocato in comunita'</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C12002">
+                <xs:annotation>
+                    <xs:documentation>Msna collocati presso privati</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C13001">
+                <xs:annotation>
+                    <xs:documentation>Apertura proc. amministrativo - rieducazione/irregolarita' condotta
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C13002">
+                <xs:annotation>
+                    <xs:documentation>Prosieguo amministrativo</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C13003">
+                <xs:annotation>
+                    <xs:documentation>Prostituzione minorile</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C14001">
+                <xs:annotation>
+                    <xs:documentation>Sottrazione internazionale di minore (art 7 l.64/1994)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C15001">
+                <xs:annotation>
+                    <xs:documentation>Interdizione/inabilitazione</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C15002">
+                <xs:annotation>
+                    <xs:documentation>Tutele</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C15003">
+                <xs:annotation>
+                    <xs:documentation>Curatele</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C16001">
+                <xs:annotation>
+                    <xs:documentation>Segnalazione ex art. 403 cc</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="AnagraficaSegnalazione">
+        <xs:annotation>
+            <xs:documentation>Dati anagrafici relativi alla segnalazione da iscrivere</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Segnalatori" type="at:Parte" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Soggetto che introduce la segnalazione.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+

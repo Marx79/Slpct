@@ -1,0 +1,2230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/delegato/v5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v5" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v3" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/delegato/v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v5" schemaLocation="../base_v5/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" schemaLocation="../base_v3/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="../eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v3" schemaLocation="../base_v3/tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:simpleType name="TipoAttivitaDelegato">
+		<xs:annotation>
+			<xs:documentation>Tipi di attività del delegato</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Vendita"/>
+			<xs:enumeration value="Assegnazione"/>
+			<xs:enumeration value="Trasferimento"/>
+			<xs:enumeration value="Distribuzione"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaCrediti">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="crediti verso clienti"/>
+			<xs:enumeration value="crediti verso societa"/>
+			<xs:enumeration value="crediti verso l'erario"/>
+			<xs:enumeration value="crediti da azioni revocatorie"/>
+			<xs:enumeration value="altri crediti"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaBeni">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mobili NON registrati"/>
+			<xs:enumeration value="Mobili registrati"/>
+			<xs:enumeration value="Diritti di autore, di proprietà industriale o di sfruttamento di opere dell’ingegno"/>
+			<xs:enumeration value="Partecipazioni societarie"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CategoriaCredito">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Crediti ipotecari"/>
+			<xs:enumeration value="Altri crediti privilegiati"/>
+			<xs:enumeration value="Crediti chirografi"/>
+			<xs:enumeration value="Crediti prededucibili"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CategoriaEconomicaImm">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="crediti bancari"/>
+			<xs:enumeration value="crediti condominiali"/>
+			<xs:enumeration value="crediti di professionisti"/>
+			<xs:enumeration value="crediti di artigiani"/>
+			<xs:enumeration value="crediti al consumo"/>
+			<xs:enumeration value="crediti erariali o previdenziali"/>
+			<xs:enumeration value="altri crediti"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DescrizioneLotto">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Appartamento in condominio"/>
+			<xs:enumeration value="Casa autonoma"/>
+			<xs:enumeration value="Area Servizio"/>
+			<xs:enumeration value="Area urbana"/>
+			<xs:enumeration value="Box auto"/>
+			<xs:enumeration value="Commerciale"/>
+			<xs:enumeration value="Industriale"/>
+			<xs:enumeration value="Artigianale"/>
+			<xs:enumeration value="Impianti sportivi"/>
+			<xs:enumeration value="Artigianale"/>
+			<xs:enumeration value="Casa di campagna"/>
+			<xs:enumeration value="Multiproprietà"/>
+			<xs:enumeration value="Posto auto scoperto"/>
+			<xs:enumeration value="Rurale"/>
+			<xs:enumeration value="Terreno agricolo"/>
+			<xs:enumeration value="Rurale"/>
+			<xs:enumeration value="Terreno edificabile"/>
+			<xs:enumeration value="Terreno con fabbricato"/>
+			<xs:enumeration value="Ufficio"/>
+			<xs:enumeration value="Volume tecnico"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatoLotto">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="In vendita"/>
+			<xs:enumeration value="Aggiudicato"/>
+			<xs:enumeration value="Trasferito"/>
+			<xs:enumeration value="Non in vendita - lotto per il quale non è stata ancora disposta la vendita"/>
+			<xs:enumeration value="Non in vendita - lotto per il quale è stata emessa ordinanza di riduzione del pignoramento"/>
+			<xs:enumeration value="Non in vendita - lotto per il quale tutti i creditori hanno rinunciato agli atti esecutivi"/>
+			<xs:enumeration value="Non in vendita - conversione in atto"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Acconto">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DataUltimoAcconto" type="xs:date"/>
+				<xs:element name="ImportoComplessivoAcconto" type="bt:Valuta"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRapportoImmobiliareFinale">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo finale  IMM</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AbstractDepositoRapportoImmobiliare"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRapportoImmobiliareIniziale">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo iniziale IMM</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AbstractDepositoRapportoImmobiliare"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRapportoImmobiliare">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo semestrale IMM</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AbstractDepositoRapportoImmobiliare"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRapportoMobiliareFinale">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo finale  MOB</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AbstractDepositoRapportoMobiliare"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRapportoMobiliare">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo semestrale MOB</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="AbstractDepositoRapportoMobiliare"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="AbstractDepositoRapportoImmobiliare">
+		<xs:annotation>
+			<xs:documentation>ComplexType astratto per tutti i Rapporti Riepilogativi Immobiliari</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pt:AttoProcedimento">
+				<xs:sequence>
+					<xs:element name="RapportoImmobiliare">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="DatiGenerali">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="dataNotPignoramento" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data di notifica del pignoramento</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataIscrizioneRuolo" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data di iscrizione a ruolo</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataDepDocIpo" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data del deposito documentazione ipocatastale/o relazione notarile </xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataDecretoFissazione" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data decreto fissazione udienza 569</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataUdienza569" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data udienza 569</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataNominaCustode" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data nomina del custode</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataOrdininanzaVendita" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data ordinanza di vendita</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="dataAvvisoVendita" type="xs:date">
+												<xs:annotation>
+													<xs:documentation>Data avviso di vendita da parte del professionista delegato</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Parti">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Debitori" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:choice>
+															<xs:sequence>
+																<xs:element name="Cognome" type="xs:string"/>
+																<xs:element name="Nome" type="xs:string"/>
+															</xs:sequence>
+															<xs:sequence>
+																<xs:element name="Denominazione" type="xs:string"/>
+																<xs:element name="TipoSocietario" type="xs:string"/>
+															</xs:sequence>
+														</xs:choice>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataNotPrecetto" type="xs:date"/>
+														<xs:element name="DataNotPignoramento" type="xs:date"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Creditori" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:choice>
+															<xs:element name="Denominazione" type="xs:string"/>
+															<xs:sequence>
+																<xs:element name="Cognome" type="xs:string"/>
+																<xs:element name="Nome" type="xs:string"/>
+															</xs:sequence>
+														</xs:choice>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TitoloCredito">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="Sentenza di condanna I grado"/>
+																	<xs:enumeration value="Cartella Esattoriale"/>
+																	<xs:enumeration value="Assegno"/>
+																	<xs:enumeration value="Contratto di Finanziamento"/>
+																	<xs:enumeration value="Contratto di Vendita"/>
+																	<xs:enumeration value="Contratto di Sovvenzione"/>
+																	<xs:enumeration value="Polizza di Pegno"/>
+																	<xs:enumeration value="Fattura"/>
+																	<xs:enumeration value="Mutuo Fondiario"/>
+																	<xs:enumeration value="Mutuo Ipotecario"/>
+																	<xs:enumeration value="Atto notarile"/>
+																	<xs:enumeration value="Sentenza di condanna II grado"/>
+																	<xs:enumeration value="Lodo Arbitrale"/>
+																	<xs:enumeration value="Scrittura contabile autenticata"/>
+																	<xs:enumeration value="Sequestro"/>
+																	<xs:enumeration value="Diritto di pegno"/>
+																	<xs:enumeration value="Diritto di prelazione risultante da pubblici registri"/>
+																	<xs:enumeration value="Somma di denaro risultante da scritture contabili"/>
+																	<xs:enumeration value="Decreto ingiuntivo"/>
+																	<xs:enumeration value="Cambiale"/>
+																	<xs:enumeration value="Ordinanza"/>
+																	<xs:enumeration value="Ordinanza in corso di causa (art.186 quater cpc)"/>
+																	<xs:enumeration value="Ingiunzione in corso di causa (art. 183 ter cpc)"/>
+																	<xs:enumeration value="Omologa Separazione Consensuale"/>
+																	<xs:enumeration value="Verbale di Conciliazione"/>
+																	<xs:enumeration value="Atto da specificare"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Importo"/>
+														<xs:element name="TipoPrivilegio" type="xs:boolean"/>
+														<xs:element name="Debitori" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="OrganiProcedura">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Giudice">
+												<xs:annotation>
+													<xs:documentation>Giudice attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataAssegnazioneFascicolo" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element name="Note"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="GiudiciPrecedenti" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Giudice precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataAssegnazioneFascicolo" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Delegato">
+												<xs:annotation>
+													<xs:documentation>Delegato attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto" minOccurs="0" maxOccurs="unbounded"/>
+														<xs:element name="TipologiaAttivita" type="TipoAttivitaDelegato"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Delegati" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Delegati precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto" minOccurs="0" maxOccurs="unbounded"/>
+														<xs:element name="TipologiaAttivita" type="TipoAttivitaDelegato"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Custode">
+												<xs:annotation>
+													<xs:documentation>Custode attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Custodi" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Custodi precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Stimatore">
+												<xs:annotation>
+													<xs:documentation>Stimatore attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Stimatori" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Stimatori precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Attivo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Immobiliare">
+												<xs:complexType>
+													<xs:sequence minOccurs="0" maxOccurs="unbounded">
+														<xs:element name="Lotto">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="Numero" type="xs:string">
+																		<xs:annotation>
+																			<xs:documentation>nr. identificativo del lotto</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Stato" type="StatoLotto"/>
+																	<xs:element name="ValoreContabileDiStima" type="bt:Valuta">
+																		<xs:annotation>
+																			<xs:documentation>Valorizzare obbligatoriamente e da specificare diverso da zero per lotto in stato aggiudicato, in vendita e trasferito, altrimenti specificare motivazione nel campo Note</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ImportoAggiudicazione" type="bt:Valuta">
+																		<xs:annotation>
+																			<xs:documentation>Valorizzare obbligatoriamente per lotto in stato aggiudicato e trasferito, se valorizzato a zero specificare motivazione nel campo Note</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Delegato" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																				<xs:element name="Qualifica">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:enumeration value="curatore"/>
+																							<xs:enumeration value="professionista delegato"/>
+																							<xs:enumeration value="Istituto Vendite Giudiziarie"/>
+																							<xs:enumeration value="commissario"/>
+																							<xs:enumeration value="soggetto specializzato ex art. 107 comma 1 L.F."/>
+																							<xs:enumeration value="ufficiale giudiziario"/>
+																							<xs:enumeration value="altro"/>
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="Stimatore" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="NumeroBeni" type="xs:int">
+																		<xs:annotation>
+																			<xs:documentation>per pluralità di immobili non si deve intendere l’esistenza di più particelle catastali, ma di più unità immobiliari autonomamente godibili, indipendentemente dal numero di particelle catastali</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Beni" maxOccurs="unbounded">
+																		<xs:annotation>
+																			<xs:documentation>Elenco dei beni che compongono il lotto</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="DatiBene">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="Identificazione" type="xs:string"/>
+																							<xs:element name="Descrizione" type="xs:string"/>
+																							<xs:element name="Stima" type="bt:Valuta"/>
+																							<xs:element name="Debitore" maxOccurs="unbounded">
+																								<xs:complexType>
+																									<xs:sequence>
+																										<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																										<xs:element name="Diritto">
+																											<xs:simpleType>
+																												<xs:restriction base="xs:string">
+																													<xs:enumeration value="Proprietà"/>
+																													<xs:enumeration value="nuda proprietà"/>
+																													<xs:enumeration value="usufrutto"/>
+																													<xs:enumeration value="superficie"/>
+																													<xs:enumeration value="servitù"/>
+																												</xs:restriction>
+																											</xs:simpleType>
+																										</xs:element>
+																										<xs:element name="Frazione" type="xs:string">
+																											<xs:annotation>
+																												<xs:documentation>Quota in centesimi</xs:documentation>
+																											</xs:annotation>
+																										</xs:element>
+																										<xs:element name="Creditori" maxOccurs="unbounded">
+																											<xs:annotation>
+																												<xs:documentation>Lista di creditori per questo bene riferito a questo debitore</xs:documentation>
+																											</xs:annotation>
+																											<xs:complexType>
+																												<xs:sequence>
+																													<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																													<xs:element name="DataRinuncia" type="xs:date" minOccurs="0">
+																														<xs:annotation>
+																															<xs:documentation>Data rinuncia agli atti presente solo per i creditori rinunciatari</xs:documentation>
+																														</xs:annotation>
+																													</xs:element>
+																												</xs:sequence>
+																											</xs:complexType>
+																										</xs:element>
+																									</xs:sequence>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="DataOrdinanzaVendita" type="xs:date"/>
+																	<xs:element name="DataDecretoTrasferimento" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>quando non è compilato, dovrà essere obbligatoriamente presente il campo “ragioni della mancata emissione del decreto di trasferimento”</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ragioniMancataEmissDecrTrasf" type="xs:string" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>presente quando non è compilato DataDecretoTrasferimento</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="DataCancTrascrIscri" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation> quando non è compilato, dovrà essere obbligatoriamente presente il campo “ragioni della mancata cancellazione trascrizioni e iscrizioni pregiudizievoli”</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ragioniMancataCancTrascrIscri" type="xs:string" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>presente quando non è compilato DataCancTrascIscri</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="TentativiVendita" minOccurs="0" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="NumeroTentativo"/>
+																				<xs:element name="DataVendita" type="xs:date"/>
+																				<xs:element name="PrezzoBase" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>per prezzo base si intende quello stabilito dal giudice o dal professionista delegato e non l'offerta minima</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="PercentualeRibasso" type="bt:Percentuale"/>
+																				<xs:element name="CognomeIncaricato" type="xs:string"/>
+																				<xs:element name="CodFiscIncaricato" type="bt:CodiceFiscale"/>
+																				<xs:element name="NomeIncaricato" type="xs:string"/>
+																				<xs:element name="RestituzioneAtti" type="xs:boolean">
+																					<xs:annotation>
+																						<xs:documentation>Segnalazione di asta andata deserta</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="VenditaTelematica" type="xs:string"/>
+																				<xs:element name="TipoVenditaTelematica" type="xs:string"/>
+																				<xs:element name="GestioneVenditaTelematica" type="xs:string"/>
+																				<xs:element name="AccettazioneGestore" type="xs:boolean"/>
+																				<xs:element name="DataAccettazioneGestore" type="xs:date"/>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="ImposteETasseTrasferimento" type="bt:Valuta" minOccurs="0"/>
+																	<xs:element name="SpeseDiLiquidazione">
+																		<xs:annotation>
+																			<xs:documentation>Dato segretato: spese (Di cui per cancellazione formalità pregiudizievoli, Di cui per altre spese)</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CancellazionePregiudizievoli" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>di cui per cancellazione formalità pregiudizievoli</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="AltreSpese" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>di cui per altre spese</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="DataAggiudicazione" type="xs:date" minOccurs="0"/>
+																	<xs:element name="StatoDiOccupazione">
+																		<xs:annotation>
+																			<xs:documentation>- se è valorizzato con “occupato senza titolo dall’esecutato” o con “occupato senza titolo da terzi”, è obbligatorio compilare i campi EmessoOrdineLiberazione e DebitoAutorizzatoPermanere  -se è valorizzato con “occupato con titolo”, è obbligatorio compilare i campi “data titolo”,“natura del titolo” e “scadenza del titolo”
+</xs:documentation>
+																		</xs:annotation>
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Libero"/>
+																				<xs:enumeration value="In corso di liberazione"/>
+																				<xs:enumeration value="Occupato senza titolo dall’esecutato"/>
+																				<xs:enumeration value="Occupato senza titolo da terzi"/>
+																				<xs:enumeration value="Occupato con titolo"/>
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="EmessoOrdineLiberazione" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Nel caso sia stato emesso un ordine di liberazione (e quindi il tag sia valorizzato a true) devono essere obbligatoriamente valorizzate sia la DataOrdineLiberazione che DataInizioAttivita</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:boolean">
+																					<xs:attribute name="DataOrdineLiberazione" type="xs:date"/>
+																					<xs:attribute name="DataInizioAttivita" type="xs:date">
+																						<xs:annotation>
+																							<xs:documentation>per 'data inizio attività' si intende la prima comunicazione inviata al soggetto che occupa l’immobile con l’invito a lasciarlo libero</xs:documentation>
+																						</xs:annotation>
+																					</xs:attribute>
+																					<xs:attribute name="DataLiberazioneEseguita" type="xs:date"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="DebitoreAutorizzatoPermanere" type="xs:boolean" minOccurs="0"/>
+																	<xs:element name="DataTitolo" type="xs:date" minOccurs="0"/>
+																	<xs:element name="NaturaTitolo" type="xs:string" minOccurs="0"/>
+																	<xs:element name="ScadenzaTitolo" type="xs:date" minOccurs="0"/>
+																	<xs:element name="DataVersamentoPrezzo" type="xs:date" minOccurs="0"/>
+																	<xs:element name="ImportoVersatoAggiudicatario" type="bt:Valuta" minOccurs="0"/>
+																	<xs:element name="DataDepositoProgDistr" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>data deposito progetto di distribuzione” (indicare se è parziale o totale)</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="DataTrasmissione" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Data trasmissione al giudice della bozza del decreto di trasferimento</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ImportoRipartitoCreditore" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Importo complessivamente ripartito ai creditori</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="DataUdieApprProgDistr" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>data dell’udienza di approvazione del progetto di distribuzione</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="DataUltimoPagCred" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>data dell’ultimo pagamento ai creditori</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Note" type="xs:string" minOccurs="0"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Altro">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Rendita" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Per “rendita” s’intendono canoni di locazione e/o affitto.Se non ci sono rendite, il delegato indicherà “0,00”</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Rendita" type="bt:Valuta"/>
+																	<xs:element name="ImportoRipartito" type="bt:Valuta"/>
+																	<xs:element name="DataRiparto" type="xs:date"/>
+																	<xs:element name="DataIstanza" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>compilata solo se l’importo ripartito è zero e se c’è stata istanza del creditore</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ImportoAttualeCassa" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Si devono inserire anche gli importi derivanti dalla conversione</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Multa" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="ImportoCauzione" type="bt:Valuta"/>
+																	<xs:element name="DataAggiudicazione" type="xs:date"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Risarcimento" minOccurs="0" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Eventuali cause accessorie”, “risarcimento danni</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Importo" type="bt:Valuta"/>
+																	<xs:element name="DataDecreto" type="xs:date"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="AltriImporti" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Importo" type="bt:Valuta"/>
+																	<xs:element name="Causale" type="xs:string"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="SommaConfiscata" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>conversione pignoramento</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Crediti">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="DatiGenerali">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="NumCredDichiarati" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Numero di crediti dichiarati dai creditori</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="NumCredSoddIntegr" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Numero di crediti soddisfatti integralmente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="NumCredSoddNonIntegr" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Numero di crediti soddisfatti non integralmente</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="NumCredTotNonSodd" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Numero di crediti totalmente incapienti (non soddisfatti)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="NumeroCreditori" type="xs:int"/>
+														<xs:element name="ImportoTotaleCrediti" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>dato dalla somma degli importi dei crediti definiti nell’elenco dei creditori</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="ClassificazioneGiuridica" minOccurs="4" maxOccurs="4">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="CategoriaCredito" type="CategoriaCredito">
+															<xs:annotation>
+																<xs:documentation>Categoria credito</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ImpComplessivo" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="ImpSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="ImpNonSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="PercSodd" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="TipoSpesaPrededucibile">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="acconto stimatore"/>
+																	<xs:enumeration value="compenso e spese stimatore"/>
+																	<xs:enumeration value="acconto professionista delegato"/>
+																	<xs:enumeration value="compenso e spese professionista delegato"/>
+																	<xs:enumeration value="acconto custode"/>
+																	<xs:enumeration value="compenso e spese custode"/>
+																	<xs:enumeration value="acconto altro ausiliario del giudice"/>
+																	<xs:enumeration value="compenso e spese altro ausiliario del giudice"/>
+																	<xs:enumeration value="contributo di pubblicazione sul portale delle vendite"/>
+																	<xs:enumeration value="pubblicità sul sito Internet"/>
+																	<xs:enumeration value="pubblicità sul quotidiano"/>
+																	<xs:enumeration value="altro tipo di pubblicità"/>
+																	<xs:enumeration value="altro"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Incaricato">
+															<xs:annotation>
+																<xs:documentation>Dati relativi al soggetto incaricato che ha percepito il compenso</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="CodiceFiscale" type="bt:CodiceFiscale">
+																		<xs:annotation>
+																			<xs:documentation>dello stimatore, o professionista delegato  o custode</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Creditore">
+															<xs:annotation>
+																<xs:documentation>Dati relativi al soggetto che ha pagato la somma all'incaricato sopra indicato</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Importo" type="bt:Valuta"/>
+														<xs:element name="DataPagamento" type="xs:date"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="ClassificazioneEconomica" minOccurs="7" maxOccurs="7">
+												<xs:annotation>
+													<xs:documentation>Classificazione economica e comparazione dei crediti</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="CategoriaEconomica" type="CategoriaEconomicaImm">
+															<xs:annotation>
+																<xs:documentation>Categoria economica immobiliare</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ImpComplessivo" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="ImpSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="ImpNonSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+														<xs:element name="ImpTotNonSodd" type="bt:Valuta" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="SchedeApprofondimento">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Incarico" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="CategoriaProfessionale">
+															<xs:annotation>
+																<xs:documentation>Specificare il tipo di incarico, se lo stesso e di tipo altro descrivere nel campo note</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="avvocato"/>
+																	<xs:enumeration value="commercialista"/>
+																	<xs:enumeration value="professionista"/>
+																	<xs:enumeration value="altro"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Stato">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="in corso"/>
+																	<xs:enumeration value="definito"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Tipo">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="cause civili"/>
+																	<xs:enumeration value="consulenza"/>
+																	<xs:enumeration value="altro"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Affari" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Nr. affari (o posizioni)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ValoreAffari" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>valore complessivo nominale degli affari (o posizioni)  dello stesso tipo</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="DataIncarico" type="xs:date"/>
+														<xs:element name="SommaIncassata" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>valorizzare per il tipo incarico: legale giudiziale, legale stragiudiziale, recupero crediti ex art. 106 comma 3 LF; per gli altri tipi di incarico valorizzare a zero</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TotaleCompensi" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>il totale compensi liquidati, anche a titolo di acconto, va riferito all'incarico, anche se ricomprende più affari (o posizioni)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TotaleSpese" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>totale altre spese sostenute per tutti gli incarichi dello stesso tipo</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>note da utilizzare specialmente per dettagliare il tipo di incarico qualora questo sia stato specificato come tipo altro</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Contabilita">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ContiCorrentiLibretti" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="TipoCCLibretto">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="ContoCorrente"/>
+																	<xs:enumeration value="libretto"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Numero" type="xs:string"/>
+														<xs:element name="NomeIstituto" type="xs:string"/>
+														<xs:element name="Agenzia" type="xs:string"/>
+														<xs:element name="Intestazione" type="xs:string"/>
+														<xs:element name="DataApertura" type="xs:date"/>
+														<xs:element name="UltimoSaldo" type="bt:Valuta"/>
+														<xs:element name="DataSaldo" type="xs:date"/>
+														<xs:element name="Costi" type="bt:Valuta"/>
+														<xs:element name="TotaleSaldo" type="bt:Valuta"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="EntrateUscite">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Entrate">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="LiquidazioneBeniImmobili" type="bt:Valuta"/>
+																	<xs:element name="Altro" type="bt:Valuta"/>
+																	<xs:element name="TotaleAttivo" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di entrate inserite.</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Uscite">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="AccontoCompensoEspertoEstimatore">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoCustodeGiudiziario">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoDelegato">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoAltri">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="SpesePubblicita">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AltreSpese">
+																		<xs:annotation>
+																			<xs:documentation>spese per la cancellazione delle formalità pregiudizievoli dove poste a carico della procedura</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="TotaleSpese" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di uscite inserite.</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Saldo" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>dato da Attivo – Uscite</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="SaldoRipartito" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>dato da Attivo – Uscite + Totale uscite di cui anticipate</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Riparti">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Riparto" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="DataEsecutivita" type="xs:date">
+																		<xs:annotation>
+																			<xs:documentation>data esecutività riparto parziale/finale</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="ClassificazioneEconomica" minOccurs="7" maxOccurs="7">
+																		<xs:annotation>
+																			<xs:documentation>Classificazione economica e comparazione dei crediti</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CategoriaEconomica" type="CategoriaEconomicaImm">
+																					<xs:annotation>
+																						<xs:documentation>Categoria economica immobiliare</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="ImpComplessivo" type="bt:Valuta" minOccurs="0"/>
+																				<xs:element name="ImpSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+																				<xs:element name="ImpNonSoddIntegr" type="bt:Valuta" minOccurs="0"/>
+																				<xs:element name="ImpTotNonSodd" type="bt:Valuta" minOccurs="0"/>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="NoteGenerali" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:key name="PK_DEB_IMM">
+							<xs:selector xpath="Parti/Debitori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_DEB_CRED_IMM" refer="PK_DEB_IMM">
+							<xs:selector xpath="Parti/Creditori/Debitori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:key name="PK_CRED_IMM">
+							<xs:selector xpath="Parti/Creditori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_BENE_DEB_IMM" refer="PK_DEB_IMM">
+							<xs:selector xpath="Attivo/Immobiliare/Lotto/Beni/DatiBene/Debitore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:keyref name="PK_BENE_DEB_CRED_IMM" refer="PK_CRED_IMM">
+							<xs:selector xpath="Attivo/Immobiliare/Lotto/Beni/DatiBene/Debitore/Creditori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:key name="PK_DEL_IMM">
+							<xs:selector xpath="OrganiProcedura/Delegato"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:key name="PK_STIM_IMM">
+							<xs:selector xpath="OrganiProcedura/Stimatore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_LOTTO_DEL_IMM" refer="PK_DEL_IMM">
+							<xs:selector xpath="Attivo/Immobiliare/Lotto/Delegato"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:keyref name="PK_LOTTO_STIM_IMM" refer="PK_STIM_IMM">
+							<xs:selector xpath="Attivo/Immobiliare/Lotto/Stimatore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AbstractDepositoRapportoMobiliare">
+		<xs:annotation>
+			<xs:documentation>ComplexType astratto per tutti i Rapporti Riepilogativi Mobiliari</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pt:AttoProcedimento">
+				<xs:sequence>
+					<xs:element name="RapportoMobiliare">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Parti">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Debitori" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:choice>
+															<xs:sequence>
+																<xs:element name="Cognome" type="xs:string"/>
+																<xs:element name="Nome" type="xs:string"/>
+															</xs:sequence>
+															<xs:sequence>
+																<xs:element name="Denominazione" type="xs:string"/>
+																<xs:element name="TipoSocietario" type="xs:string"/>
+															</xs:sequence>
+														</xs:choice>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataNotPrecetto" type="xs:date"/>
+														<xs:element name="DataNotPignoramento" type="xs:date"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Creditori" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:choice>
+															<xs:element name="Denominazione" type="xs:string"/>
+															<xs:sequence>
+																<xs:element name="Cognome" type="xs:string"/>
+																<xs:element name="Nome" type="xs:string"/>
+															</xs:sequence>
+														</xs:choice>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TitoloCredito">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="Sentenza di condanna I grado"/>
+																	<xs:enumeration value="Cartella Esattoriale"/>
+																	<xs:enumeration value="Assegno"/>
+																	<xs:enumeration value="Contratto di Finanziamento"/>
+																	<xs:enumeration value="Contratto di Vendita"/>
+																	<xs:enumeration value="Contratto di Sovvenzione"/>
+																	<xs:enumeration value="Polizza di Pegno"/>
+																	<xs:enumeration value="Fattura"/>
+																	<xs:enumeration value="Mutuo Fondiario"/>
+																	<xs:enumeration value="Mutuo Ipotecario"/>
+																	<xs:enumeration value="Atto notarile"/>
+																	<xs:enumeration value="Sentenza di condanna II grado"/>
+																	<xs:enumeration value="Lodo Arbitrale"/>
+																	<xs:enumeration value="Scrittura contabile autenticata"/>
+																	<xs:enumeration value="Sequestro"/>
+																	<xs:enumeration value="Diritto di pegno"/>
+																	<xs:enumeration value="Diritto di prelazione risultante da pubblici registri"/>
+																	<xs:enumeration value="Somma di denaro risultante da scritture contabili"/>
+																	<xs:enumeration value="Decreto ingiuntivo"/>
+																	<xs:enumeration value="Cambiale"/>
+																	<xs:enumeration value="Ordinanza"/>
+																	<xs:enumeration value="Ordinanza in corso di causa (art.186 quater cpc)"/>
+																	<xs:enumeration value="Ingiunzione in corso di causa (art. 183 ter cpc)"/>
+																	<xs:enumeration value="Omologa Separazione Consensuale"/>
+																	<xs:enumeration value="Verbale di Conciliazione"/>
+																	<xs:enumeration value="Atto da specificare"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Importo"/>
+														<xs:element name="TipoPrivilegio" type="xs:boolean"/>
+														<xs:element name="Debitori" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="OrganiProcedura">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Giudice">
+												<xs:annotation>
+													<xs:documentation>Giudice attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataAssegnazioneFascicolo" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element name="Note"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="GiudiciPrecedenti" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Giudice precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataAssegnazioneFascicolo" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Delegato">
+												<xs:annotation>
+													<xs:documentation>Delegato/Commissionario attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto" maxOccurs="unbounded"/>
+														<xs:element name="TipologiaAttivita" type="TipoAttivitaDelegato"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Delegati" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Delegati/Commissionari precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto" maxOccurs="unbounded"/>
+														<xs:element name="TipologiaAttivita" type="TipoAttivitaDelegato"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Custode">
+												<xs:annotation>
+													<xs:documentation>Custode attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TipologiaBene" type="TipologiaBeni"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Custodi" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Custodi precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TipologiaBene" type="TipologiaBeni"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Stimatore">
+												<xs:annotation>
+													<xs:documentation>Stimatore attuale dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TipologiaBene" type="TipologiaBeni"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date" minOccurs="0"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Stimatori" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>Stimatori precedenti dell'esecuzione</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="TipologiaBene" type="TipologiaBeni"/>
+														<xs:element name="DataInizioIncarico" type="xs:date"/>
+														<xs:element name="DataCessazioneIncarico" type="xs:date"/>
+														<xs:element ref="Acconto"/>
+														<xs:element name="DataCompenso" type="xs:date"/>
+														<xs:element name="ImportoCompenso" type="bt:Valuta"/>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Attivo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Mobiliare">
+												<xs:complexType>
+													<xs:sequence minOccurs="0" maxOccurs="unbounded">
+														<xs:element name="Lotto">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="TipologiaBene" type="TipologiaBeni"/>
+																	<xs:element name="Descrizione" type="xs:string">
+																		<xs:annotation>
+																			<xs:documentation>Descrizione lotto</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Numero" type="xs:string">
+																		<xs:annotation>
+																			<xs:documentation>nr. identificativo del lotto</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Stato" type="StatoLotto"/>
+																	<xs:element name="ValoreContabileDiStima" type="bt:Valuta">
+																		<xs:annotation>
+																			<xs:documentation>Valorizzare obbligatoriamente e da specificare diverso da zero per lotto in stato aggiudicato, in vendita e trasferito, altrimenti specificare motivazione nel campo Note</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Delegato" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																				<xs:element name="Qualifica">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:enumeration value="curatore"/>
+																							<xs:enumeration value="professionista delegato"/>
+																							<xs:enumeration value="Istituto Vendite Giudiziarie"/>
+																							<xs:enumeration value="commissario"/>
+																							<xs:enumeration value="soggetto specializzato ex art. 107 comma 1 L.F."/>
+																							<xs:enumeration value="ufficiale giudiziario"/>
+																							<xs:enumeration value="altro"/>
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="Stimatore" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="NumeroBeni" type="xs:int">
+																		<xs:annotation>
+																			<xs:documentation>numero dei beni mobili che compongono il lotto</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Beni" maxOccurs="unbounded">
+																		<xs:annotation>
+																			<xs:documentation>Elenco dei beni che compongono il lotto</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="DatiBene">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="Identificazione" type="xs:string"/>
+																							<xs:element name="Descrizione" type="xs:string"/>
+																							<xs:element name="Stima" type="bt:Valuta"/>
+																							<xs:element name="Debitore" maxOccurs="unbounded">
+																								<xs:complexType>
+																									<xs:sequence>
+																										<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+																										<xs:element name="Diritto">
+																											<xs:simpleType>
+																												<xs:restriction base="xs:string">
+																													<xs:enumeration value="Proprietà"/>
+																													<xs:enumeration value="nuda proprietà"/>
+																													<xs:enumeration value="usufrutto"/>
+																													<xs:enumeration value="superficie"/>
+																													<xs:enumeration value="servitù"/>
+																												</xs:restriction>
+																											</xs:simpleType>
+																										</xs:element>
+																										<xs:element name="Frazione" type="xs:string">
+																											<xs:annotation>
+																												<xs:documentation>Quota in centesimi</xs:documentation>
+																											</xs:annotation>
+																										</xs:element>
+																									</xs:sequence>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="DataOrdinanzaVendita" type="xs:date"/>
+																	<xs:element name="TentativiVendita" minOccurs="0" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="NumeroTentativo"/>
+																				<xs:element name="DataVendita" type="xs:date"/>
+																				<xs:element name="PrezzoBase" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>per prezzo base si intende quello stabilito dal giudice o dal professionista delegato e non l'offerta minima</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="PercentualeRibasso" type="bt:Percentuale"/>
+																				<xs:element name="CognomeIncaricato" type="xs:string"/>
+																				<xs:element name="CodFiscIncaricato" type="bt:CodiceFiscale"/>
+																				<xs:element name="NomeIncaricato" type="xs:string"/>
+																				<xs:element name="RestituzioneAtti" type="xs:boolean">
+																					<xs:annotation>
+																						<xs:documentation>Segnalazione di asta andata deserta</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="ImposteETasseTrasferimento" type="bt:Valuta" minOccurs="0"/>
+																	<xs:element name="SpeseDiLiquidazione">
+																		<xs:annotation>
+																			<xs:documentation>Dato segretato: spese (Di cui per cancellazione formalità pregiudizievoli, Di cui per altre spese)</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="CancellazionePregiudizievoli" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>di cui per cancellazione formalità pregiudizievoli. Nel caso non ci siano state spese inserire 0.00</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																				<xs:element name="AltreSpese" type="bt:Valuta">
+																					<xs:annotation>
+																						<xs:documentation>di cui per altre spese. Nel caso non ci siano state spese inserire 0.00</xs:documentation>
+																					</xs:annotation>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="DataAggiudicazione" type="xs:date" minOccurs="0"/>
+																	<xs:element name="ValoreAggiudicazione">
+																		<xs:annotation>
+																			<xs:documentation>Valore obbligatorio, nel caso il lotto non sia nello stato aggiudicato andrà inserito il valore 0.00</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="DataVersamentoPrezzo" type="xs:date" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Data versamento prezzo/conguaglio (verbale di vendita)</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																	<xs:element name="Note" type="xs:string" minOccurs="0"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Altro">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Rendita" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Per “rendita” s’intendono canoni di locazione e/o affitto.Se non ci sono rendite, il delegato indicherà “0,00”</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Rendita" type="bt:Valuta"/>
+																	<xs:element name="DataUltimaRilevazione" type="xs:date"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Multa" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="ImportoCauzione" type="bt:Valuta"/>
+																	<xs:element name="DataAggiudicazione" type="xs:date"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Risarcimento" minOccurs="0" maxOccurs="unbounded">
+															<xs:annotation>
+																<xs:documentation>Eventuali cause accessorie”, “risarcimento danni</xs:documentation>
+															</xs:annotation>
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Importo" type="bt:Valuta"/>
+																	<xs:element name="DataDecreto" type="xs:date"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="AltriImporti" minOccurs="0" maxOccurs="unbounded">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NumeroLotto" type="xs:string"/>
+																	<xs:element name="Importo" type="bt:Valuta"/>
+																	<xs:element name="Causale" type="xs:string"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="SommaConfiscata" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>conversione pignoramento</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="SchedeApprofondimento">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Incarico" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Cognome" type="xs:string"/>
+														<xs:element name="Nome" type="xs:string"/>
+														<xs:element name="CodiceFiscale" type="bt:CodiceFiscale"/>
+														<xs:element name="CategoriaProfessionale">
+															<xs:annotation>
+																<xs:documentation>Specificare il tipo di incarico, se lo stesso e di tipo altro descrivere nel campo note</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="avvocato"/>
+																	<xs:enumeration value="commercialista"/>
+																	<xs:enumeration value="altro professionista"/>
+																	<xs:enumeration value="IVG"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Stato">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="in corso"/>
+																	<xs:enumeration value="definito"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Tipo">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="cause civili"/>
+																	<xs:enumeration value="consulenza"/>
+																	<xs:enumeration value="altro"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Affari" type="xs:int">
+															<xs:annotation>
+																<xs:documentation>Nr. affari (o posizioni)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="ValoreAffari" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>valore complessivo nominale degli affari (o posizioni)  dello stesso tipo</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="DataIncarico" type="xs:date"/>
+														<xs:element name="LiquiditaTotale" type="bt:Valuta"/>
+														<xs:element name="TotaleCompensi" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>il totale compensi liquidati, anche a titolo di acconto, va riferito all'incarico, anche se ricomprende più affari (o posizioni)</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="TotaleSpese" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>totale altre spese sostenute per tutti gli incarichi dello stesso tipo</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>note da utilizzare specialmente per dettagliare il tipo di incarico qualora questo sia stato specificato come tipo altro</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Contabilita">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ContiCorrentiLibretti" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="TipoCCLibretto">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="ContoCorrente"/>
+																	<xs:enumeration value="libretto"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Numero" type="xs:string"/>
+														<xs:element name="NomeIstituto" type="xs:string"/>
+														<xs:element name="Agenzia" type="xs:string"/>
+														<xs:element name="Intestazione" type="xs:string"/>
+														<xs:element name="DataApertura" type="xs:date"/>
+														<xs:element name="UltimoSaldo" type="bt:Valuta"/>
+														<xs:element name="DataSaldo" type="xs:date"/>
+														<xs:element name="Costi" type="bt:Valuta"/>
+														<xs:element name="TotaleSaldo" type="bt:Valuta"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="EntrateUscite">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Entrate">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="LiquidazioneBeniMobili" type="bt:Valuta"/>
+																	<xs:element name="Altro" type="bt:Valuta"/>
+																	<xs:element name="TotaleAttivo" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di entrate inserite.</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Uscite">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="AccontoCompensoEspertoEstimatore">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoCustodeGiudiziario">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoDelegato">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AccontoCompensoAltri">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="SpesePubblicita">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="AltreSpese">
+																		<xs:annotation>
+																			<xs:documentation>spese per la cancellazione delle formalità pregiudizievoli dove poste a carico della procedura</xs:documentation>
+																		</xs:annotation>
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="bt:Valuta">
+																					<xs:attribute name="DiCuiAnticipate" type="bt:Valuta"/>
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="TotaleSpese" type="bt:Valuta" minOccurs="0">
+																		<xs:annotation>
+																			<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di uscite inserite.</xs:documentation>
+																		</xs:annotation>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Saldo" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>dato da Attivo – Uscite</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="SaldoRipartito" type="bt:Valuta">
+															<xs:annotation>
+																<xs:documentation>dato da Attivo – Uscite + Totale uscite di cui anticipate</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Note" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="NoteGenerali" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:key name="PK_DEB_MOB">
+							<xs:selector xpath="Parti/Debitori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_DEB_CRED_MOB" refer="PK_DEB_MOB">
+							<xs:selector xpath="Parti/Creditori/Debitori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:key name="PK_CRED_MOB">
+							<xs:selector xpath="Parti/Creditori"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_BENE_DEB_MOB" refer="PK_DEB_MOB">
+							<xs:selector xpath="Attivo/Mobiliare/Lotto/Beni/DatiBene/Debitore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:keyref name="PK_BENE_DEB_CRED_MOB" refer="PK_CRED_MOB">
+							<xs:selector xpath="Attivo/Mobiliare/Lotto/Beni/DatiBene/Debitore/Creditor"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:key name="PK_DEL_MOB">
+							<xs:selector xpath="OrganiProcedura/Delegato"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:key name="PK_STIM_MOB">
+							<xs:selector xpath="OrganiProcedura/Stimatore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:key>
+						<xs:keyref name="PK_LOTTO_DEL_MOB" refer="PK_DEL_MOB">
+							<xs:selector xpath="Attivo/Mobiliare/Lotto/Delegato"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+						<xs:keyref name="PK_LOTTO_STIM_MOB" refer="PK_STIM_MOB">
+							<xs:selector xpath="Attivo/Mobiliare/Lotto/Stimatore"/>
+							<xs:field xpath="CodiceFiscale"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DepositoRapportoSintetico">
+		<xs:annotation>
+			<xs:documentation>Deposito rapporto riepilogativo  sintetico</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="Attivo">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Immobiliare">
+										<xs:complexType>
+											<xs:sequence minOccurs="0" maxOccurs="unbounded">
+												<xs:element name="Lotto">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Numero" type="xs:string">
+																<xs:annotation>
+																	<xs:documentation>nr. identificativo del lotto</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="Stato" type="StatoLotto"/>
+															<xs:element name="ValoreContabileDiStima" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>Valorizzare obbligatoriamente e da specificare diverso da zero per lotto in stato aggiudicato, in vendita e trasferito, altrimenti specificare motivazione nel campo Note</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="ImportoAggiudicazione" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>Valorizzare obbligatoriamente per lotto in stato aggiudicato e trasferito, se valorizzato a zero specificare motivazione nel campo Note</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="DescrizioneLotto" type="DescrizioneLotto">
+																<xs:annotation>
+																	<xs:documentation>se il lotto si compone di più immobili, occorre inserire la descrizione dell’immobile di più elevato valore</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="NumeroBeni" type="xs:int">
+																<xs:annotation>
+																	<xs:documentation>per pluralità di immobili non si deve intendere l’esistenza di più particelle catastali, ma di più unità immobiliari autonomamente godibili, indipendentemente dal numero di particelle catastali</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="Beni" maxOccurs="unbounded">
+																<xs:annotation>
+																	<xs:documentation>Elenco dei beni che compongono il lotto</xs:documentation>
+																</xs:annotation>
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="DatiBene">
+																			<xs:complexType>
+																				<xs:sequence>
+																					<xs:element name="Descrizione" type="xs:string"/>
+																					<xs:element name="Stima" type="bt:Valuta"/>
+																				</xs:sequence>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="TentativiVendita">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="NumeroTentativo"/>
+																		<xs:element name="PrezzoBase" type="bt:Valuta">
+																			<xs:annotation>
+																				<xs:documentation>per prezzo base si intende quello stabilito dal giudice o dal professionista delegato e non l'offerta minima</xs:documentation>
+																			</xs:annotation>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="DataAggiudicazione" type="xs:date"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Crediti">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiGenerali">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="NumeroCreditori" type="xs:int"/>
+												<xs:element name="ImportoTotaleCrediti" type="bt:Valuta">
+													<xs:annotation>
+														<xs:documentation>dato dalla somma degli importi dei crediti definiti nell’elenco dei creditori</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ClassificazioneGiuridica" minOccurs="3" maxOccurs="3">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="CategoriaCredito" type="CategoriaCredito">
+													<xs:annotation>
+														<xs:documentation>Categoria credito</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="ImpComplessivo" type="bt:Valuta"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Contabilita">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="EntrateUscite">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Entrate">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="TotaleAttivo" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di entrate inserite.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Uscite">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="TotaleSpese" type="bt:Valuta">
+																<xs:annotation>
+																	<xs:documentation>Non è obbligatorio l'inserimento in quanto corrisponde al totale di tutte le voci di uscite inserite.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="Saldo" type="bt:Valuta">
+													<xs:annotation>
+														<xs:documentation>dato da Attivo – Uscite</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="SaldoRipartito" type="bt:Valuta">
+													<xs:annotation>
+														<xs:documentation>dato da Attivo – Uscite + Totale uscite di cui anticipate</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="TipologiaAttività">
+		<xs:annotation>
+			<xs:documentation>Tipi di attività del delegato</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Vendita"/>
+			<xs:enumeration value="Assegnazione"/>
+			<xs:enumeration value="Trasferimento"/>
+			<xs:enumeration value="Distribuzione"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Privilegio">
+		<xs:annotation>
+			<xs:documentation>Tipi privilegio del creditore</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Ipoteca"/>
+			<xs:enumeration value="Privilegio speciale ex art. 2772 cc"/>
+			<xs:enumeration value="Privilegio speciale ex art. 2774 cc"/>
+			<xs:enumeration value="Privilegio speciale ex art. 2774 cc"/>
+			<xs:enumeration value="Privilegio speciale ex art. 2775 cc"/>
+			<xs:enumeration value="Privilegio speciale ex art. 2775bis cc"/>
+			<xs:enumeration value="Privilegio sussidiario ex art. 2776 cc"/>
+			<xs:enumeration value="Chirografario tempestivo"/>
+			<xs:enumeration value="chirografario tardivo ex art. 565 cpc"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipoPrivilegio">
+		<xs:annotation>
+			<xs:documentation>Tipi Atti introduttivi per le Successioni</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Istanza"/>
+			<xs:enumeration value="AttoGiudiziario"/>
+			<xs:enumeration value="AttoNotarile"/>
+			<xs:enumeration value="Segnalazione"/>
+			<xs:enumeration value="Dichiarazione"/>
+			<xs:enumeration value="Altro"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="DepositoSemplice">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto semplice</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:relazionePeriodicaDelegato"/>
+									<xs:element ref="evt:avvisoVendita"/>
+									<xs:element ref="evt:verbaleAggiudicazione"/>
+									<xs:element ref="evt:depositoPrezzo"/>
+									<xs:element ref="evt:istanzaRevocaDecadenzaAggiudicatario"/>
+									<xs:element ref="evt:attoNonCodificato"/>
+									<xs:element ref="evt:istanzaIntegrazioneSpese"/>
+									<xs:element ref="evt:istanzaLiquidazioneProfessionistaDelegato"/>
+									<xs:element ref="evt:verbaleAstaDeserta"/>
+									<xs:element ref="evt:rinunciaIncarico"/>
+									<xs:element ref="evt:depIstEmissMandPagGenerico"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MinutaDecreto">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto minuta decreto di trasferimento</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="lotto" type="xs:string" nillable="false">
+							<xs:annotation>
+								<xs:documentation>Specifica del numero di lotto al quale si riferisce (se è un evento di lotto)</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PropostaProgetto">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto proposta progetto di distribuzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AggiudicazioneLotto">
+		<xs:annotation>
+			<xs:documentation>Aggiudicazione lotto (verbale di vendita)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="Lotto" type="xs:positiveInteger">
+							<xs:annotation>
+								<xs:documentation>Identificazione numerica del lotto oggetto di aggiudicazione</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:choice>
+							<xs:element name="SenzaIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Offerte" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="st:importo"/>
+													<xs:element name="Cauzione" type="bt:Valuta"/>
+													<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+													<xs:element name="Offerente" type="at:Soggetto"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Aggiudicatario" type="at:RiferimentoSoggetto">
+											<xs:annotation>
+												<xs:documentation>I dati dell'aggiudicatario sono dedotti dai dati degli offerenti, qui viene riportato il solo codice fiscale che deve avere una ed una sola occorrenza nell'insieme degli offerenti</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ConIncanto">
+								<xs:annotation>
+									<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="BaseAsta" type="bt:Valuta"/>
+										<xs:element name="ImportoAumento" type="bt:Valuta">
+											<xs:annotation>
+												<xs:documentation>Importo fissato per le offerte in aumento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element ref="st:importo"/>
+										<xs:element name="Cauzione" type="bt:Valuta"/>
+										<xs:element name="Spese" type="bt:Valuta" nillable="true"/>
+										<xs:element name="Aggiudicatario" type="at:Soggetto"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:element name="TermineConguaglio" type="xs:date">
+							<xs:annotation>
+								<xs:documentation>Termine per il versamento del conguaglio</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TermineDecreto" type="xs:date" nillable="true" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Termine per l’emissione del decreto di trasferimento</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProgettoDistribuzione">
+		<xs:annotation>
+			<xs:documentation>Decreto di esecutività progetto di distribuzione</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="dispositivo">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:accoglimentoPianoRipartoParziale"/>
+									<xs:element ref="evt:accoglimentoPianoRiparto"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="st:dettagliRiparto" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoAttestatoPrestazioneEnergetica">
+		<xs:annotation>
+			<xs:documentation>Deposito attestato prestazione energetica</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="beneImmobile" type="st:BeneImmobile" nillable="false">
+							<xs:annotation>
+								<xs:documentation>Specifica del bene immobile da liberare</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="st:certificazioneEnergetica"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MinutaDecretoTrasferimento">
+		<xs:annotation>
+			<xs:documentation>Minuta decreto trasferimento</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

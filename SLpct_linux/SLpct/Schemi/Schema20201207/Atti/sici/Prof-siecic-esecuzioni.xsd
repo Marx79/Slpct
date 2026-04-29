@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by TEAM (RENEGADE) -->
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Filippo (RENEGADE) -->
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/professionista/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:evt="http://schemi.processotelematico.giustizia.it/siecic/eventi" xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase" xmlns:tns="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/professionista/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/siecic/esecuzioni/professionista/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" schemaLocation="./tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase" schemaLocation="./tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/eventi" schemaLocation="./eventi.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:annotation>
+		<xs:documentation>ATTI DI PROFESSIONISTI E COADIUTORI DEL GIUDICE DELEGATO</xs:documentation>
+		<xs:documentation>Gli atti qui definiti si riferiscono a procedimenti in essere</xs:documentation>
+	</xs:annotation>
+	<xs:element name="relazioneNotarile">
+		<xs:annotation>
+			<xs:documentation>Dettagli relazione notarile  ex. art. 569</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Immobile" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CertificazioneAttuale">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="DatiCatastali" type="st:BeneImmobile">
+											<xs:annotation>
+												<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="nonCorrispondenza" type="xs:string" nillable="true">
+											<xs:annotation>
+												<xs:documentation>Difformità rispetto alla situazione catastale; in caso di difformità indicarle sinteticamente.
+(Se elemento nillable il sistema considererà la corrispondenza tra i dati del pignoramento ed i dati catastali)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="PassaggiVentennio" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Provenienza" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Atto" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Descrizione libera atto e tipologia di passaggio</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Data" type="xs:date"/>
+													<xs:element name="Anagrafica" type="at:Parte"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="StatoCivileEsecutato" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Al momento dell'acquisto</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="NonConiugato"/>
+													<xs:enumeration value="ConiugatoSeparazioneBeni"/>
+													<xs:enumeration value="ConiugatoComunioneBeni"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Iscrizioni" nillable="true" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Se elemento nillable si indica l'assenza di iscrizioni</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Specie">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Legale"/>
+													<xs:enumeration value="Volontaria"/>
+													<xs:enumeration value="Giudiziale"/>
+													<xs:enumeration value="ConcessioneAmministrativa"/>
+													<xs:enumeration value="SeparazioneDeiBeni"/>
+													<xs:enumeration value="Ripetizione"/>
+													<xs:enumeration value="Rinnovazione"/>
+													<xs:enumeration value="Rettifica"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="Rettifica" minOccurs="0">
+											<xs:complexType>
+												<xs:attribute name="Data" type="xs:date" use="required"/>
+												<xs:attribute name="Numero" type="xs:positiveInteger" use="required"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="UfficioTerritorio" type="xs:string"/>
+										<xs:element name="Data" type="xs:date"/>
+										<xs:element name="nGen" type="xs:positiveInteger"/>
+										<xs:element name="nPart" type="xs:positiveInteger"/>
+										<xs:element name="Titolo">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="tipologia" type="st:TipologiaTitolo" use="required"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="SommaGarantita" type="xs:float"/>
+										<xs:element name="SoggettoFavore" type="at:Parte" maxOccurs="unbounded"/>
+										<xs:element name="SoggettoContro" type="at:Parte" maxOccurs="unbounded"/>
+										<xs:element name="nonCorrispondenza" type="xs:string" nillable="true">
+											<xs:annotation>
+												<xs:documentation>Difformità rispetto alla situazione catastale; in caso di difformità indicarle sinteticamente.
+(Se 'elemento è nillable il sistema considererà la corrispondenza tra i dati del pignoramento ed i dati catastali)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Trascrizioni" nillable="true" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Se elemento nillable si indica l'assenza di trascrizioni</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Pignoramento" type="xs:boolean"/>
+										<xs:element name="Natura">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Pignoramento"/>
+													<xs:enumeration value="Sequestro"/>
+													<xs:enumeration value="DomandaGiudiziale"/>
+													<xs:enumeration value="SentenzaFallimento "/>
+													<xs:enumeration value="DecretoAmmConcPreventivo"/>
+													<xs:enumeration value="DecretoAmmProceduraAmmControllata"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="AnnotazioneAltriRegistri" type="xs:boolean"/>
+										<xs:element name="UfficioTerritorio" type="xs:string"/>
+										<xs:element name="Data" type="xs:date"/>
+										<xs:element name="nGen" type="xs:positiveInteger"/>
+										<xs:element name="nPart" type="xs:positiveInteger"/>
+										<xs:element name="SoggettoFavore" type="at:Parte" maxOccurs="unbounded"/>
+										<xs:element name="SoggettoContro" type="at:Parte" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Proprieta" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="at:Parte">
+								<xs:sequence>
+									<xs:element name="DirittiReali" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:complexContent>
+												<xs:extension base="st:Diritto">
+													<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+												</xs:extension>
+											</xs:complexContent>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="debitore" type="xs:boolean" use="required">
+									<xs:annotation>
+										<xs:documentation>Indica se la parte censita è un debitore, altrimenti comproprietario (non esecutato)</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="PK_DATICATASTALI">
+			<xs:selector xpath="tns:Immobile/tns:CertificazioneAttuale/tns:DatiCatastali"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:keyref name="FK_BENE_RELAZIONE" refer="PK_DATICATASTALI">
+			<xs:selector xpath="tns:Proprieta/tns:DirittiReali"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="DepositoSemplice">
+		<xs:annotation>
+			<xs:documentation>Deposito Atto semplice</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:annotation>
+								<xs:documentation>Specifica la tipologia di atto oggetto di deposito</xs:documentation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoRelazioneCTU"/>
+									<xs:element ref="evt:depositoIntegrazioneCTU"/>
+									<xs:element ref="evt:attoNonCodificato"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaProrogaCTU">
+		<xs:annotation>
+			<xs:documentation>Istanza di proroga del CTU “Perito Immobiliare”</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element ref="st:quesito" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PeriziaImmobiliare">
+		<xs:annotation>
+			<xs:documentation>Deposito perizia del CTU “Perito Immobiliare”</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="Immobile" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="DatiCatastali" type="st:BeneImmobile">
+										<xs:annotation>
+											<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Descrizione" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Caratteristiche" type="xs:string">
+													<xs:annotation>
+														<xs:documentation>Caratteristiche ritenute utili nella stima in forma libera</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="EpocaCostruzione">
+													<xs:annotation>
+														<xs:documentation>Epoca di costruzione dell’immobile (decennio)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Destinazione" type="xs:string">
+													<xs:annotation>
+														<xs:documentation>Destinazione (esempio: abitazione singola o inserita in condominio, porzione di fabbricato etc., ufficio, capannone, etc.)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="nonCorrispondenza" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Difformità rispetto alla situazione catastale; in caso di difformità indicarle sinteticamente.
+(Se non presente l'elemento il sistema considererà la corrispondenza tra i dati del pignoramento ed i dati catastali
+</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="PartiComuni" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Elencazioni Parti comuni e servitù</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="Oneri" minOccurs="0" maxOccurs="unbounded">
+													<xs:annotation>
+														<xs:documentation>Vincoli ed oneri (esempio spese condominali)</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PassaggiVentennio" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Provenienza" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="Atto" type="xs:string">
+																<xs:annotation>
+																	<xs:documentation>Descrizione libera atto e tipologia di passaggio</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="Data" type="xs:date"/>
+															<xs:element name="Anagrafica" type="at:Parte"/>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="StatoCivileEsecutato">
+													<xs:annotation>
+														<xs:documentation>Al momento dell'acquisto</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="NonConiugato"/>
+															<xs:enumeration value="ConiugatoSeparazioneBeni"/>
+															<xs:enumeration value="ConiugatoComunioneBeni"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="AttoPregiudizievole" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+									<xs:element name="RegimeFiscale" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="IVA"/>
+												<xs:enumeration value="Registro"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="Indagine" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Indagine Amministrativa</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:all>
+												<xs:element name="AnalisiUrbanistica">
+													<xs:annotation>
+														<xs:documentation>Analisi urbanistica e verifica di regolarità.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="ConformitaEdilizia">
+													<xs:annotation>
+														<xs:documentation>Conformità edilizia: segnalazione di difformità e certificazione di condonabilità</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:all>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="SituazioneOccupazionale" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Disponibile" type="xs:boolean"/>
+												<xs:element name="Descrizione" type="xs:string">
+													<xs:annotation>
+														<xs:documentation>descrizione in forma libera</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="ConsistenzaSuperficiale" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Superficie commerciale, al lordo delle murature, del bene in argomento, puramente a titolo indicativo</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Proprieta" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:Parte">
+										<xs:sequence>
+											<xs:element name="DirittiReali" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="st:Diritto">
+															<xs:attribute name="ref" type="xs:NMTOKEN" use="required"/>
+															<xs:attribute name="lottoProposto" type="xs:int" use="required"/>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+										<xs:attribute name="debitore" type="xs:boolean" use="required">
+											<xs:annotation>
+												<xs:documentation>Indica se la parte censita è un debitore, altrimenti comproprietario (non esecutato)</xs:documentation>
+											</xs:annotation>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:key name="PK_BENE">
+			<xs:selector xpath="tns:Immobile/tns:DatiCatastali"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:keyref name="FK_BENE_PERIZIA" refer="PK_BENE">
+			<xs:selector xpath="tns:Proprieta/tns:DirittiReali"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="DepositoRelazioneNotarile">
+		<xs:annotation>
+			<xs:documentation>Deposito Relazione Notarile ex. art. 569</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element ref="relazioneNotarile" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProgettoDistribuzione">
+		<xs:annotation>
+			<xs:documentation>Deposito progetto di distribuzione del CTU “Perito Contabile"</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="deposito">
+							<xs:complexType>
+								<xs:choice>
+									<xs:element ref="evt:depositoPianoRiparto"/>
+									<xs:element ref="evt:depositoPianoRipartoParziale"/>
+								</xs:choice>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="st:dettagliRiparto" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

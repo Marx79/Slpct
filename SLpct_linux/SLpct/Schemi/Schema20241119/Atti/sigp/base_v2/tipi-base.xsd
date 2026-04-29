@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://schemi.processotelematico.giustizia.it/sigp/tipi/v2" targetNamespace="http://schemi.processotelematico.giustizia.it/sigp/tipi/v2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:annotation>
+		<xs:documentation>Tipi primitivi utilizzati nella definizione degli schemi</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="EmptyElement">
+		<xs:complexContent>
+			<xs:restriction base="xs:anyType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="UfficioTelematico">
+		<xs:annotation>
+			<xs:documentation>Elenco uffici abilitati al processo telematico</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:maxLength value="15"/>
+			<xs:pattern value="[0-9A-Z]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Valuta">
+		<xs:annotation>
+			<xs:documentation>Formato numerico accettato per l'indicazione di tutti gli importi</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="\p{Nd}*(\.\p{Nd}{2,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Percentuale">
+		<xs:annotation>
+			<xs:documentation>Tipologia per il valore espresso in percentuale</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="+0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodiceFiscale">
+		<xs:annotation>
+			<xs:documentation>Codice fiscale, utilizzato per definire ed all'occorrenza identificare univocamente un soggetto coinvolto nel procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="(\p{Nd}|\p{L}){14,16}"/>
+			<xs:pattern value="[0-9]{11,11}"/>
+			<xs:pattern value="(EX:[0-9]{13,13})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodiceUfficioPostale">
+		<xs:annotation>
+			<xs:documentation>Codice idenitificativo dell'ufficio postale, utilizzato per l'dentificazione di di bollettini di pagamento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{2,2}/\d{3,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodiceVCY">
+		<xs:annotation>
+			<xs:documentation>Codice identificativo del pagamento tramite bollettino postale</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4,4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CodiceOggetto">
+		<xs:annotation>
+			<xs:documentation>Codice oggetto Ministeriale</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="010001">
+				<xs:annotation>
+					<xs:documentation>Decreto Ingiuntivo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="012001">
+				<xs:annotation>
+					<xs:documentation>Accertamento tecnico preventivo / Prova testimoniale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="012011">
+				<xs:annotation>
+					<xs:documentation>Ispezione giudiziale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="101002">
+				<xs:annotation>
+					<xs:documentation>Revocazione della sentenza ex artt. 395 e ss. c.p.c.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="101003">
+				<xs:annotation>
+					<xs:documentation>Opposizione di terzo ex artt. 404 e ss. c.p.c.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="101012">
+				<xs:annotation>
+					<xs:documentation>Prova Delegata </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+                        <xs:enumeration value="111503">
+                              <xs:annotation>
+                                   <xs:documentation>Istanza per la nomina del curatore speciale del minore</xs:documentation>
+                              </xs:annotation>
+                        </xs:enumeration>                        
+			<xs:enumeration value="130099">
+				<xs:annotation>
+					<xs:documentation>Rapporti condominiali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="130111">
+				<xs:annotation>
+					<xs:documentation>Apposizione di termini</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="130121">
+				<xs:annotation>
+					<xs:documentation>Controversia in materia di immissioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="130131">
+				<xs:annotation>
+					<xs:documentation>Osservanza distanze riguardo alberi/siepi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="139999">
+				<xs:annotation>
+					<xs:documentation>Altri istituti in materia di diritti reali possesso e trascrizioni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="140999">
+				<xs:annotation>
+					<xs:documentation>Altri contratti tipici ed obbligazioni non rientranti nelle altre materie</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="145009">
+				<xs:annotation>
+					<xs:documentation>Azioni di competenza del Giudice di Pace in materia di risarcimento danno</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="145999">
+				<xs:annotation>
+					<xs:documentation>Altre ipotesi di responsabilita Extracontr. non ricomprese nelle altre materie (art. 2043)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="180001">
+				<xs:annotation>
+					<xs:documentation>Opposizione all'ordinanza-ingiunzione ex artt. 22 e ss., L. n. 689/1981 relative a sanzioni per emissione di assegni a vuoto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="180002">
+				<xs:annotation>
+					<xs:documentation>Opposizione ord. ingiunzione ex artt. 22 L689/1981 (violazione codice della strada)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="180003">
+				<xs:annotation>
+					<xs:documentation>Opposizione ordinanza prefettizia di cui all'art. 75 c.4 DPR 309/1990 (stupefacenti)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="180004">
+				<xs:annotation>
+					<xs:documentation>Opposizione ordinanza/decreto prefettizio di cui all'art. di cui all'art. 75 c.9 DPR 309/1990 (stupefacenti)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="180099">
+				<xs:annotation>
+					<xs:documentation>Opp. all'ord. di ingiunzione ex artt. 22 e ss. L.689/81 (escluse sanzioni per emiss. assegnia vuoto, codice strada e in materia di lavoro e di previdenza)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400201">
+				<xs:annotation>
+					<xs:documentation>Ricorso avverso decreto di espulsione del Prefetto (art. 13 c.8)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400202">
+				<xs:annotation>
+					<xs:documentation>Convalida del procedimento del questore di trattenimento presso centro di permanenza temporanea (art. 14 c.4 D.l.vo 286/98) </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400205">
+				<xs:annotation>
+					<xs:documentation>Convalida del Provvedimento del questore di accompagnamento alla frontiera (art. 13 c.5 bis D.L. 286/98)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400206">
+				<xs:annotation>
+					<xs:documentation>Convalida del Provvedimento del questore di accompagnamento alla frontiera e trattenimento presso centro di permanenza temporaneo </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400209">
+				<xs:annotation>
+					<xs:documentation>Altri procedimenti in materia di espulsione immigrati</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="400210">
+				<xs:annotation>
+					<xs:documentation>Ricorso per la liquidazione degli onorari e dei diritti dell'avvocato (L794/42)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="472001">
+				<xs:annotation>
+					<xs:documentation>Apposizione Sigilli</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="700001">
+				<xs:annotation>
+					<xs:documentation>Asseverazione di perizia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="700002">
+				<xs:annotation>
+					<xs:documentation>Asseverazione di traduzione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="700011">
+				<xs:annotation>
+					<xs:documentation>Atto notorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="700012">
+				<xs:annotation>
+					<xs:documentation>Dichiarazione sostitutiva di atto notorio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="701001">
+				<xs:annotation>
+					<xs:documentation>Autenticazione di documento</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="701002">
+				<xs:annotation>
+					<xs:documentation>Autenticazione di firma</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="701003">
+				<xs:annotation>
+					<xs:documentation>Autenticazione di fotografia</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="709999">
+				<xs:annotation>
+					<xs:documentation>Altri atti amministrativi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="710001">
+				<xs:annotation>
+					<xs:documentation>Istanza di Conciliazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Ruolo">
+		<xs:annotation>
+			<xs:documentation>Ruoli di iscrizione della causa o dell'atto</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GiudiceDiPace"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Rito">
+		<xs:annotation>
+			<xs:documentation>Riti validi per l'indentificazione del registro telematico</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GiudiceDiPace">
+				<xs:annotation>
+					<xs:documentation>Atto Giudice di pace</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NaturaGiuridica">
+		<xs:annotation>
+			<xs:documentation>Natura giuridica della parti di un procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PFI">
+				<xs:annotation>
+					<xs:documentation>Persona fisica</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PGI">
+				<xs:annotation>
+					<xs:documentation>Persona giuridica</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASS">
+				<xs:annotation>
+					<xs:documentation>Associazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COM">
+				<xs:annotation>
+					<xs:documentation>Comitato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CND">
+				<xs:annotation>
+					<xs:documentation>Condominio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CON">
+				<xs:annotation>
+					<xs:documentation>Consorzio</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:documentation>Cooperativa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DIM">
+				<xs:annotation>
+					<xs:documentation>Ditta individuale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENP">
+				<xs:annotation>
+					<xs:documentation>Ente pubblico</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAM">
+				<xs:annotation>
+					<xs:documentation>Pubblica amministrazione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EIS">
+				<xs:annotation>
+					<xs:documentation>Ente religioso</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EDG">
+				<xs:annotation>
+					<xs:documentation>Enti di gestione</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOC">
+				<xs:annotation>
+					<xs:documentation>Societa'</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOP">
+				<xs:annotation>
+					<xs:documentation>Societa' di persone</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAS">
+				<xs:annotation>
+					<xs:documentation>Partito o sindacato</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OSE">
+				<xs:annotation>
+					<xs:documentation>Organizzazione o stato estero</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RiferimentoAllegato">
+		<xs:annotation>
+			<xs:documentation>Rigerimento ad un allegato depositato contestualmente all'atto principale</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+		<xs:attribute name="complementare" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:simpleType name="IndirizzoEmail">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-zA-Z\.\+\-_]+@[0-9a-zA-Z\.\+\-_]+\.[a-zA-Z]{2,4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Nazione">
+		<xs:annotation>
+			<xs:documentation>Lista nazioni mondiali</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Afghanistan"/>
+			<xs:enumeration value="Albania"/>
+			<xs:enumeration value="Algeria"/>
+			<xs:enumeration value="Andorra"/>
+			<xs:enumeration value="Angola"/>
+			<xs:enumeration value="Anguilla"/>
+			<xs:enumeration value="Antartide"/>
+			<xs:enumeration value="Antigua e Barbuda"/>
+			<xs:enumeration value="Arabia Saudita"/>
+			<xs:enumeration value="Argentina"/>
+			<xs:enumeration value="Armenia"/>
+			<xs:enumeration value="Aruba"/>
+			<xs:enumeration value="Australia"/>
+			<xs:enumeration value="Austria"/>
+			<xs:enumeration value="Azerbaigian"/>
+			<xs:enumeration value="Bahamas"/>
+			<xs:enumeration value="Bahrein"/>
+			<xs:enumeration value="Bangladesh"/>
+			<xs:enumeration value="Barbados"/>
+			<xs:enumeration value="Belgio"/>
+			<xs:enumeration value="Belize"/>
+			<xs:enumeration value="Benin"/>
+			<xs:enumeration value="Bermuda"/>
+			<xs:enumeration value="Bhutan"/>
+			<xs:enumeration value="Bielorussia"/>
+			<xs:enumeration value="Birmania"/>
+			<xs:enumeration value="Bolivia"/>
+			<xs:enumeration value="Bosnia ed Erzegovina"/>
+			<xs:enumeration value="Botswana"/>
+			<xs:enumeration value="Brasile"/>
+			<xs:enumeration value="Brunei"/>
+			<xs:enumeration value="Bulgaria"/>
+			<xs:enumeration value="Burkina Faso"/>
+			<xs:enumeration value="Burundi"/>
+			<xs:enumeration value="Cambogia"/>
+			<xs:enumeration value="Camerun"/>
+			<xs:enumeration value="Canada"/>
+			<xs:enumeration value="Capo Verde"/>
+			<xs:enumeration value="Ciad"/>
+			<xs:enumeration value="Cile"/>
+			<xs:enumeration value="Cina"/>
+			<xs:enumeration value="Cipro"/>
+			<xs:enumeration value="Citt"/>
+			<xs:enumeration value="Colombia"/>
+			<xs:enumeration value="Comore"/>
+			<xs:enumeration value="Corea del Nord"/>
+			<xs:enumeration value="Corea del Sud"/>
+			<xs:enumeration value="Costa d'Avorio"/>
+			<xs:enumeration value="Costa Rica"/>
+			<xs:enumeration value="Croazia"/>
+			<xs:enumeration value="Cuba"/>
+			<xs:enumeration value="Cura"/>
+			<xs:enumeration value="Danimarca"/>
+			<xs:enumeration value="Dominica"/>
+			<xs:enumeration value="Ecuador"/>
+			<xs:enumeration value="Egitto"/>
+			<xs:enumeration value="El Salvador"/>
+			<xs:enumeration value="Emirati Arabi Uniti"/>
+			<xs:enumeration value="Eritrea"/>
+			<xs:enumeration value="Estonia"/>
+			<xs:enumeration value="Etiopia"/>
+			<xs:enumeration value="Figi"/>
+			<xs:enumeration value="Filippine"/>
+			<xs:enumeration value="Finlandia"/>
+			<xs:enumeration value="Francia"/>
+			<xs:enumeration value="Gabon"/>
+			<xs:enumeration value="Gambia"/>
+			<xs:enumeration value="Georgia"/>
+			<xs:enumeration value="Georgia del Sud e isole Sandwich meridionali"/>
+			<xs:enumeration value="Germania"/>
+			<xs:enumeration value="Ghana"/>
+			<xs:enumeration value="Giamaica"/>
+			<xs:enumeration value="Giappone"/>
+			<xs:enumeration value="Gibilterra"/>
+			<xs:enumeration value="Gibuti"/>
+			<xs:enumeration value="Giordania"/>
+			<xs:enumeration value="Grecia"/>
+			<xs:enumeration value="Grenada"/>
+			<xs:enumeration value="Groenlandia"/>
+			<xs:enumeration value="Guadalupa"/>
+			<xs:enumeration value="Guam"/>
+			<xs:enumeration value="Guatemala"/>
+			<xs:enumeration value="Guernsey"/>
+			<xs:enumeration value="Guinea"/>
+			<xs:enumeration value="Guinea Equatoriale"/>
+			<xs:enumeration value="Guinea-Bissau"/>
+			<xs:enumeration value="Guyana"/>
+			<xs:enumeration value="Guyana francese"/>
+			<xs:enumeration value="Haiti"/>
+			<xs:enumeration value="Honduras"/>
+			<xs:enumeration value="Hong Kong"/>
+			<xs:enumeration value="India"/>
+			<xs:enumeration value="Indonesia"/>
+			<xs:enumeration value="Iran"/>
+			<xs:enumeration value="Iraq"/>
+			<xs:enumeration value="Irlanda"/>
+			<xs:enumeration value="Islanda"/>
+			<xs:enumeration value="Isola Bouvet"/>
+			<xs:enumeration value="Isola di Man"/>
+			<xs:enumeration value="Isola di Natale"/>
+			<xs:enumeration value="Isola Norfolk"/>
+			<xs:enumeration value="Isole Åland"/>
+			<xs:enumeration value="Isole BES"/>
+			<xs:enumeration value="Isole Cayman"/>
+			<xs:enumeration value="Isole Cocos (Keeling)"/>
+			<xs:enumeration value="Isole Cook"/>
+			<xs:enumeration value="Isole Falkland"/>
+			<xs:enumeration value="Isole Fær Øer"/>
+			<xs:enumeration value="Isole Heard e McDonald"/>
+			<xs:enumeration value="Isole Marianne Settentrionali"/>
+			<xs:enumeration value="Isole Marshall"/>
+			<xs:enumeration value="Isole minori esterne degli Stati Uniti"/>
+			<xs:enumeration value="Isole Pitcairn"/>
+			<xs:enumeration value="Isole Salomone"/>
+			<xs:enumeration value="Isole Vergini americane"/>
+			<xs:enumeration value="Isole Vergini britanniche"/>
+			<xs:enumeration value="Israele"/>
+			<xs:enumeration value="Italia"/>
+			<xs:enumeration value="Jersey"/>
+			<xs:enumeration value="Kazakistan"/>
+			<xs:enumeration value="Kenya"/>
+			<xs:enumeration value="Kirghizistan"/>
+			<xs:enumeration value="Kiribati"/>
+			<xs:enumeration value="Kuwait"/>
+			<xs:enumeration value="Laos"/>
+			<xs:enumeration value="Lesotho"/>
+			<xs:enumeration value="Lettonia"/>
+			<xs:enumeration value="Libano"/>
+			<xs:enumeration value="Liberia"/>
+			<xs:enumeration value="Libia"/>
+			<xs:enumeration value="Liechtenstein"/>
+			<xs:enumeration value="Lituania"/>
+			<xs:enumeration value="Lussemburgo"/>
+			<xs:enumeration value="Macao"/>
+			<xs:enumeration value="Macedonia"/>
+			<xs:enumeration value="Madagascar"/>
+			<xs:enumeration value="Malawi"/>
+			<xs:enumeration value="Maldive"/>
+			<xs:enumeration value="Malesia"/>
+			<xs:enumeration value="Mali"/>
+			<xs:enumeration value="Malta"/>
+			<xs:enumeration value="Marocco"/>
+			<xs:enumeration value="Martinica"/>
+			<xs:enumeration value="Mauritania"/>
+			<xs:enumeration value="Mauritius"/>
+			<xs:enumeration value="Mayotte"/>
+			<xs:enumeration value="Messico"/>
+			<xs:enumeration value="Micronesia"/>
+			<xs:enumeration value="Moldavia"/>
+			<xs:enumeration value="Monaco"/>
+			<xs:enumeration value="Mongolia"/>
+			<xs:enumeration value="Montenegro"/>
+			<xs:enumeration value="Montserrat"/>
+			<xs:enumeration value="Mozambico"/>
+			<xs:enumeration value="Namibia"/>
+			<xs:enumeration value="Nauru"/>
+			<xs:enumeration value="Nepal"/>
+			<xs:enumeration value="Nicaragua"/>
+			<xs:enumeration value="Niger"/>
+			<xs:enumeration value="Nigeria"/>
+			<xs:enumeration value="Niue"/>
+			<xs:enumeration value="Norvegia"/>
+			<xs:enumeration value="Nuova Caledonia"/>
+			<xs:enumeration value="Nuova Zelanda"/>
+			<xs:enumeration value="Oman"/>
+			<xs:enumeration value="Paesi Bassi"/>
+			<xs:enumeration value="Pakistan"/>
+			<xs:enumeration value="Palau"/>
+			<xs:enumeration value="Palestina"/>
+			<xs:enumeration value="Panam"/>
+			<xs:enumeration value="Papua Nuova Guinea"/>
+			<xs:enumeration value="Paraguay"/>
+			<xs:enumeration value="Per"/>
+			<xs:enumeration value="Polinesia Francese"/>
+			<xs:enumeration value="Polonia"/>
+			<xs:enumeration value="Porto Rico"/>
+			<xs:enumeration value="Portogallo"/>
+			<xs:enumeration value="Qatar"/>
+			<xs:enumeration value="RD del Congo"/>
+			<xs:enumeration value="Regno Unito"/>
+			<xs:enumeration value="Rep. Ceca"/>
+			<xs:enumeration value="Rep. Centrafricana"/>
+			<xs:enumeration value="Rep. del Congo"/>
+			<xs:enumeration value="Rep. Dominicana"/>
+			<xs:enumeration value="Riunione"/>
+			<xs:enumeration value="Romania"/>
+			<xs:enumeration value="Ruanda"/>
+			<xs:enumeration value="Russia"/>
+			<xs:enumeration value="Sahara Occidentale"/>
+			<xs:enumeration value="Saint Kitts e Nevis"/>
+			<xs:enumeration value="Saint Vincent e Grenadine"/>
+			<xs:enumeration value="Saint-Barth"/>
+			<xs:enumeration value="Saint-Martin"/>
+			<xs:enumeration value="Saint-Pierre e Miquelon"/>
+			<xs:enumeration value="Samoa"/>
+			<xs:enumeration value="Samoa Americane"/>
+			<xs:enumeration value="San Marino"/>
+			<xs:enumeration value="Santa Lucia"/>
+			<xs:enumeration value="Sant'Elena, Ascensione e Tristan da Cunha"/>
+			<xs:enumeration value="Sao Tome e Principe"/>
+			<xs:enumeration value="Senegal"/>
+			<xs:enumeration value="Serbia"/>
+			<xs:enumeration value="Seychelles"/>
+			<xs:enumeration value="Sierra Leone"/>
+			<xs:enumeration value="Singapore"/>
+			<xs:enumeration value="Sint Maarten"/>
+			<xs:enumeration value="Siria"/>
+			<xs:enumeration value="Slovacchia"/>
+			<xs:enumeration value="Slovenia"/>
+			<xs:enumeration value="Somalia"/>
+			<xs:enumeration value="Spagna"/>
+			<xs:enumeration value="Sri Lanka"/>
+			<xs:enumeration value="Stati Uniti"/>
+			<xs:enumeration value="Sudafrica"/>
+			<xs:enumeration value="Sudan"/>
+			<xs:enumeration value="Sudan del Sud"/>
+			<xs:enumeration value="Suriname"/>
+			<xs:enumeration value="Svalbard e Jan Mayen"/>
+			<xs:enumeration value="Svezia"/>
+			<xs:enumeration value="Svizzera"/>
+			<xs:enumeration value="Swaziland"/>
+			<xs:enumeration value="Tagikistan"/>
+			<xs:enumeration value="Taiwan"/>
+			<xs:enumeration value="Tanzania"/>
+			<xs:enumeration value="Terre australi e antartiche francesi"/>
+			<xs:enumeration value="Territorio britannico dell'oceano Indiano"/>
+			<xs:enumeration value="Thailandia"/>
+			<xs:enumeration value="Timor Est"/>
+			<xs:enumeration value="Togo"/>
+			<xs:enumeration value="Tokelau"/>
+			<xs:enumeration value="Tonga"/>
+			<xs:enumeration value="Trinidad e Tobago"/>
+			<xs:enumeration value="Tunisia"/>
+			<xs:enumeration value="Turchia"/>
+			<xs:enumeration value="Turkmenistan"/>
+			<xs:enumeration value="Turks e Caicos"/>
+			<xs:enumeration value="Tuvalu"/>
+			<xs:enumeration value="Ucraina"/>
+			<xs:enumeration value="Uganda"/>
+			<xs:enumeration value="Ungheria"/>
+			<xs:enumeration value="Uruguay"/>
+			<xs:enumeration value="Uzbekistan"/>
+			<xs:enumeration value="Vanuatu"/>
+			<xs:enumeration value="Venezuela"/>
+			<xs:enumeration value="Vietnam"/>
+			<xs:enumeration value="Wallis e Futuna"/>
+			<xs:enumeration value="Yemen"/>
+			<xs:enumeration value="Zambia"/>
+			<xs:enumeration value="Zimbabwe"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MotivazioneVerbaleOSA">
+		<xs:annotation>
+			<xs:documentation>Tipo di verbale</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Fermo Amministrativo Ex Art. 86 DPR 602-73"/>
+			<xs:enumeration value="Assegni a vuoto ex L. 205 del 25-6-99"/>
+			<xs:enumeration value="Cartelle Esattoriali"/>
+			<xs:enumeration value="ZTL"/>
+			<xs:enumeration value="Semaforo rosso"/>
+			<xs:enumeration value="Divieto di sosta"/>
+			<xs:enumeration value="Eccesso di velocità"/>
+			<xs:enumeration value="Corsie preferenziali"/>
+			<xs:enumeration value="Guida in stato di ebbrezza"/>
+			<xs:enumeration value="Guida sotto effetti di stupefacenti"/>
+			<xs:enumeration value="Altro"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="VerbaleOSA">
+		<xs:annotation>
+			<xs:documentation>Verbale necessario all'iscrizione degli OSA</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NumeroVerbale" type="xs:string"/>
+			<xs:element name="DataVerbale" type="xs:date" minOccurs="0"/>
+			<xs:element name="Motivazione" type="MotivazioneVerbaleOSA" minOccurs="0"/>
+			<xs:element name="PuntiPersi" type="xs:positiveInteger" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

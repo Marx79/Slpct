@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:st="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v4" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" xmlns="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/introduttivi/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tp="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v7" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:ts="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2" xmlns:procura="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/introduttivi/v1" elementFormDefault="qualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1" schemaLocation="../base_v1/tipi-procura.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v7" schemaLocation="../base_v7/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v4" schemaLocation="../base_v4/tipi-base-siecic.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/uac/sicid/segnalazioni/tipi/v2" schemaLocation="../base_v2/tipi-segnalazioni-minori.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/sicid/uac/procura/tipi/v1" schemaLocation="../base_v1/tipi-procura.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" schemaLocation="../base_v4/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/siecic/tipibase/v4" schemaLocation="../base_v4/tipi-base-siecic.xsd"/>
+	<xs:annotation>
+		<xs:documentation>DEPOSITI INTRODUTTIVI PROCURA</xs:documentation>
+		<xs:documentation>Gli atti qui definiti permettono l'iscrizione all'Ufficio Affari Civili, registro Procura
+        </xs:documentation>
+	</xs:annotation>
+	<xs:element name="Debitore">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Debitore del procedimento. Comprende le informazioni minimali necessarie per la creazione del fascicolo all'interno dei sistemi di cancelleria.</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="denominazione" type="xs:normalizedString">
+					<xs:annotation>
+						<xs:documentation>Cognome o denominazione del Debitore. Il dato viene utilizzato per l'identificazione all'interno del procedimento</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="nome" type="xs:normalizedString" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Nome del Debitore. Il dato viene utiizzato per l'identificazione all'interno del procedimento.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="codiceFiscale" type="bt:CodiceFiscale">
+					<xs:annotation>
+						<xs:documentation>Codice fiscale o partita iva del Debitore</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="indirizzo" type="at:Indirizzo"/>
+				<xs:element name="codiceUnivocoPA" type="bt:CodiceUnivoco" minOccurs="0"/>
+				<xs:element name="formaSocietaria" type="st:FormaSocietaria"/>
+				<xs:element name="unitaLocale" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="at:Indirizzo">
+								<xs:sequence>
+									<xs:element name="tipoUnita" type="bt:TipoUnitaLocale"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="naturaGiuridica" type="bt:NaturaGiuridica" use="required"/>
+			<xs:attribute name="ID" type="xs:NMTOKEN" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccordiNegoziazione">
+		<xs:annotation>
+			<xs:documentation>Deposito di Accordi Negoziazione in procura</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tp:IntroduttivoProcura">
+					<xs:sequence>
+						<xs:element name="AnagraficaIstanti" type="tp:AnagraficaProcedimentoProcura"/>
+						<xs:element name="AnagraficaProle" type="tp:AnagraficaProle" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+
+
+	<xs:key name="PK_PARTECIPANTI">
+		<xs:selector xpath="AnagraficaIstanti/tp:Partecipanti/*"/>
+		<xs:field xpath="@ID"/>
+	</xs:key>
+
+
+        <xs:key name="PK_AVVOCATO">
+            <xs:selector xpath="AnagraficaIstanti/pt:Soggetti/pt:Avvocato"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:key>
+        <xs:unique name="AK_PARTECIPANTI">
+            <xs:selector xpath="AnagraficaIstanti/tp:Partecipanti/*"/>
+            <xs:field xpath="at:codiceFiscale"/>
+        </xs:unique>
+
+	<xs:keyref name="FK_PARTE_AVVOCATO" refer="PK_PARTECIPANTI">
+		<xs:selector xpath="AnagraficaIstanti/pt:Soggetti/pt:Avvocato/at:parteRappresentata"/>
+		<xs:field xpath="@ref"/>
+	</xs:keyref>
+
+
+	</xs:element>
+	<xs:simpleType name="TipoGruppoDebitori">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GI">
+				<xs:annotation>
+					<xs:documentation>Gruppo di Imprese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CF">
+				<xs:annotation>
+					<xs:documentation>Crisi Familiare</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FascicoloSegnalazioni">
+		<xs:sequence>
+			<xs:element name="numero" type="xs:nonNegativeInteger"/>
+			<xs:element name="anno" type="xs:nonNegativeInteger"/>
+			<xs:element name="definizioneSegnalazione" type="xs:boolean" default="false"/>
+		</xs:sequence>
+		<xs:attribute name="ufficio" type="xs:string" use="required"/>
+		<xs:attribute name="ruolo" type="ts:RuoloSegnalazione" use="required"/>
+		<xs:attribute name="rito" type="ts:Rito" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="FascicoloProcuraCivile">
+		<xs:sequence>
+			<xs:element name="numero" type="xs:nonNegativeInteger"/>
+			<xs:element name="anno" type="xs:nonNegativeInteger"/>
+			<!--<xs:element name="definizioneFascicoloProcuraCivile" type="xs:boolean" default="false"/>-->
+		</xs:sequence>
+		<xs:attribute name="ufficio" type="xs:string" use="required"/>
+		<xs:attribute name="ruolo" type="procura:RuoloSegnalazione" use="required"/>
+		<xs:attribute name="rito" type="procura:Rito" use="required"/>
+	</xs:complexType>
+	<xs:element name="SegnalazionePerLiquidazioneGiudiziale">
+		<xs:annotation>
+			<xs:documentation>Segnalazione per liquidazione giudiziale
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="false">
+			<xs:complexContent mixed="false">
+				<xs:extension base="tp:IntroduttivoProcura">
+					<xs:sequence>
+						<xs:element name="AnagraficaSegnalazione" type="ts:AnagraficaSegnalazione"/>
+						<xs:element name="Debitori">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element ref="Debitore" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="gruppoDebitori" type="TipoGruppoDebitori" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="Grado">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PRIMO">
+				<xs:annotation>
+					<xs:documentation>Primo Grado</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SECONDO">
+				<xs:annotation>
+					<xs:documentation>Secondo Grado</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TipologiaAtto">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PU01">
+				<xs:annotation>
+					<xs:documentation>Ricorso per Liquidazione giudiziale CCI PU</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ricorso">
+				<xs:annotation>
+					<xs:documentation>Ricorso (VG e CON) – Tribunale (primo grado) e Corte d'appello (grado unico di appello)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoMinorenni">
+				<xs:annotation>
+					<xs:documentation>Ricorso Minorenni – Tribunale per i Minorenni</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoAppello">
+				<xs:annotation>
+					<xs:documentation>Ricorso Appello (VG e CON) – Tribunale e Corte d'appello (secondo grado)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoCautelareAnteCausam">
+				<xs:annotation>
+					<xs:documentation>Ricorso Cautelare Ante Causam (CON) – Tribunale e Corte d'Appello</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RevocazioneArt395cpcTribunale">
+				<xs:annotation>
+					<xs:documentation>Revocazione ex art. 395 Cpc (CON) – Tribunale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RevocazioneArt395cpcCorte">
+				<xs:annotation>
+					<xs:documentation>Revocazione ex art. 395 Cpc (CON) – Corte d'Appello</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoAmministrazioneSostegno">
+				<xs:annotation>
+					<xs:documentation>Ricorso Amministrazione di sostegno (VG) – Tribunale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoRitoSemplificatoCartabia">
+				<xs:annotation>
+					<xs:documentation>Ricorso Rito Semplificato Cartabia (CON) – Tribunale</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoAppelloMinorenni">
+				<xs:annotation>
+					<xs:documentation>Ricorso Appello Minorenni (VG) – Corte d'Appello</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RicorsoNegoziazione">
+				<xs:annotation>
+					<xs:documentation>Ricorso ex art. 6 d.l. 12.9.2014, n. 132 (VG)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Beneficiario">
+		<xs:sequence>
+			<xs:element name="Cognome" type="xs:string"/>
+			<xs:element name="Nome" type="xs:string"/>
+			<xs:element name="CodiceFiscale" type="xs:string" minOccurs="0"/>
+			<xs:element name="LuogoNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="DataNascita" type="xs:date" minOccurs="0"/>
+			<xs:element name="IndirizzoResidenza" type="xs:string" minOccurs="0"/>
+			<xs:element name="CittaResidenza" type="xs:string" minOccurs="0"/>
+			<xs:element name="Domicilio" type="xs:string" minOccurs="0"/>
+			<xs:element name="Nazionalita" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SegnalazionePerAmministrazioneSostegno">
+		<xs:annotation>
+			<xs:documentation>Segnalazione Amministrazione di sostegno</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tp:IntroduttivoProcura">
+					<xs:annotation>
+						<xs:documentation>Anche se il tag AttoIntroduttivo segue la logica di tutti gli introduttivi SICID, e' necessario compilare solo destinazione ed eventualmente IndiceBusta, in quanto l'iscrizione del ricorso dovra' essere eseguita dal SIECIC tramite la compilazione dei dati successivi.</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="AnagraficaSegnalazione" type="ts:AnagraficaSegnalazione"/>
+						<xs:element name="Beneficiario" type="Beneficiario"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TipoMerito">
+		<xs:choice>
+			<xs:element name="atp" type="bt:EmptyElement"/>
+			<xs:element name="fornero" type="bt:EmptyElement"/>
+			<xs:element name="generico" type="bt:EmptyElement"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:simpleType name="TipoMinore">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Minore"/>
+			<xs:enumeration value="MinoreStraniero"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DatiMinore">
+		<xs:sequence>
+			<xs:element name="Tipologia" type="TipoMinore" minOccurs="0"/>
+			<xs:element name="Cognome" type="xs:string" minOccurs="0"/>
+			<xs:element name="Nome" type="xs:string" minOccurs="0"/>
+			<xs:element name="LuogoNascita" type="xs:string" minOccurs="0"/>
+			<xs:element name="DataNascita" type="xs:date" minOccurs="0"/>
+			<xs:element name="Indirizzo" type="xs:string" minOccurs="0"/>
+			<xs:element name="Citta" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SegnalazioneMinore">
+		<xs:annotation>
+			<xs:documentation>Segnalazione minore</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tp:IntroduttivoProcura">
+					<xs:annotation>
+						<xs:documentation>Anche se il tag AttoIntroduttivo segue la logica di tutti gli introduttivi SICID, e' necessario compilare solo destinazione ed eventualmente IndiceBusta, in quanto l'iscrizione del ricorso dovra' essere eseguita dal SIECIC tramite la compilazione dei dati successivi.</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="AnagraficaSegnalazione" type="ts:AnagraficaSegnalazione"/>
+						<xs:element name="DatiMinore" type="DatiMinore" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SegnalazioneGenerica">
+		<xs:annotation>
+			<xs:documentation>Segnalazione generica</xs:documentation>
+			<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tp:IntroduttivoProcura">
+					<xs:annotation>
+						<xs:documentation>Anche se il tag AttoIntroduttivo segue la logica di tutti gli introduttivi SICID, e' necessario compilare solo destinazione ed eventualmente IndiceBusta, in quanto l'iscrizione del ricorso dovra' essere eseguita dal SIECIC tramite la compilazione dei dati successivi.</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="AnagraficaSegnalazione" type="ts:AnagraficaSegnalazione"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/sicid/rappcomune/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" targetNamespace="http://schemi.processotelematico.giustizia.it/sicid/rappcomune/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" schemaLocation="../base_v4/tipi-atti.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:complexType name="DomandeClassAction">
+		<xs:sequence>
+			<xs:element name="Domanda" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Una domanda senza richieste un una domanda rigettata</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Numero">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="D[AI][0-9]{7}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Richiesta" minOccurs="0" maxOccurs="2">
+							<xs:annotation>
+								<xs:documentation>Le richieste non presenti sono da considerarsi rigettate</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Importo" type="bt:Valuta" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Se l'importo non è presente allora verra' considerato con 'Non Precisato'</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Tipo">
+										<xs:annotation>
+											<xs:documentation>Risarcitoria/Restitutoria</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="Risarcitoria"/>
+												<xs:enumeration value="Restitutoria"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+							<xs:unique name="oneTipoforEachRichiesta">
+								<xs:selector xpath="Tipo"/>
+								<xs:field xpath="."/>
+							</xs:unique>
+						</xs:element>
+						<xs:element name="Motivazioni" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+				<xs:unique name="oneDomanda">
+					<xs:selector xpath="Numero"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DepositoProgettoDirittiOmogenei">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="DomandeClassAction" type="DomandeClassAction"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SchemaAccordoTransattivoCA">
+		<xs:annotation>
+			<xs:documentation>Schema Accordo Transattivo Class Action</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoPianoRiparto">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="DomandeClassAction" type="DomandeClassAction"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoDocumentazionePagamenti">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="DomandeClassAction" type="DomandeClassAction"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccordoTransattivoCA">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:AttoProcedimento">
+					<xs:sequence>
+						<xs:element name="DomandeClassAction" type="DomandeClassAction"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:all="http://schemi.processotelematico.giustizia.it/tipi/allegati/v12" xmlns="http://schemi.processotelematico.giustizia.it/esallegaticonxml" targetNamespace="http://schemi.processotelematico.giustizia.it/esallegaticonxml" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/allegati/v12" schemaLocation="./tipi-allegati.xsd"/>
+
+	<xs:element name="ESAllegatoConXml">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="all:AttestazioneConformita"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

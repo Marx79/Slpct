@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Nik (.) -->
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Nicola (..) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti" xmlns:evt="http://schemi.processotelematico.giustizia.it/eventi/parte" xmlns="http://schemi.processotelematico.giustizia.it/atti/Introduttivi" targetNamespace="http://schemi.processotelematico.giustizia.it/atti/Introduttivi" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti" schemaLocation="./tipi-atti.xsd"/>
+  <xs:import namespace="http://schemi.processotelematico.giustizia.it/eventi/parte" schemaLocation="./eventi-parte.xsd"/>
+  <xs:annotation>
+    <xs:documentation>ATTI DI PARTE INTRODUTTIVI</xs:documentation>
+    <xs:documentation>Gli atti qui definiti iscrivono una nuova causa al ruolo per citazione o ricorso</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="DatiIntimazione">
+    <xs:sequence>
+      <xs:element name="Data" type="xs:date"/>
+      <xs:element name="Provincia" type="xs:normalizedString" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TipoDecreto">
+    <xs:choice>
+      <xs:element name="somma" type="bt:Valuta"/>
+      <xs:element name="somma-beni" type="bt:Valuta"/>
+      <xs:element name="oneri-condominiali" type="bt:Valuta"/>
+      <xs:element name="consegna-beni"/>
+    </xs:choice>
+    <xs:attribute name="esecutivo" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="TipoDivorzio">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="scioglimentoMatrimonio"/>
+      <xs:enumeration value="cessazioneEffettiCivili"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DatiMatrimonio">
+    <xs:sequence>
+      <xs:element name="ParteCivile" type="xs:string" minOccurs="0"/>
+      <xs:element name="ParteReligiosa" type="xs:string" minOccurs="0"/>
+      <xs:element name="NumeroMatrimonio" type="xs:nonNegativeInteger" minOccurs="0"/>
+      <xs:element name="RegistroMatrimonio" type="xs:string" minOccurs="0"/>
+      <xs:element name="SerieMatrimonio" type="xs:string" minOccurs="0"/>
+      <xs:element name="CittaMatrimonio" type="xs:string" minOccurs="0"/>
+      <xs:element name="ProvinciaMatrimonio" type="xs:string" minOccurs="0"/>
+      <xs:element name="DataCelebrazioneMatrimonio" type="xs:date" minOccurs="0"/>
+      <xs:element name="DataOmologazioneMatrimonio" type="xs:date" minOccurs="0"/>
+      <xs:element name="LuogoTrascrizioneMatrmonio" type="xs:string" minOccurs="0"/>
+      <xs:element name="AnnoRegistrazione" type="xs:nonNegativeInteger" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Citazione">
+    <xs:annotation>
+      <xs:documentation>Citazione generica</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="istanze" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Istanze presentabili contestualmente alla citazione</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element ref="evt:IstanzaExArt186Ter"/>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CitazioneAppello">
+    <xs:annotation>
+      <xs:documentation>Citazione in appello</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiAppello" type="pt:GradoPrecedente"/>
+            <xs:element name="istanze" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Istanze presentabili contestualmente alla citazione</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="evt:IstanzaSospensioneProvvisoriaEsecuzione" minOccurs="0"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CitazioneSfratto">
+    <xs:annotation>
+      <xs:documentation>Citazione in materia di sfratto, morosita', finita locazione</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="Intimazione" type="DatiIntimazione"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CitazioneMateriaSocetaria">
+    <xs:annotation>
+      <xs:documentation>Citazione in materia societaria</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CitazioneInRiassunzione">
+    <xs:annotation>
+      <xs:documentation>Citazione in riassunzione e riassunzione in appello</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiProcedimento" type="pt:DatiRiassunzioneProcedimento"/>
+            <xs:element name="DatiAppello" type="pt:GradoPrecedente" minOccurs="0"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OpposizioneDecretoIngiuntivo">
+    <xs:annotation>
+      <xs:documentation>Atto di opposizione a decreto ingiuntivo</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiDecreto">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="causa" type="pt:RiferimentoFascicolo" minOccurs="0">
+                    <xs:annotation>
+                      <xs:documentation>Riferimento al decreto opposto, come identificativi di procedimento (anno numero)</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="decreto" type="pt:RiferimentoProvvedimento" minOccurs="0">
+                    <xs:annotation>
+                      <xs:documentation>Riferimento al decreto ingiuntivo</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="data" type="xs:date" minOccurs="0">
+                    <xs:annotation>
+                      <xs:documentation>Data di emissione del decreto</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ricorso">
+    <xs:annotation>
+      <xs:documentation>Iscrizione al ruolo di un ricorso generico</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoAppello">
+    <xs:annotation>
+      <xs:documentation>Iscrizione al ruolo di un ricorso in appello</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiAppello" type="pt:GradoPrecedente"/>
+            <xs:element name="istanze" minOccurs="0">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="evt:IstanzaSospensioneProvvisoriaEsecuzione"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoCautelareAnteCausam">
+    <xs:annotation>
+      <xs:documentation>Iscrizione di un ricorso per un provvedimento cautelare ante causam.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="RiferimentoMerito" type="pt:RiferimentoFascicolo">
+              <xs:annotation>
+                <xs:documentation>Riferimento alla causa di merito del ricorso</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoDecretoIngiuntivo">
+    <xs:annotation>
+      <xs:documentation>Iscrizione di un ricorso per decreto ingiuntivo.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="TipoDecreto" type="TipoDecreto"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoDivorzio">
+    <xs:annotation>
+      <xs:documentation>Iscrizione di un ricorso per divorzio giudiziale o consensuale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiMatrimonio" type="DatiMatrimonio"/>
+            <xs:element name="DatiDivorzio">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="Congiunto">
+                    <xs:complexType>
+                      <xs:choice>
+                        <xs:element ref="SeparazioneGiudiziale"/>
+                        <xs:element ref="SeparazioneConsensuale"/>
+                      </xs:choice>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element name="Giudiziale">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element ref="SeparazioneConsensuale"/>
+                        <xs:element ref="SeparazioneGiudiziale"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+                <xs:attribute name="tipo" type="TipoDivorzio" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoSeparazione">
+    <xs:annotation>
+      <xs:documentation>Iscrizione di un ricorso per separazione giudiziale o consensuale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+            <xs:element name="DatiMatrimonio" type="DatiMatrimonio"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoSequestroConservativo">
+    <xs:annotation>
+      <xs:documentation>Iscrizione di un ricorso sequestro conservativo</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RicorsoSequestroGiudiziario">
+    <xs:annotation>
+      <xs:documentation>iscrizione di un ricorso sequestro giudiziario</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="pt:AttoIntroduttivo">
+          <xs:sequence>
+            <xs:element ref="AnagraficaProcedimento"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SeparazioneGiudiziale">
+    <xs:annotation>
+      <xs:documentation>Dati della separazione giudiziale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Causa" type="pt:RiferimentoFascicolo"/>
+        <xs:element name="Sentenza" type="pt:RiferimentoProvvedimento"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SeparazioneConsensuale">
+    <xs:annotation>
+      <xs:documentation>Dati della separazione consensuale</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Causa" type="pt:RiferimentoFascicolo"/>
+        <xs:element name="Omologazione" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnagraficaProcedimento">
+    <xs:annotation>
+      <xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="pt:Partecipanti"/>
+        <xs:element ref="pt:Soggetti"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

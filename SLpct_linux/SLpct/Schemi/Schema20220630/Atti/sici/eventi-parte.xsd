@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/eventi/parte" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" xmlns:pt="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemi.processotelematico.giustizia.it/eventi/parte" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="./tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v4" schemaLocation="./base_v4/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" schemaLocation="./base_v4/tipi-atti.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Eventi associabili ad atti di parte</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="TipoReclamoCollegio">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Generico"/>
+			<xs:enumeration value="ExArt669cpc"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="tIstanzaRicusazioneCtu">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="ctu" type="at:RiferimentoCTU"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tIscrizioneReclamoAlCollegio">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="attore" type="at:RiferimentoParte" maxOccurs="unbounded"/>
+					<xs:element name="convenuto" type="at:RiferimentoParte" maxOccurs="unbounded"/>
+					<xs:element name="terzo" type="at:Parte" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="tipoReclamo" type="TipoReclamoCollegio" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tNominaConsulenteParte">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="parte" type="at:RiferimentoPartecipante" maxOccurs="unbounded"/>
+					<xs:element name="consulente" type="xs:normalizedString"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tNominaAmministrazione">
+		<xs:complexContent>
+			<xs:extension base="pt:IstanzaEvento">
+				<xs:sequence>
+					<xs:element name="amministrazione" type="at:Soggetto"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DichiarazioneInefficacia" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaCorrezioneErroreMateriale" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Istanza di correzione di errore materiale</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IstanzaCitazioneInRiassunzione" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaTrasformazioneInConsensuale" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaFissazioneUdienza" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaCongiuntaFissazioneUdienza" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAnticipazioneDifferimentoUdienza" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaDomandaIncidentale" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaInterruzione" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRicusazioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRinuncia" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaDiscussioneOrale" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaExArt186Bis" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaExArt186Ter" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaExArt186Quater" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaExArt243Cpc" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaArt418" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRicusazioneCtu" type="tIstanzaRicusazioneCtu"/>
+	<xs:element name="IstanzaEstromissione" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaDeferimentoGiuramento" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRimessioneInIstruttoria" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaSospensioneProvvisoriaEsecuzione" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRimessioneTermini" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRichiestaInefficaciaExArt188" type="pt:IstanzaEvento"/>
+	<xs:element name="SostituzioneAmministrazioneSostegno">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="NuovaAmministrazione" type="tNominaAmministrazione"/>
+						<xs:element name="AmministrazioneDaSostituire" type="at:RiferimentoSoggetto"/>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RimozioneAmministrazioneSostegno">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="Amministrazione" type="at:RiferimentoSoggetto"/>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ConvocazionePartiDinanziAlGiudice">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaProrogaMisureProtettive">
+		<xs:annotation>
+			<xs:documentation>Istanza proroga Misure Protettive - atto atto non depositabile prima dell'entrata in vigore della riforma della crisi d'impresa </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="CodiceFiscale" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Codice Fiscale del debitore istante</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="note" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaRinnovoTSO" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRevocaTSO" type="pt:IstanzaEvento"/>
+	<xs:element name="CessazioneTSO" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaAutorizzTrattenimentoFrontiera" type="pt:IstanzaEvento"/>
+	<xs:element name="IstanzaRichiestaEsecutorietaExArt647">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence minOccurs="0">
+						<xs:element name="parte" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:RiferimentoParte">
+										<xs:attribute name="tipoRichiesta" use="required">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="DefinitivaEsecutorieta"/>
+													<xs:enumeration value="PrimaFormula"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoDocumentazioneIntegrativa" type="pt:IstanzaEvento"/>
+	<xs:element name="RelazioneAmministrazioneSostegno">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoProveExArt210Cpc" type="pt:IstanzaEvento"/>
+	<xs:element name="RelazioneFinaleArt2409cc" type="pt:IstanzaEvento"/>
+	<xs:element name="DocumentazioneIntegrativaAUSL">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DocumentazioneIntegrativaPM">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RelazioneIspettoreArt2409cc" type="pt:IstanzaEvento"/>
+	<xs:element name="AttoNonCodificato">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="note" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InventarioEreditaGiacente" type="pt:IstanzaEvento"/>
+	<xs:element name="RendicontoEreditaGiacente" type="pt:IstanzaEvento"/>
+	<xs:element name="RendicontoAmministrazioneSostegno">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:sequence>
+						<xs:element name="SportelloProssimita" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="at:SportelloProssimita">
+										<xs:sequence>
+											<xs:element name="Funzionari" type="at:Avvocato" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DepositoRicorsoDiRiassunzione" type="pt:IstanzaEvento"/>
+	<xs:element name="DepositoRicorsoFissazioneUdienzaDiProsecuzioneProcedimento" type="pt:IstanzaEvento"/>
+	<xs:element name="DepositoFoglioDiPC" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Foglio di precisazioni conclusioni</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DepositoMemoria2409" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Deposito memoria 2409 cpc</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OpposizioneTardivaExArt668" type="pt:IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Ricorso in opposizione tardiva ex art. 668 c.p.c</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IscrizioneReclamoAlCollegio" type="tIscrizioneReclamoAlCollegio"/>
+	<xs:element name="NominaConsulenteParte" type="tNominaConsulenteParte"/>
+	<xs:element name="RichiestaInefficaciaMisuraCautelare" type="pt:IstanzaEvento"/>
+	<xs:element name="RichiestaFissazioneModalitaProvvedimento" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcExArt186" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcExArt124c7" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcRicusazioneGiudice" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautIspezionePreventiva" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautProvaTestim_AccertTecnicoPreventivo" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautProvvUurgenzaExArt700" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautSequestroConservativoExArt671" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautSequestroGiudiziarioExArt670" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCautSequestroLiberatorioExArt687" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcProposizioneQuerelaFalso" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcCorrezioneErroreMateriale" type="pt:IstanzaEvento"/>
+	<xs:element name="SubProcSospensione" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoNotaSpese">
+		<xs:annotation>
+			<xs:documentation>Deposito della nota spese</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:attribute name="spese_esenti" type="bt:Valuta"/>
+					<xs:attribute name="spese_imponibili" type="bt:Valuta"/>
+					<xs:attribute name="spese_generali" type="bt:Valuta"/>
+					<xs:attribute name="compensi" type="bt:Valuta"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depositoIstanzaLiquidazionePatrocinio">
+		<xs:annotation>
+			<xs:documentation>Deposito dell'istanza di liquidazione patrocinio</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="avvocato" type="at:RiferimentoSoggetto">
+					<xs:annotation>
+						<xs:appinfo source="http://www.giustizia.it/gl/sgr"/>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="cfParte" type="xs:string"/>
+				<xs:element name="speseEsenti" type="xs:double"/>
+				<xs:element name="speseImponibili" type="xs:double"/>
+				<xs:element name="speseGenerali" type="xs:double"/>
+				<xs:element name="compensi" type="xs:double"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ChiamataTerzo" type="xs:boolean"/>
+	<xs:element name="IstanzaRevocaMisureProtettive">
+		<xs:annotation>
+			<xs:documentation>Istanza revoca mis. prot. - atto non depositabile prima dell'entrata in vigore della riforma della crisi d'impresa </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="nome" type="xs:string"/>
+				<xs:element name="cognome" type="xs:string"/>
+				<xs:element name="cfParte" type="xs:string"/>
+				<xs:element name="note" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaConfermaMisureProtettive">
+		<xs:annotation>
+			<xs:documentation>Istanza conf. mis. prot. - atto non depositabile prima dell'entrata in vigore della riforma della crisi d'impresa </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="cfDebitore" type="xs:string"/>
+				<xs:element name="note" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IstanzaSostituzioneEsperto">
+		<xs:annotation>
+			<xs:documentation>Istanza sost. esperto. - atto non depositabile prima dell'entrata in vigore della riforma della crisi d'impresa </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="cfDebitore" type="xs:string"/>
+				<xs:element name="note" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depCertificazPubbAccordi">
+		<xs:annotation>
+			<xs:documentation>Deposito Certificazione Pubblicazione Accordi</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dataPubblicazione" type="xs:date"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depositoBilanci" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoDichiarazioniRedditiIva" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoProspettoPatrimoniale" type="pt:IstanzaEvento"/>
+	<xs:element name="DepositoElencoCreditori" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoPianoFinanziario" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoProspettoIniziativeIndustriali" type="pt:IstanzaEvento"/>
+	<xs:element name="depositoAutocertificazioneImprenditore" type="pt:IstanzaEvento"/>
+	<xs:element name="parereEsperto" type="pt:IstanzaEvento"/>
+	<xs:element name="richiestaProroga" type="pt:IstanzaEvento"/>
+	<xs:element name="richiestaRevoca" type="pt:IstanzaEvento"/>
+	<xs:element name="reclamoCollegio">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depositoSostituzioneEsperto">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pt:IstanzaEvento">
+					<xs:choice>
+						<xs:element name="cfEsperto" type="at:RiferimentoSoggetto"/>
+						<xs:sequence>
+							<xs:element name="nuovoEsperto" type="at:Esperto"/>
+						</xs:sequence>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="depositoRinunciaEsperto" type="pt:IstanzaEvento"/>
+</xs:schema>

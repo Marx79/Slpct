@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" xmlns:at="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" xmlns:bt="http://schemi.processotelematico.giustizia.it/tipi" xmlns:all="http://schemi.processotelematico.giustizia.it/tipi/allegati/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" targetNamespace="http://schemi.processotelematico.giustizia.it/tipi/atti/v4" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi" schemaLocation="../tipi-base.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/anagrafiche/v3" schemaLocation="../base_v3/tipi-anagrafiche.xsd"/>
+	<xs:import namespace="http://schemi.processotelematico.giustizia.it/tipi/allegati/v1" schemaLocation="../base_v1/tipi-allegati.xsd"/>
+	<xs:attributeGroup name="RegistroTelematico">
+		<xs:annotation>
+			<xs:documentation>Attributi necessari ad individuare un registro telematico</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ufficio" type="xs:string" use="required"/>
+		<xs:attribute name="ruolo" type="bt:Ruolo" use="required"/>
+		<xs:attribute name="rito" type="bt:Rito" use="optional"/>
+	</xs:attributeGroup>
+	<xs:complexType name="NumeroProcedimento">
+		<xs:annotation>
+			<xs:documentation>Numero di un procedimento</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:nonNegativeInteger">
+				<xs:attribute name="sub" type="xs:nonNegativeInteger" use="optional"/>
+                <xs:attribute name="subSocio" type="xs:nonNegativeInteger" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoProcedimento">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un procedimento all'interno del sistema di gestione dei registri.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+	    <xs:element name="numero" type="NumeroProcedimento"/>
+			<xs:element name="anno" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="RegistroTelematico"/>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoFascicolo">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un fascicolo all'interno del sistema di gestione dei registri. Ad un fascicolo sono legati uno o piu' procedimenti.
+		Nel riferimento al fasciclo non e' indicato il ruolo di iscrizione in quanto e' sempre identico a quello dell'atto che utilizza il riferimento.      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numero" type="xs:nonNegativeInteger"/>
+			<xs:element name="anno" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+		<xs:attribute name="ufficio" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoProvvedimento">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad un provvedimento del magistrato.
+		Non e' indicato il ruolo in quanto e' sempre identico a quello dell'atto che utilizza il riferimento.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numero" type="xs:nonNegativeInteger"/>
+			<xs:element name="anno" type="xs:nonNegativeInteger"/>
+		</xs:sequence>
+		<xs:attribute name="ufficio" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="FascicoloCollegato">
+		<xs:annotation>
+			<xs:documentation>Estremi per l'identificazione di un fascicolo collegato.
+		Possono essere indicati o il fascicolo o il provvedimento emesso collegato.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fascicolo" type="RiferimentoFascicolo" minOccurs="0"/>
+			<xs:element name="provvedimento" type="RiferimentoProvvedimento" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IstanzaEvento">
+		<xs:annotation>
+			<xs:documentation>Tipo astratto per l'evento scaricabile dall'atto</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="BollettinoPostale">
+		<xs:annotation>
+			<xs:documentation>Estremi per l'identificazione di pagamento tramite bollettino postale</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bt:Valuta">
+				<xs:attribute name="agenzia" type="bt:CodiceUfficioPostale" use="required"/>
+				<xs:attribute name="vcy" type="bt:CodiceVCY" use="required"/>
+				<xs:attribute name="data" type="xs:date" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MarcheLottoMatica">
+		<xs:annotation>
+			<xs:documentation>Estremi per l'dentificazione di pagemento tramite marca da bollo LottoMatica</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="Marca">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="bt:Valuta">
+							<xs:attribute name="ID" type="xs:string" use="required"/>
+							<xs:attribute name="data" type="xs:date" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelloF23">
+		<xs:annotation>
+			<xs:documentation>Estremi per l'identificazione/qualificazione del pagamento tramite modello F23</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="bt:Valuta">
+				<xs:attribute name="data" type="xs:date" use="required"/>
+				<xs:attribute name="ID" type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoDocumentale" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Generico riferimento ad documentazione</xs:documentation>
+			<xs:documentation>Il riferimento documentale e' un elemento che puo' essere fornito in forma testuale, se istanza del tipo base, oppure strutturato se istanza dei tipi derivati</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="AttoProcedimento" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Generico atto in corso di causa.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="procedimento" type="RiferimentoProcedimento">
+				<xs:annotation>
+					<xs:documentation>Riferimento alla causa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="riferimento" type="RiferimentoDocumentale" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="RefId" type="xs:NMTOKEN"/>
+		<xs:attribute name="urgente" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="AttoProcedimentoMagistrato">
+		<xs:annotation>
+			<xs:documentation>Generico atto del magistrato in corso di causa.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AttoProcedimento">
+				<xs:sequence>
+					<xs:element name="eventoCollegato" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identificativo dell'evento collegato al provvedimento del magistrato</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:simpleContent>
+								<xs:extension base="xs:string">
+									<xs:attribute name="evadeIstanza" type="xs:boolean"/>
+								</xs:extension>
+							</xs:simpleContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Articolo">
+		<xs:annotation>
+			<xs:documentation>Riferimento ad articolo di legge con sottonumerazione</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:nonNegativeInteger">
+				<xs:attribute name="sottoNumerazione" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoNormativo" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Riferimento a documentazione normativa.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:extension base="RiferimentoDocumentale">
+				<xs:choice>
+					<xs:element name="RiferimentoLegge">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="numero" type="xs:string"/>
+								<xs:element name="anno" type="xs:nonNegativeInteger"/>
+								<xs:element name="articolo" type="Articolo" minOccurs="0"/>
+								<xs:element name="allegato" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RiferimentoCodici">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="articolo" type="Articolo"/>
+								<xs:element name="comma" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+							<xs:attribute name="codice" use="optional" default="civile">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="civile"/>
+										<xs:enumeration value="penale"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Rivista">
+		<xs:annotation>
+			<xs:documentation>Definizione della rivista per i riferimenti alla documentazione</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="posizione" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RiferimentoGiurisprudenziale" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Riferimento a documentazione giurisprudenziale, provvedimenti (sentenze pubblicata) o atti legati a procedimenti</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:extension base="RiferimentoDocumentale">
+				<xs:choice minOccurs="0">
+					<xs:element name="RiferimentoDocumento">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="sentenza" type="RiferimentoProvvedimento"/>
+								<xs:element name="rivista" type="Rivista" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RiferimentoAtto">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="fascicolo" type="RiferimentoFascicolo"/>
+								<xs:element name="rivista" type="Rivista" minOccurs="0"/>
+							</xs:sequence>
+							<xs:attribute name="atto" type="bt:TipoAtto" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:attribute name="relazioneInterpretativa" type="bt:TipoRelazioneInterpretativa" use="optional"/>
+				<xs:attribute name="ruolo" type="bt:Ruolo" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PQM">
+		<xs:annotation>
+			<xs:documentation>P.Q.M. presente negli atti del magistrato</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Domanda">
+		<xs:annotation>
+			<xs:documentation>Domanda presentata negli atti di parte</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AttoIntroduttivo" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Generico atto per l'introduzione di una causa al ruolo.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="destinazione">
+				<xs:annotation>
+					<xs:documentation>Ufficio Giudiziario di destinazione, tra quelli dove e' attivo il PCT</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="RegistroTelematico"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Oggetto" type="bt:CodiceOggetto">
+				<xs:annotation>
+					<xs:documentation>Codice oggetto della causa. L'oggetto deve essere attinente all'atto specifico.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValoreCausa" type="bt:Valuta" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Valore della causa (ai sensi dell'art.14 del D.P.R. 30 Maggio
+			2002, n.115); 0 se indeterminabile o esente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ContributoUnificato" type="ContributoUnificato" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Valore del contributo unificato esteso comprensivo anche dei dati di pagamento. L'assenza dell'elemento specifica l'esenzione del pagamento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="RefId" type="xs:NMTOKEN"/>
+	</xs:complexType>
+	<xs:complexType name="AnagraficaProcedimento">
+		<xs:annotation>
+			<xs:documentation>Dati anagrafici relativi al procedimento da iscrivere</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Partecipanti">
+				<xs:annotation>
+					<xs:documentation>Parti in causa</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Parte" type="at:Parte" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Soggetto che introduce il procedimento. Ad esempio Attore/Ricorrente/Appellante nelle cause di contenzioso. Il primo elemento e' considerato il principale.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ControParte" type="at:Parte" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Parte opposta nel procedimento. Ad esempio Convenuto/Resistente/Appellato coinvolto nella causa di contenzioso. Il primo elemento e' considerato il principale. Puo' essere assente solo nel contesto degli atti di Volontaria Giurisdizione.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Altro" type="at:Parte" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Altri partecipanti alla causa. Ad esempio chiamato in causa</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SportelloProssimita" type="at:SportelloProssimita" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Anagrafica Sportello Prossimita</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="Soggetti"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnagraficaCostituzione">
+		<xs:annotation>
+			<xs:documentation>Dati anagrafici delle parti coinvolte nella costituzione e nella modifica dell'anagrafica del fascicolo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Partecipanti">
+				<xs:annotation>
+					<xs:documentation>Parti che si costituiscono nel procedimento</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Parte" type="at:Parte" maxOccurs="unbounded"/>
+						<xs:element name="Chiamato" type="at:Parte" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="Soggetti"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DatiRiassunzioneProcedimento">
+		<xs:annotation>
+			<xs:documentation>Indicazione dei dati identificativi procedimento da riassumere</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numeroRicorso" type="RiferimentoFascicolo"/>
+			<xs:element name="dataProvvedimento" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContributoUnificato">
+		<xs:annotation>
+			<xs:documentation>Estremi versamento del contributo unificato</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="Importo">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="bt:Valuta">
+							<xs:attribute name="debito" type="xs:boolean"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EstremiPagamento" minOccurs="0">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="LottoMatica" type="MarcheLottoMatica">
+							<xs:annotation>
+								<xs:documentation>Marche da bollo utilizzate per il pagamento dell'importo</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="BollettinoPostale" type="BollettinoPostale">
+							<xs:annotation>
+								<xs:documentation>Identificazione del bollettino postale con l'importo pagato del contributo unificato.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ModelloF23" type="ModelloF23">
+							<xs:annotation>
+								<xs:documentation>Identificazione del pagamento tramite modello F23</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="GradoPrecedente">
+		<xs:annotation>
+			<xs:documentation>Informazioni relative ad un procedimento iscritto al grado precedente. Utilizzato per l'iscrizione di cause in appello</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Fascicolo" type="RiferimentoFascicolo" minOccurs="0"/>
+			<xs:element name="Provvedimento" type="RiferimentoProvvedimento"/>
+		</xs:sequence>
+		<xs:attribute name="dataProvvedimento" type="xs:date" use="optional"/>
+		<xs:attribute name="grado" type="bt:GradoGiudizio" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="AttoSistema">
+		<xs:annotation>
+			<xs:documentation>Generico atto per la definizione del registro dei depositi di sistema pubblici</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="destinazione">
+				<xs:annotation>
+					<xs:documentation>Ufficio Giudiziario di destinazione, tra quelli dove e' attivo il PCT</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref="RegistroTelematico"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IndiceBusta" type="all:IndiceBusta" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnagraficaProcedimento" type="AnagraficaProcedimento">
+		<xs:annotation>
+			<xs:documentation>Anagrafica delle parti e loro difensori</xs:documentation>
+		</xs:annotation>
+		<xs:key name="PK_PARTECIPANTI">
+			<xs:selector xpath="ns:Partecipanti/*"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:key name="PK_PARTE">
+			<xs:selector xpath="ns:Partecipanti/ns:Parte"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:key name="PK_CONTROPARTE">
+			<xs:selector xpath="ns:Partecipanti/ns:ControParte"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:key name="PK_ALTRO">
+			<xs:selector xpath="ns:Partecipanti/ns:Altro"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:key name="PK_AVVOCATO">
+			<xs:selector xpath="ns:Soggetti/ns:Avvocato"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:key>
+		<xs:unique name="AK_PARTECIPANTI">
+			<xs:selector xpath="ns:Partecipanti/*"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:unique>
+		<xs:keyref name="FK_PARTE_AVVOCATO" refer="PK_PARTECIPANTI">
+			<xs:selector xpath="ns:Soggetti/ns:Avvocato/at:parteRappresentata"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+		<xs:keyref name="FK_SPORTELLOPROSSIMITA_PARTEDELEGANTE" refer="PK_PARTECIPANTI">
+			<xs:selector xpath="ns:Partecipanti/ns:SportelloProssimita/at:delegatoDa/at:parteDelegante"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="domanda" type="Domanda">
+		<xs:annotation>
+			<xs:documentation>Testo della domanda o delle conclusioni, come riportate nell'atto di parte</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PQM" type="PQM">
+		<xs:annotation>
+			<xs:documentation>Testo riassuntivo del P.Q.M. presente nell'atto del magistrato</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ModificheAnagrafica" type="AnagraficaCostituzione">
+		<xs:annotation>
+			<xs:documentation>Parti che si costituiscono o per cui viene modificata l'anagrafica</xs:documentation>
+		</xs:annotation>
+		<xs:key name="PK_PARTE_MODIFICHE">
+			<xs:selector xpath="ns:Partecipanti/*"/>
+			<xs:field xpath="@ID"/>
+		</xs:key>
+		<xs:unique name="AK_PARTE_MODIFICHE">
+			<xs:selector xpath="ns:Partecipanti/*"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:unique>
+		<xs:key name="PK_AVVOCATO_MODIFICHE">
+			<xs:selector xpath="ns:Soggetti/ns:Avvocato"/>
+			<xs:field xpath="at:codiceFiscale"/>
+		</xs:key>
+		<xs:keyref name="FK_PARTE_AVVOCATO_MODIFICHE" refer="PK_PARTE_MODIFICHE">
+			<xs:selector xpath="ns:Soggetti/ns:Avvocato/at:parteRappresentata"/>
+			<xs:field xpath="@ref"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="Partecipanti">
+		<xs:annotation>
+			<xs:documentation>Parti in causa</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Attore" type="at:Parte" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Attore/Ricorrente/Appellante coinvolto nella causa. Il primo elemento e' considerato il principale.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Convenuto" type="at:Parte" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Convenuto/Resistente/Appellato coinvolto nella causa. Il primo elemento e' considerato il principale</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Chiamato" type="at:Parte" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Chiamato in causa</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Soggetti">
+		<xs:annotation>
+			<xs:documentation>Difensori delle parti.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Avvocato" type="at:Avvocato" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Avvocato coinvolto nel procedimento. I gli avvocati qui definiti referenziano  i partecipanti al procedimento.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Domicilio" type="at:Indirizzo">
+		<xs:annotation>
+			<xs:documentation>Domicilio del legale depositante/rappresentante</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Comunicazione" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Generico atto in corso di causa.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="procedimento" type="RiferimentoProcedimento">
+				<xs:annotation>
+					<xs:documentation>Riferimento alla causa</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oggetto" type="xs:string"/>
+			<xs:element name="contenuto" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="MessageUG" type="xs:NMTOKEN"/>
+	</xs:complexType>
+	<xs:complexType name="AttoTrasmissione" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Generico atto in corso di causa.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AttoProcedimento">
+				<xs:attribute name="MessageID" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
